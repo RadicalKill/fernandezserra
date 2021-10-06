@@ -5,17 +5,23 @@
 
 from window import *
 
-import sys
+import sys,var,event
 
 
 
 class Main (QtWidgets.QMainWindow):
     def __init__(self):
         super(Main, self).__init__()
-        self.ui= Ui_MainWindow()
-        self.ui.setupUi(self)
-
-
+        var.ui= Ui_MainWindow()
+        var.ui.setupUi(self)
+        '''
+        Eventos de botón
+        '''
+        var.ui.btnSalir.clicked.connect(event.Eventos.Salir)
+        '''
+        Barra de menu
+        '''
+        var.ui.actionSalir.triggered.connect(event.Eventos.Salir)
 if __name__ =="__main__":
     app=QtWidgets.QApplication([])
     window=Main()
