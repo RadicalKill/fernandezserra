@@ -2,7 +2,7 @@
 
 # Press Shift+F10 to execute it or replace it with your code.
 # Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-
+import clients
 from window import *
 from windowaviso import *
 import sys,var,event
@@ -29,6 +29,12 @@ class Main (QtWidgets.QMainWindow):
         Barra de menu
         '''
         var.ui.actionSalir.triggered.connect(event.Eventos.Salir)
+
+        '''
+        comprobar el dni
+        '''
+
+        var.ui.txtDNI.editingFinished.connect(clients.Clientes.validarDNI)
 if __name__ =="__main__":
     app=QtWidgets.QApplication([])
     window=Main()
