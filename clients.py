@@ -25,7 +25,9 @@ class Clientes():
                 else:
                     var.ui.ValidarDNI.setStyleSheet("QLabel{color:red;}")
                     var.ui.ValidarDNI.setText("La erraste pendejo")
-
+            else:
+                var.ui.ValidarDNI.setStyleSheet("QLabel{color:red;}")
+                var.ui.ValidarDNI.setText("Aprende a escribir puto")
 
 
         except Exception as error: print("Error en modulo validarDNI")

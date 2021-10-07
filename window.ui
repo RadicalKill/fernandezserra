@@ -161,6 +161,9 @@ background-color: rgb(85, 255, 255);</string>
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
+       <property name="acceptDrops">
+        <bool>false</bool>
+       </property>
        <property name="autoFillBackground">
         <bool>false</bool>
        </property>
