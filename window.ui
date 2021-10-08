@@ -20,21 +20,21 @@
    <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
-      <x>300</x>
-      <y>200</y>
+      <x>290</x>
+      <y>330</y>
       <width>204</width>
       <height>75</height>
      </rect>
     </property>
     <layout class="QGridLayout" name="gridLayout">
-     <item row="2" column="0">
+     <item row="0" column="0">
       <widget class="QPushButton" name="btnAceptar">
        <property name="text">
         <string>Aceptar</string>
        </property>
       </widget>
      </item>
-     <item row="2" column="1">
+     <item row="0" column="1">
       <widget class="QPushButton" name="btnSalir">
        <property name="font">
         <font>
@@ -46,38 +46,15 @@
        </property>
       </widget>
      </item>
-     <item row="1" column="0" colspan="2">
-      <widget class="QLineEdit" name="txtDatos"/>
-     </item>
-     <item row="0" column="0" colspan="2">
-      <widget class="QLabel" name="lblClientes">
-       <property name="font">
-        <font>
-         <pointsize>11</pointsize>
-         <weight>75</weight>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">
-background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 blue, stop:1 black);
-color: rgb(85, 170, 255);
-</string>
-       </property>
-       <property name="text">
-        <string>Xestion Clientes</string>
-       </property>
-      </widget>
-     </item>
     </layout>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
-      <x>120</x>
+      <x>110</x>
       <y>160</y>
-      <width>491</width>
-      <height>22</height>
+      <width>385</width>
+      <height>16</height>
      </rect>
     </property>
     <layout class="QHBoxLayout" name="horizontalLayout">
@@ -89,7 +66,11 @@ color: rgb(85, 170, 255);
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="txtApel"/>
+      <widget class="QLineEdit" name="txtApel">
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
      </item>
      <item>
       <widget class="QLabel" name="lblNombre">
@@ -110,70 +91,281 @@ color: rgb(85, 170, 255);
      </item>
     </layout>
    </widget>
+   <widget class="QLabel" name="lblClientes">
+    <property name="geometry">
+     <rect>
+      <x>300</x>
+      <y>20</y>
+      <width>202</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>11</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">
+background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 blue, stop:1 black);
+color: rgb(85, 170, 255);
+</string>
+    </property>
+    <property name="text">
+     <string>Xestion Clientes</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="rbtFem">
+    <property name="geometry">
+     <rect>
+      <x>190</x>
+      <y>230</y>
+      <width>82</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Mujer</string>
+    </property>
+    <property name="checked">
+     <bool>true</bool>
+    </property>
+    <attribute name="buttonGroup">
+     <string notr="true">rbtGroupGen</string>
+    </attribute>
+   </widget>
+   <widget class="QRadioButton" name="rbtHom">
+    <property name="geometry">
+     <rect>
+      <x>280</x>
+      <y>230</y>
+      <width>82</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Hombre</string>
+    </property>
+    <attribute name="buttonGroup">
+     <string notr="true">rbtGroupGen</string>
+    </attribute>
+   </widget>
+   <widget class="QRadioButton" name="rbtOtro">
+    <property name="geometry">
+     <rect>
+      <x>380</x>
+      <y>230</y>
+      <width>82</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Otro</string>
+    </property>
+    <attribute name="buttonGroup">
+     <string notr="true">rbtGroupGen</string>
+    </attribute>
+   </widget>
+   <widget class="QLabel" name="lblGen">
+    <property name="geometry">
+     <rect>
+      <x>110</x>
+      <y>230</y>
+      <width>47</width>
+      <height>13</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Género</string>
+    </property>
+   </widget>
+   <widget class="Line" name="line">
+    <property name="geometry">
+     <rect>
+      <x>-23</x>
+      <y>310</y>
+      <width>851</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Horizontal</enum>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="PagoEfectivo">
+    <property name="geometry">
+     <rect>
+      <x>206</x>
+      <y>261</y>
+      <width>62</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Efectivo</string>
+    </property>
+    <attribute name="buttonGroup">
+     <string notr="true">rbtGroupPago</string>
+    </attribute>
+   </widget>
+   <widget class="QLabel" name="lblPago">
+    <property name="geometry">
+     <rect>
+      <x>111</x>
+      <y>261</y>
+      <width>76</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Forma de Pago:</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="PagoTarjeta">
+    <property name="geometry">
+     <rect>
+      <x>301</x>
+      <y>261</y>
+      <width>58</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Tarjeta</string>
+    </property>
+    <attribute name="buttonGroup">
+     <string notr="true">rbtGroupPago</string>
+    </attribute>
+   </widget>
+   <widget class="QCheckBox" name="PagoCuenta">
+    <property name="geometry">
+     <rect>
+      <x>395</x>
+      <y>261</y>
+      <width>90</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Cargo Cuenta</string>
+    </property>
+    <attribute name="buttonGroup">
+     <string notr="true">rbtGroupPago</string>
+    </attribute>
+   </widget>
+   <widget class="QCheckBox" name="PagoTransfer">
+    <property name="geometry">
+     <rect>
+      <x>491</x>
+      <y>261</y>
+      <width>89</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Transferencia</string>
+    </property>
+    <attribute name="buttonGroup">
+     <string notr="true">rbtGroupPago</string>
+    </attribute>
+   </widget>
+   <widget class="QLineEdit" name="txtDNI">
+    <property name="geometry">
+     <rect>
+      <x>142</x>
+      <y>121</y>
+      <width>133</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(0, 255, 255);</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="DNI">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>110</x>
+      <y>120</y>
+      <width>31</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">
+background-color: rgb(85, 255, 255);</string>
+    </property>
+    <property name="text">
+     <string>DNI:</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="ValidarDNI">
+    <property name="geometry">
+     <rect>
+      <x>281</x>
+      <y>121</y>
+      <width>141</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+    <property name="acceptDrops">
+     <bool>false</bool>
+    </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"/>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
    <widget class="QWidget" name="">
     <property name="geometry">
      <rect>
-      <x>120</x>
-      <y>120</y>
-      <width>221</width>
-      <height>22</height>
+      <x>110</x>
+      <y>190</y>
+      <width>201</width>
+      <height>16</height>
      </rect>
     </property>
     <layout class="QHBoxLayout" name="horizontalLayout_2">
      <item>
-      <widget class="QLabel" name="DNI">
-       <property name="enabled">
-        <bool>true</bool>
-       </property>
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">
-background-color: rgb(85, 255, 255);</string>
-       </property>
+      <widget class="QLabel" name="lblDir">
        <property name="text">
-        <string>Dni</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+        <string>Dirección</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="txtDNI">
-       <property name="styleSheet">
-        <string notr="true">background-color: rgb(0, 255, 255);</string>
-       </property>
-       <property name="text">
-        <string>dsdasda</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLabel" name="ValidarDNI">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="acceptDrops">
-        <bool>false</bool>
-       </property>
-       <property name="autoFillBackground">
-        <bool>false</bool>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">background-color: rgb(170, 255, 255);</string>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
+      <widget class="QLineEdit" name="txtDir"/>
      </item>
     </layout>
    </widget>
@@ -232,4 +424,8 @@ background-color: rgb(85, 255, 255);</string>
  </widget>
  <resources/>
  <connections/>
+ <buttongroups>
+  <buttongroup name="rbtGroupGen"/>
+  <buttongroup name="rbtGroupPago"/>
+ </buttongroups>
 </ui>

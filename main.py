@@ -35,6 +35,11 @@ class Main (QtWidgets.QMainWindow):
         '''
 
         var.ui.txtDNI.editingFinished.connect(clients.Clientes.validarDNI)
+
+
+        var.ui.rbtGroupGen.buttonClicked.connect(clients.Clientes.selGen)
+
+        var.ui.rbtGroupPago.buttonClicked.connect(clients.Clientes.selPago)
 if __name__ =="__main__":
     app=QtWidgets.QApplication([])
     window=Main()
