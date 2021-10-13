@@ -1,6 +1,7 @@
 '''
 gestion clientes
 '''
+import clients
 import var
 from window import *
 
@@ -63,3 +64,45 @@ class Clientes():
                 print("Transferime esta jaja salu2")
 
         except Exception as error: print("Error en modulo selPago")
+
+
+
+    def cargaProv(self):
+        try:
+            var.ui.cmbProv.clear()
+            prov=[" ","A Coruña","Lugo","Ourense","Pontevedra","Vigo"]
+            for i in prov:
+                var.ui.cmbProv.addItem(i)
+
+        except Exception as error: print("Error en modulo cargaProv")
+
+    def selProv(prov):
+        try:
+            clients.Clientes.cargaMun(prov)
+            print("Has seleccionado la provincia de "+prov)
+
+        except Exception as error: print("Error en modulo selProv")
+
+    def cargaMun(prov):
+        try:
+            var.ui.cmbMun.clear()
+            if prov == "Vigo":
+                mun=[" ","Vigo","Redondela","Ponteareas","Cangas"]
+            if prov == "A Coruña":
+                mun=[" ","A Coruña","Ferrol","Betanzos","Santiago"]
+            if prov == "Pontevedra":
+                mun=[" ","Pontevedra","Moaña","Lalín","A Cañiza"]
+            if prov == "Ourense":
+                mun=[" ","Ourense","O Barco","Monforte","Verin"]
+            if prov== "Lugo":
+                mun=[" ","Lugo","Sarria","Villalba","Ribadeo"]
+            for i in mun:
+                var.ui.cmbMun.addItem(i)
+        except Exception as error: print("Error en modulo cargaMun")
+
+    def selMun(mun):
+        try:
+
+            print("Has seleccionado el municipio de "+ mun)
+
+        except Exception as error: print("Error en modulo selMun")

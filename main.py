@@ -36,10 +36,23 @@ class Main (QtWidgets.QMainWindow):
 
         var.ui.txtDNI.editingFinished.connect(clients.Clientes.validarDNI)
 
-
+        '''
+        Eventos de género
+        '''
         var.ui.rbtGroupGen.buttonClicked.connect(clients.Clientes.selGen)
+        '''
+        Eventos de forma de pago
+        '''
 
         var.ui.rbtGroupPago.buttonClicked.connect(clients.Clientes.selPago)
+
+        '''
+        Eventos combobox
+        '''
+        clients.Clientes.cargaProv(self)
+        var.ui.cmbProv.activated[str].connect(clients.Clientes.selProv)
+        var.ui.cmbMun.activated[str].connect(clients.Clientes.selMun)
+
 if __name__ =="__main__":
     app=QtWidgets.QApplication([])
     window=Main()
