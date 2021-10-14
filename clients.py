@@ -106,3 +106,10 @@ class Clientes():
             print("Has seleccionado el municipio de "+ mun)
 
         except Exception as error: print("Error en modulo selMun")
+
+
+    def cargarFecha(self):
+        try:
+        print("GOla")
+
+        except Exception as error: print("Error en modulo cargarFecha")

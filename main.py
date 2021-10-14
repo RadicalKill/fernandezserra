@@ -5,8 +5,24 @@
 import clients
 from window import *
 from windowaviso import *
+from windowcal import *
+from datetime import *
 import sys,var,event
 
+
+
+
+
+class DialogCalendar(QtWidgets.QDialog):
+    def __init__(self):
+        super(DialogCalendar,self).__init__()
+        var.dlgcalendar=Ui_windowcal()
+        var.dlgcalendar.setupUi(self)
+        diaactual= datetime.now().day
+        mesactual= datetime.now().month
+        anoactual=datetime.now().year
+        var.dlgcalendar.calendario.setSelectedDate(QtCore.QDate(anoactual,mesactual,diaactual))
+        var.dlgcalendar.calendario.clicked.connect(clients.Clientes.cargarFecha)
 
 class DialogAviso(QtWidgets.QDialog):
     def __init__(self):
@@ -25,6 +41,9 @@ class Main (QtWidgets.QMainWindow):
         Eventos de botón
         '''
         var.ui.btnSalir.clicked.connect(event.Eventos.Salir)
+        var.ui.rbtGroupPago.buttonClicked.connect(clients.Clientes.selPago)
+        var.ui.rbtGroupGen.buttonClicked.connect(clients.Clientes.selGen)
+        var.ui.btFecha.clicked.connect(event.Eventos.abrirCal)
         '''
         Barra de menu
         '''
@@ -36,15 +55,8 @@ class Main (QtWidgets.QMainWindow):
 
         var.ui.txtDNI.editingFinished.connect(clients.Clientes.validarDNI)
 
-        '''
-        Eventos de género
-        '''
-        var.ui.rbtGroupGen.buttonClicked.connect(clients.Clientes.selGen)
-        '''
-        Eventos de forma de pago
-        '''
 
-        var.ui.rbtGroupPago.buttonClicked.connect(clients.Clientes.selPago)
+
 
         '''
         Eventos combobox
@@ -57,5 +69,6 @@ if __name__ =="__main__":
     app=QtWidgets.QApplication([])
     window=Main()
     var.dlgaviso=DialogAviso()
+    var.dlgcalendar=DialogCalendar()
     window.show()
     sys.exit(app.exec())

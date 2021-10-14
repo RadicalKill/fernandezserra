@@ -319,7 +319,7 @@ color: rgb(85, 170, 255);
      <enum>Qt::Horizontal</enum>
     </property>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -381,7 +381,7 @@ color: rgb(85, 170, 255);
      </item>
     </layout>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>9</x>
@@ -481,7 +481,7 @@ background-color: rgb(85, 255, 255);</string>
      </item>
     </layout>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>11</x>
@@ -575,7 +575,7 @@ background-color: rgb(85, 255, 255);</string>
  <resources/>
  <connections/>
  <buttongroups>
-  <buttongroup name="rbtGroupPago"/>
   <buttongroup name="rbtGroupGen"/>
+  <buttongroup name="rbtGroupPago"/>
  </buttongroups>
 </ui>
