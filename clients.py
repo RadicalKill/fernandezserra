@@ -79,8 +79,6 @@ class Clientes():
     def selProv(prov):
         try:
             clients.Clientes.cargaMun(prov)
-            print("Has seleccionado la provincia de "+prov)
-
         except Exception as error: print("Error en modulo selProv")
 
     def cargaMun(prov):
@@ -100,16 +98,25 @@ class Clientes():
                 var.ui.cmbMun.addItem(i)
         except Exception as error: print("Error en modulo cargaMun")
 
-    def selMun(mun):
+
+
+
+    def cargarFecha(qDate):
         try:
-
-            print("Has seleccionado el municipio de "+ mun)
-
-        except Exception as error: print("Error en modulo selMun")
-
-
-    def cargarFecha(self):
-        try:
-        print("GOla")
+            data = ('{0}/{1}/{2}'.format(qDate.day(),qDate.month(),qDate.year()))
+            var.ui.txtFecha.setText(str(data))
+            var.dlgcalendar.hide()
 
         except Exception as error: print("Error en modulo cargarFecha")
+
+    def capitalizar():
+        try:
+            nombre=var.ui.txtNombre.text()
+            var.ui.txtNombre.setText(nombre.title())
+            apel = var.ui.txtApel.text()
+            var.ui.txtApel.setText(apel.title())
+            dir = var.ui.txtDir.text()
+            var.ui.txtDir.setText(dir.title())
+
+
+        except Exception as error: print("Error en modulo capitalizar")

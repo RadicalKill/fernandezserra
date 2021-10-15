@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>975</width>
+    <height>787</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,116 +17,10 @@
    <string notr="true"/>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QWidget" name="layoutWidget">
-    <property name="geometry">
-     <rect>
-      <x>290</x>
-      <y>430</y>
-      <width>204</width>
-      <height>75</height>
-     </rect>
-    </property>
-    <layout class="QGridLayout" name="gridLayout">
-     <item row="0" column="0">
-      <widget class="QPushButton" name="btnAceptar">
-       <property name="text">
-        <string>Aceptar</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="1">
-      <widget class="QPushButton" name="btnSalir">
-       <property name="font">
-        <font>
-         <pointsize>8</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>Salir</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </widget>
-   <widget class="QWidget" name="layoutWidget">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>160</y>
-      <width>771</width>
-      <height>22</height>
-     </rect>
-    </property>
-    <layout class="QHBoxLayout" name="horizontalLayout">
-     <item>
-      <widget class="QLabel" name="lblApel">
-       <property name="text">
-        <string>Apellidos</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <spacer name="horizontalSpacer_2">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeType">
-        <enum>QSizePolicy::Preferred</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item>
-      <widget class="QLineEdit" name="txtApel">
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <spacer name="horizontalSpacer">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeType">
-        <enum>QSizePolicy::Preferred</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item>
-      <widget class="QLabel" name="lblNombre">
-       <property name="text">
-        <string>Nombre</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLineEdit" name="txtNombre">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </widget>
    <widget class="QLabel" name="lblClientes">
     <property name="geometry">
      <rect>
-      <x>300</x>
+      <x>380</x>
       <y>20</y>
       <width>202</width>
       <height>18</height>
@@ -152,76 +46,474 @@ color: rgb(85, 170, 255);
      <set>Qt::AlignCenter</set>
     </property>
    </widget>
-   <widget class="QRadioButton" name="rbtFem">
+   <widget class="QGroupBox" name="groupBox">
     <property name="geometry">
      <rect>
-      <x>94</x>
-      <y>267</y>
-      <width>82</width>
-      <height>17</height>
+      <x>10</x>
+      <y>40</y>
+      <width>941</width>
+      <height>321</height>
      </rect>
     </property>
-    <property name="text">
-     <string>Mujer</string>
+    <property name="font">
+     <font>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
     </property>
-    <property name="checked">
-     <bool>true</bool>
+    <property name="title">
+     <string>Datos Personales</string>
     </property>
-    <attribute name="buttonGroup">
-     <string notr="true">rbtGroupGen</string>
-    </attribute>
+    <widget class="QWidget" name="">
+     <property name="geometry">
+      <rect>
+       <x>25</x>
+       <y>211</y>
+       <width>391</width>
+       <height>19</height>
+      </rect>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout_5">
+      <item>
+       <widget class="QLabel" name="lblGen">
+        <property name="text">
+         <string>Género</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QRadioButton" name="rbtFem">
+        <property name="text">
+         <string>Mujer</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+        <attribute name="buttonGroup">
+         <string notr="true">rbtGroupGen</string>
+        </attribute>
+       </widget>
+      </item>
+      <item>
+       <widget class="QRadioButton" name="rbtHom">
+        <property name="text">
+         <string>Hombre</string>
+        </property>
+        <attribute name="buttonGroup">
+         <string notr="true">rbtGroupGen</string>
+        </attribute>
+       </widget>
+      </item>
+      <item>
+       <widget class="QRadioButton" name="rbtOtro">
+        <property name="text">
+         <string>Otro</string>
+        </property>
+        <attribute name="buttonGroup">
+         <string notr="true">rbtGroupGen</string>
+        </attribute>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QWidget" name="layoutWidget">
+     <property name="geometry">
+      <rect>
+       <x>21</x>
+       <y>111</y>
+       <width>911</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QLabel" name="lblApel">
+        <property name="text">
+         <string>Apellidos</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer_2">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeType">
+         <enum>QSizePolicy::Preferred</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="txtApel">
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeType">
+         <enum>QSizePolicy::Preferred</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QLabel" name="lblNombre">
+        <property name="text">
+         <string>Nombre</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="txtNombre">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QWidget" name="layoutWidget">
+     <property name="geometry">
+      <rect>
+       <x>22</x>
+       <y>142</y>
+       <width>230</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout_3">
+      <item>
+       <widget class="QLabel" name="lblDir">
+        <property name="text">
+         <string>Dirección</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer_3">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeType">
+         <enum>QSizePolicy::Fixed</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="txtDir"/>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QWidget" name="layoutWidget">
+     <property name="geometry">
+      <rect>
+       <x>21</x>
+       <y>171</y>
+       <width>911</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout_2">
+      <item>
+       <widget class="QLabel" name="lblProv">
+        <property name="text">
+         <string>Provincia:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QComboBox" name="cmbProv">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer_5">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeType">
+         <enum>QSizePolicy::Fixed</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QLabel" name="lblMun">
+        <property name="text">
+         <string>Municipio:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QComboBox" name="cmbMun">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QWidget" name="layoutWidget">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>70</y>
+       <width>911</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout_4">
+      <item>
+       <widget class="QLabel" name="DNI">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="autoFillBackground">
+         <bool>false</bool>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">
+background-color: rgb(85, 255, 255);</string>
+        </property>
+        <property name="text">
+         <string>DNI:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="txtDNI">
+        <property name="styleSheet">
+         <string notr="true">background-color: rgb(0, 255, 255);</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="ValidarDNI">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="acceptDrops">
+         <bool>false</bool>
+        </property>
+        <property name="autoFillBackground">
+         <bool>false</bool>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="lblFecha">
+        <property name="text">
+         <string>Fecha Alta:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="txtFecha"/>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btFecha">
+        <property name="autoFillBackground">
+         <bool>false</bool>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>img/calend.png</normaloff>img/calend.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>20</width>
+          <height>20</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+    <widget class="Line" name="line_2">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>10</y>
+       <width>771</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+    </widget>
+    <widget class="QWidget" name="">
+     <property name="geometry">
+      <rect>
+       <x>27</x>
+       <y>250</y>
+       <width>901</width>
+       <height>19</height>
+      </rect>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout_6">
+      <item>
+       <widget class="QLabel" name="lblPago">
+        <property name="text">
+         <string>Forma de Pago:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="PagoEfectivo">
+        <property name="text">
+         <string>Efectivo</string>
+        </property>
+        <attribute name="buttonGroup">
+         <string notr="true">rbtGroupPago</string>
+        </attribute>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="PagoTarjeta">
+        <property name="text">
+         <string>Tarjeta</string>
+        </property>
+        <attribute name="buttonGroup">
+         <string notr="true">rbtGroupPago</string>
+        </attribute>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="PagoCuenta">
+        <property name="text">
+         <string>Cargo Cuenta</string>
+        </property>
+        <attribute name="buttonGroup">
+         <string notr="true">rbtGroupPago</string>
+        </attribute>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="PagoTransfer">
+        <property name="text">
+         <string>Transferencia</string>
+        </property>
+        <attribute name="buttonGroup">
+         <string notr="true">rbtGroupPago</string>
+        </attribute>
+       </widget>
+      </item>
+     </layout>
+    </widget>
    </widget>
-   <widget class="QRadioButton" name="rbtHom">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
-      <x>184</x>
-      <y>267</y>
-      <width>82</width>
-      <height>17</height>
+      <x>280</x>
+      <y>360</y>
+      <width>401</width>
+      <height>75</height>
      </rect>
     </property>
-    <property name="text">
-     <string>Hombre</string>
-    </property>
-    <attribute name="buttonGroup">
-     <string notr="true">rbtGroupGen</string>
-    </attribute>
-   </widget>
-   <widget class="QRadioButton" name="rbtOtro">
-    <property name="geometry">
-     <rect>
-      <x>284</x>
-      <y>267</y>
-      <width>82</width>
-      <height>17</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Otro</string>
-    </property>
-    <attribute name="buttonGroup">
-     <string notr="true">rbtGroupGen</string>
-    </attribute>
-   </widget>
-   <widget class="QLabel" name="lblGen">
-    <property name="geometry">
-     <rect>
-      <x>14</x>
-      <y>260</y>
-      <width>47</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Género</string>
-    </property>
+    <layout class="QGridLayout" name="gridLayout">
+     <item row="0" column="0">
+      <widget class="QPushButton" name="btnAceptar">
+       <property name="text">
+        <string>Aceptar</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="2">
+      <widget class="QPushButton" name="btnSalir">
+       <property name="font">
+        <font>
+         <pointsize>8</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Salir</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <spacer name="horizontalSpacer_4">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
    </widget>
    <widget class="Line" name="line">
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>410</y>
-      <width>771</width>
+      <y>450</y>
+      <width>941</width>
       <height>20</height>
      </rect>
     </property>
@@ -229,295 +521,15 @@ color: rgb(85, 170, 255);
      <enum>Qt::Horizontal</enum>
     </property>
    </widget>
-   <widget class="QCheckBox" name="PagoEfectivo">
-    <property name="geometry">
-     <rect>
-      <x>167</x>
-      <y>300</y>
-      <width>62</width>
-      <height>17</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Efectivo</string>
-    </property>
-    <attribute name="buttonGroup">
-     <string notr="true">rbtGroupPago</string>
-    </attribute>
-   </widget>
-   <widget class="QLabel" name="lblPago">
-    <property name="geometry">
-     <rect>
-      <x>16</x>
-      <y>299</y>
-      <width>76</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Forma de Pago:</string>
-    </property>
-   </widget>
-   <widget class="QCheckBox" name="PagoTarjeta">
-    <property name="geometry">
-     <rect>
-      <x>318</x>
-      <y>300</y>
-      <width>58</width>
-      <height>17</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Tarjeta</string>
-    </property>
-    <attribute name="buttonGroup">
-     <string notr="true">rbtGroupPago</string>
-    </attribute>
-   </widget>
-   <widget class="QCheckBox" name="PagoCuenta">
-    <property name="geometry">
-     <rect>
-      <x>469</x>
-      <y>300</y>
-      <width>90</width>
-      <height>17</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Cargo Cuenta</string>
-    </property>
-    <attribute name="buttonGroup">
-     <string notr="true">rbtGroupPago</string>
-    </attribute>
-   </widget>
-   <widget class="QCheckBox" name="PagoTransfer">
-    <property name="geometry">
-     <rect>
-      <x>620</x>
-      <y>300</y>
-      <width>89</width>
-      <height>17</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Transferencia</string>
-    </property>
-    <attribute name="buttonGroup">
-     <string notr="true">rbtGroupPago</string>
-    </attribute>
-   </widget>
-   <widget class="Line" name="line_2">
+   <widget class="QTableWidget" name="tableWidget">
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>100</y>
-      <width>771</width>
-      <height>20</height>
+      <y>470</y>
+      <width>951</width>
+      <height>271</height>
      </rect>
     </property>
-    <property name="orientation">
-     <enum>Qt::Horizontal</enum>
-    </property>
-   </widget>
-   <widget class="QWidget" name="layoutWidget">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>220</y>
-      <width>431</width>
-      <height>22</height>
-     </rect>
-    </property>
-    <layout class="QHBoxLayout" name="horizontalLayout_2">
-     <item>
-      <widget class="QLabel" name="lblProv">
-       <property name="text">
-        <string>Provincia:</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QComboBox" name="cmbProv">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <spacer name="horizontalSpacer_5">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeType">
-        <enum>QSizePolicy::Fixed</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item>
-      <widget class="QLabel" name="lblMun">
-       <property name="text">
-        <string>Municipio:</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QComboBox" name="cmbMun">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </widget>
-   <widget class="QWidget" name="layoutWidget">
-    <property name="geometry">
-     <rect>
-      <x>9</x>
-      <y>119</y>
-      <width>771</width>
-      <height>30</height>
-     </rect>
-    </property>
-    <layout class="QHBoxLayout" name="horizontalLayout_4">
-     <item>
-      <widget class="QLabel" name="DNI">
-       <property name="enabled">
-        <bool>true</bool>
-       </property>
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="autoFillBackground">
-        <bool>false</bool>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">
-background-color: rgb(85, 255, 255);</string>
-       </property>
-       <property name="text">
-        <string>DNI:</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLineEdit" name="txtDNI">
-       <property name="styleSheet">
-        <string notr="true">background-color: rgb(0, 255, 255);</string>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLabel" name="ValidarDNI">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="acceptDrops">
-        <bool>false</bool>
-       </property>
-       <property name="autoFillBackground">
-        <bool>false</bool>
-       </property>
-       <property name="styleSheet">
-        <string notr="true"/>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLabel" name="lblFecha">
-       <property name="text">
-        <string>Fecha Alta:</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLineEdit" name="txtFecha"/>
-     </item>
-     <item>
-      <widget class="QPushButton" name="btFecha">
-       <property name="autoFillBackground">
-        <bool>false</bool>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="icon">
-        <iconset>
-         <normaloff>img/calend.png</normaloff>img/calend.png</iconset>
-       </property>
-       <property name="iconSize">
-        <size>
-         <width>20</width>
-         <height>20</height>
-        </size>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </widget>
-   <widget class="QWidget" name="layoutWidget">
-    <property name="geometry">
-     <rect>
-      <x>11</x>
-      <y>191</y>
-      <width>771</width>
-      <height>22</height>
-     </rect>
-    </property>
-    <layout class="QHBoxLayout" name="horizontalLayout_3">
-     <item>
-      <widget class="QLabel" name="lblDir">
-       <property name="text">
-        <string>Dirección</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <spacer name="horizontalSpacer_3">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeType">
-        <enum>QSizePolicy::Fixed</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item>
-      <widget class="QLineEdit" name="txtDir"/>
-     </item>
-    </layout>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -525,7 +537,7 @@ background-color: rgb(85, 255, 255);</string>
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
+     <width>975</width>
      <height>21</height>
     </rect>
    </property>

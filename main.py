@@ -54,8 +54,9 @@ class Main (QtWidgets.QMainWindow):
         '''
 
         var.ui.txtDNI.editingFinished.connect(clients.Clientes.validarDNI)
-
-
+        var.ui.txtNombre.editingFinished.connect(clients.Clientes.capitalizar)
+        var.ui.txtApel.editingFinished.connect(clients.Clientes.capitalizar)
+        var.ui.txtDir.editingFinished.connect(clients.Clientes.capitalizar)
 
 
         '''
@@ -63,7 +64,8 @@ class Main (QtWidgets.QMainWindow):
         '''
         clients.Clientes.cargaProv(self)
         var.ui.cmbProv.activated[str].connect(clients.Clientes.selProv)
-        var.ui.cmbMun.activated[str].connect(clients.Clientes.selMun)
+
+
 
 if __name__ =="__main__":
     app=QtWidgets.QApplication([])
