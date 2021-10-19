@@ -64,7 +64,7 @@ color: rgb(85, 170, 255);
     <property name="title">
      <string>Datos Personales</string>
     </property>
-    <widget class="QWidget" name="">
+    <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
        <x>25</x>
@@ -194,9 +194,9 @@ color: rgb(85, 170, 255);
     <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
-       <x>22</x>
-       <y>142</y>
-       <width>230</width>
+       <x>20</x>
+       <y>140</y>
+       <width>501</width>
        <height>22</height>
       </rect>
      </property>
@@ -328,6 +328,22 @@ background-color: rgb(85, 255, 255);</string>
        </widget>
       </item>
       <item>
+       <spacer name="horizontalSpacer_6">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeType">
+         <enum>QSizePolicy::Fixed</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>69</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
        <widget class="QLineEdit" name="txtDNI">
         <property name="styleSheet">
          <string notr="true">background-color: rgb(0, 255, 255);</string>
@@ -338,12 +354,34 @@ background-color: rgb(85, 255, 255);</string>
        </widget>
       </item>
       <item>
+       <spacer name="horizontalSpacer_7">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeType">
+         <enum>QSizePolicy::Fixed</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
        <widget class="QLabel" name="ValidarDNI">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>80</width>
+          <height>16777215</height>
+         </size>
         </property>
         <property name="acceptDrops">
          <bool>false</bool>
@@ -356,6 +394,17 @@ background-color: rgb(85, 255, 255);</string>
         </property>
         <property name="text">
          <string/>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btnLimpiar">
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>img/recargar.ico</normaloff>img/recargar.ico</iconset>
         </property>
        </widget>
       </item>
@@ -404,7 +453,7 @@ background-color: rgb(85, 255, 255);</string>
       <enum>Qt::Horizontal</enum>
      </property>
     </widget>
-    <widget class="QWidget" name="">
+    <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
        <x>27</x>
@@ -475,9 +524,9 @@ background-color: rgb(85, 255, 255);</string>
     </property>
     <layout class="QGridLayout" name="gridLayout">
      <item row="0" column="0">
-      <widget class="QPushButton" name="btnAceptar">
+      <widget class="QPushButton" name="btnGuardaClie">
        <property name="text">
-        <string>Aceptar</string>
+        <string>Guardar</string>
        </property>
       </widget>
      </item>
@@ -521,7 +570,7 @@ background-color: rgb(85, 255, 255);</string>
      <enum>Qt::Horizontal</enum>
     </property>
    </widget>
-   <widget class="QTableWidget" name="tableWidget">
+   <widget class="QTableWidget" name="tabClientes">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -530,6 +579,36 @@ background-color: rgb(85, 255, 255);</string>
       <height>271</height>
      </rect>
     </property>
+    <property name="alternatingRowColors">
+     <bool>true</bool>
+    </property>
+    <column>
+     <property name="text">
+      <string>Apellidos</string>
+     </property>
+     <property name="background">
+      <color alpha="0">
+       <red>0</red>
+       <green>0</green>
+       <blue>0</blue>
+      </color>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Nombre</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Fecha Alta</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Forma de pago</string>
+     </property>
+    </column>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -587,7 +666,7 @@ background-color: rgb(85, 255, 255);</string>
  <resources/>
  <connections/>
  <buttongroups>
-  <buttongroup name="rbtGroupGen"/>
   <buttongroup name="rbtGroupPago"/>
+  <buttongroup name="rbtGroupGen"/>
  </buttongroups>
 </ui>

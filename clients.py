@@ -120,3 +120,20 @@ class Clientes():
 
 
         except Exception as error: print("Error en modulo capitalizar")
+
+    def GuardaClie(self):
+        try:
+            #Preparamos el registro
+            newcli=[]
+            client= [var.ui.txtApel,var.ui.txtNombre,var.ui.txtFecha]
+            for i in client:
+                newcli.append(i.text())
+            #Cargamos en la tabla
+            row=0
+            column=0
+            var.ui.tabClientes.insertRow(row)
+            for campo in newcli:
+                cell = QtWidgets.QTableWidgetItem(campo)
+                var.ui.tabClientes.setItem(row,column,cell)
+                column +=1
+        except Exception as error: print("Error en modulo GuardaClie")

@@ -1,6 +1,6 @@
 
 
-
+from window import *
 import sys,var
 
 class Eventos():
@@ -19,3 +19,39 @@ class Eventos():
         try:
             var.dlgcalendar.show()
         except Exception as error: print("Error al abrir el calendario",error)
+
+    def resizeTablaCli(self):
+        try:
+            header = var.ui.tabClientes.horizontalHeader()
+            for i in range(4):
+                header.setSectionResizeMode(i, QtWidgets.QHeaderView.Stretch)
+                if i == 2:
+                    header.setSectionResizeMode(i, QtWidgets.QHeaderView.ResizeToContents)
+        except Exception as error:
+            print("Error al cambiar el tamaño de las columnas", error)
+
+
+    def ClearForm(self):
+        try:
+            cajas=[var.ui.txtApel,var.ui.txtNombre,var.ui.txtDir,var.ui.txtDNI,var.ui.txtFecha]
+            for i in cajas:
+                i.setText("")
+            var.ui.rbtGroupGen.setExclusive(False)
+            var.ui.rbtFem.setChecked(False)
+
+            var.ui.rbtHom.setChecked(False)
+
+            var.ui.rbtOtro.setChecked(False)
+            var.ui.rbtGroupGen.setExclusive(True)
+            var.ui.rbtGroupPago.setExclusive(False)
+            var.ui.PagoCuenta.setChecked(False)
+            var.ui.PagoEfectivo.setChecked(False)
+            var.ui.PagoTarjeta.setChecked(False)
+            var.ui.PagoTransfer.setChecked(False)
+
+            var.ui.rbtGroupPago.setExclusive(True)
+            var.ui.cmbProv.setCurrentIndex(0)
+            var.ui.cmbMun.setCurrentIndex(0)
+
+
+        except Exception as error: print("Error al limpiar el formulario",error)

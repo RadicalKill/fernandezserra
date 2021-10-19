@@ -44,6 +44,8 @@ class Main (QtWidgets.QMainWindow):
         var.ui.rbtGroupPago.buttonClicked.connect(clients.Clientes.selPago)
         var.ui.rbtGroupGen.buttonClicked.connect(clients.Clientes.selGen)
         var.ui.btFecha.clicked.connect(event.Eventos.abrirCal)
+        var.ui.btnGuardaClie.clicked.connect(clients.Clientes.GuardaClie)
+        var.ui.btnLimpiar.clicked.connect(event.Eventos.ClearForm)
         '''
         Barra de menu
         '''
@@ -64,8 +66,10 @@ class Main (QtWidgets.QMainWindow):
         '''
         clients.Clientes.cargaProv(self)
         var.ui.cmbProv.activated[str].connect(clients.Clientes.selProv)
-
-
+        '''
+        Eventos QTableWidget
+        '''
+        event.Eventos.resizeTablaCli(self)
 
 if __name__ =="__main__":
     app=QtWidgets.QApplication([])
