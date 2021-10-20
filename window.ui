@@ -584,6 +584,11 @@ background-color: rgb(85, 255, 255);</string>
     </property>
     <column>
      <property name="text">
+      <string>DNI</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
       <string>Apellidos</string>
      </property>
      <property name="background">
@@ -666,7 +671,11 @@ background-color: rgb(85, 255, 255);</string>
  <resources/>
  <connections/>
  <buttongroups>
-  <buttongroup name="rbtGroupPago"/>
   <buttongroup name="rbtGroupGen"/>
+  <buttongroup name="rbtGroupPago">
+   <property name="exclusive">
+    <bool>false</bool>
+   </property>
+  </buttongroup>
  </buttongroups>
 </ui>

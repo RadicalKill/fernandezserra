@@ -41,10 +41,13 @@ class Main (QtWidgets.QMainWindow):
         Eventos de botón
         '''
         var.ui.btnSalir.clicked.connect(event.Eventos.Salir)
-        var.ui.rbtGroupPago.buttonClicked.connect(clients.Clientes.selPago)
+
         var.ui.rbtGroupGen.buttonClicked.connect(clients.Clientes.selGen)
         var.ui.btFecha.clicked.connect(event.Eventos.abrirCal)
+
         var.ui.btnGuardaClie.clicked.connect(clients.Clientes.GuardaClie)
+        var.ui.btnGuardaClie.clicked.connect(event.Eventos.ClearForm)
+
         var.ui.btnLimpiar.clicked.connect(event.Eventos.ClearForm)
         '''
         Barra de menu

@@ -23,9 +23,9 @@ class Eventos():
     def resizeTablaCli(self):
         try:
             header = var.ui.tabClientes.horizontalHeader()
-            for i in range(4):
+            for i in range(5):
                 header.setSectionResizeMode(i, QtWidgets.QHeaderView.Stretch)
-                if i == 2:
+                if i == 2 or i==0:
                     header.setSectionResizeMode(i, QtWidgets.QHeaderView.ResizeToContents)
         except Exception as error:
             print("Error al cambiar el tamaño de las columnas", error)
@@ -43,15 +43,20 @@ class Eventos():
 
             var.ui.rbtOtro.setChecked(False)
             var.ui.rbtGroupGen.setExclusive(True)
-            var.ui.rbtGroupPago.setExclusive(False)
+
             var.ui.PagoCuenta.setChecked(False)
             var.ui.PagoEfectivo.setChecked(False)
             var.ui.PagoTarjeta.setChecked(False)
             var.ui.PagoTransfer.setChecked(False)
 
-            var.ui.rbtGroupPago.setExclusive(True)
+
             var.ui.cmbProv.setCurrentIndex(0)
             var.ui.cmbMun.setCurrentIndex(0)
-
+            var.ui.ValidarDNI.setText("")
+            var.ui.txtDNI.setStyleSheet("background-color:  rgb(0, 255, 255);")
 
         except Exception as error: print("Error al limpiar el formulario",error)
+
+
+        except Exception as error:
+            print("Error al salir",error)

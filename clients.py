@@ -2,13 +2,15 @@
 gestion clientes
 '''
 import clients
-import var
+import var,event
 from window import *
-
+from PyQt5.QtWidgets import QMessageBox
 
 class Clientes():
     def validarDNI():
         try:
+            global control
+            control=0
             dni= var.ui.txtDNI.text()
             tabla="TRWAGMYFPDXBNJZSQVHLCKE" #Letra DNI
             dig_ext= "XYZ"  #DIGITO EXTRANJEROS
@@ -21,14 +23,17 @@ class Clientes():
                 if dni[0] in dig_ext:
                     dni= dni.replace(dni[0],reemp_dig_ext(dni[0]))
                 if len(dni) == len([n for n in dni if n in numeros]) and tabla[int(dni)%23] == dig_control:
+                    control=1
                     var.ui.ValidarDNI.setStyleSheet ("QLabel{color:green;}")
                     var.ui.ValidarDNI.setText("Menudo cumbiote ")
                     var.ui.txtDNI.setStyleSheet("background-color: green;")
                 else:
+
                     var.ui.ValidarDNI.setStyleSheet("QLabel{color:red;}")
                     var.ui.ValidarDNI.setText("La erraste pendejo")
                     var.ui.txtDNI.setStyleSheet("background-color: rgb(255, 155, 90);")
             else:
+
                 var.ui.ValidarDNI.setStyleSheet("QLabel{color:red;}")
                 var.ui.ValidarDNI.setText("Aprende a escribir amigo")
                 var.ui.txtDNI.setStyleSheet("background-color: rgb(255, 155, 90);")
@@ -52,18 +57,7 @@ class Clientes():
 
 
 
-    def selPago(self):
-        try:
-            if var.ui.PagoEfectivo.isChecked():
-                print("suelta los billetes")
-            if var.ui.PagoTarjeta.isChecked():
-                print("Enga, a poner el Pin")
-            if var.ui.PagoCuenta.isChecked():
-                print("Dale a la cuenta del banco bro")
-            if var.ui.PagoTransfer.isChecked():
-                print("Transferime esta jaja salu2")
 
-        except Exception as error: print("Error en modulo selPago")
 
 
 
@@ -120,20 +114,46 @@ class Clientes():
 
 
         except Exception as error: print("Error en modulo capitalizar")
+    def avisoDNI(self):
+        QMessageBox.about(self, "ERROR", "DNI incorrecto")
 
     def GuardaClie(self):
+
         try:
-            #Preparamos el registro
-            newcli=[]
-            client= [var.ui.txtApel,var.ui.txtNombre,var.ui.txtFecha]
-            for i in client:
-                newcli.append(i.text())
-            #Cargamos en la tabla
-            row=0
-            column=0
-            var.ui.tabClientes.insertRow(row)
-            for campo in newcli:
-                cell = QtWidgets.QTableWidgetItem(campo)
-                var.ui.tabClientes.setItem(row,column,cell)
-                column +=1
+            Clientes.validarDNI()
+            if control == 1:
+                #Preparamos el registro
+                newcli=[] #Para la base de datos
+                tabcli=[] #Para tableview
+                client= [var.ui.txtDNI,var.ui.txtApel,var.ui.txtNombre,var.ui.txtFecha]
+                for i in client:
+                    tabcli.append(i.text())
+                pagos=[]
+                if var.ui.PagoCuenta.isChecked():
+                    pagos.append("Cargo cuenta")
+                if var.ui.PagoEfectivo.isChecked():
+                    pagos.append("Pago Efectivo")
+                if var.ui.PagoTarjeta.isChecked():
+                    pagos.append("Pago Tarjeta")
+                if var.ui.PagoTransfer.isChecked():
+                    pagos.append("Pago por transferencia")
+
+                pagos=set(pagos)
+                tabcli.append("; ".join(pagos))
+                #Cargamos en la tabla
+                row=0
+                column=0
+                var.ui.tabClientes.insertRow(row)
+                for campo in tabcli:
+                    cell = QtWidgets.QTableWidgetItem(str(campo))
+                    var.ui.tabClientes.setItem(row,column,cell)
+                    column +=1
+            else:
+                msg=QtWidgets.QMessageBox()
+                msg.setWindowTitle("ERROR")
+                msg.setIcon(QtWidgets.QMessageBox.Warning)
+                msg.setText("DNI INCORRECTO")
+                msg.exec()
+
+
         except Exception as error: print("Error en modulo GuardaClie")
