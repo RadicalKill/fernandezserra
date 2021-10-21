@@ -157,3 +157,16 @@ class Clientes():
 
 
         except Exception as error: print("Error en modulo GuardaClie")
+
+    def CargaCli(self):
+        try:
+            fila=var.ui.tabClientes.selectedItems()
+            datos=[var.ui.txtDNI,var.ui.txtApel,var.ui.txtNombre,var.ui.txtFecha]
+            if fila:
+                row=[dato.text() for dato in fila]
+            for i, dato in enumerate(datos):
+                dato.setText(row[i])
+                if i==5:
+                    pass
+
+        except Exception as error: print("Error en modulo CargaCli")
