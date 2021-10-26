@@ -177,7 +177,7 @@ class Clientes():
                 row=[dato.text() for dato in fila]
             for i, dato in enumerate(datos):
                 dato.setText(row[i])
-            print(row[4])
+
 
 
             if "Cargo cuenta" in row[4]: var.ui.PagoCuenta.setChecked(True)
