@@ -123,11 +123,20 @@ class Clientes():
             Clientes.validarDNI()
             if control == 1:
                 #Preparamos el registro
-                newcli=[] #Para la base de datos
+                newcli=[var.ui.txtDNI.text(),var.ui.txtApel.text(),var.ui.txtNombre.text(),var.ui.txtFecha.text(),var.ui.txtDir.text()] #Para la base de datos
                 tabcli=[] #Para tableview
                 client= [var.ui.txtDNI,var.ui.txtApel,var.ui.txtNombre,var.ui.txtFecha]
                 for i in client:
                     tabcli.append(i.text())
+
+                newcli.append(var.ui.cmbProv.currentText())
+                newcli.append(var.ui.cmbMun.currentText())
+                if var.ui.rbtHom.isChecked():
+                    newcli.append('Hombre')
+                elif var.ui.rbtFem.isChecked():
+                    newcli.append('Mujer')
+                elif var.ui.rbtOtro.isChecked():
+                    newcli.append('Otro')
                 pagos=[]
                 if var.ui.PagoCuenta.isChecked():
                     pagos.append("Cargo cuenta")
@@ -140,6 +149,8 @@ class Clientes():
 
                 pagos=set(pagos)
                 tabcli.append("; ".join(pagos))
+                newcli.append("; ".join(pagos))
+
                 #Cargamos en la tabla
                 row=0
                 column=0
@@ -166,7 +177,13 @@ class Clientes():
                 row=[dato.text() for dato in fila]
             for i, dato in enumerate(datos):
                 dato.setText(row[i])
-                if i==5:
-                    pass
+            print(row[4])
+
+
+            if "Cargo cuenta" in row[4]: var.ui.PagoCuenta.setChecked(True)
+            if "Pago Efectivo" in row[4]: var.ui.PagoEfectivo.setChecked(True)
+            if "Pago Tarjeta" in row[4]: var.ui.PagoTarjeta.setChecked(True)
+            if "Pago por transferencia" in row[4]: var.ui.PagoTransfer.setChecked(True)
+
 
         except Exception as error: print("Error en modulo CargaCli")

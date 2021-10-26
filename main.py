@@ -7,7 +7,7 @@ from window import *
 from windowaviso import *
 from windowcal import *
 from datetime import *
-import sys,var,event
+import sys,var,event,conexion
 
 
 
@@ -75,7 +75,10 @@ class Main (QtWidgets.QMainWindow):
         event.Eventos.resizeTablaCli(self)
         var.ui.tabClientes.clicked.connect(clients.Clientes.CargaCli)
         var.ui.tabClientes.setSelectionBehavior(QtWidgets.QTableWidget.SelectRows)
-
+        '''
+        Base de datos
+        '''
+        conexion.Conexion.db_connect(var.filedb)
 if __name__ =="__main__":
     app=QtWidgets.QApplication([])
     window=Main()
