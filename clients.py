@@ -2,10 +2,11 @@
 gestion clientes
 '''
 import clients
+import conexion
 import var,event
 from window import *
 from PyQt5.QtWidgets import QMessageBox
-
+from PyQt5 import QtSql
 class Clientes():
     def validarDNI():
         try:
@@ -43,13 +44,7 @@ class Clientes():
 
     def selGen(self):
         try:
-            if var.ui.rbtFem.isChecked():
-                print("marcaste muhe")
-            if var.ui.rbtHom.isChecked():
-                print("marcaste simio")
-            if var.ui.rbtOtro.isChecked():
-                print("marcaste other")
-
+            pass
 
         except Exception as error: print("Error en modulo selGen")
 
@@ -123,7 +118,7 @@ class Clientes():
             Clientes.validarDNI()
             if control == 1:
                 #Preparamos el registro
-                newcli=[var.ui.txtDNI.text(),var.ui.txtApel.text(),var.ui.txtNombre.text(),var.ui.txtFecha.text(),var.ui.txtDir.text()] #Para la base de datos
+                newcli=[var.ui.txtDNI.text(),var.ui.txtFecha.text(),var.ui.txtApel.text(),var.ui.txtNombre.text(),var.ui.txtDir.text()] #Para la base de datos
                 tabcli=[] #Para tableview
                 client= [var.ui.txtDNI,var.ui.txtApel,var.ui.txtNombre,var.ui.txtFecha]
                 for i in client:
@@ -159,6 +154,7 @@ class Clientes():
                     cell = QtWidgets.QTableWidgetItem(str(campo))
                     var.ui.tabClientes.setItem(row,column,cell)
                     column +=1
+                conexion.Conexion.altaCli(newcli)
             else:
                 msg=QtWidgets.QMessageBox()
                 msg.setWindowTitle("ERROR")
@@ -170,20 +166,45 @@ class Clientes():
         except Exception as error: print("Error en modulo GuardaClie")
 
     def CargaCli(self):
+
         try:
+            var.ui.PagoCuenta.setChecked(False)
+            var.ui.PagoTransfer.setChecked(False)
+            var.ui.PagoTarjeta.setChecked(False)
+            var.ui.PagoEfectivo.setChecked(False)
             fila=var.ui.tabClientes.selectedItems()
-            datos=[var.ui.txtDNI,var.ui.txtApel,var.ui.txtNombre,var.ui.txtFecha]
+
+
             if fila:
                 row=[dato.text() for dato in fila]
-            for i, dato in enumerate(datos):
-                dato.setText(row[i])
+                dni1=row[0]
+                query = QtSql.QSqlQuery()
+                query.prepare('SELECT dni,apellidos,nombre,alta,pago,direccion,provincia,genero FROM CLIENTES WHERE dni="'+dni1+'"')
+                if query.exec_():
+                    while query.next():
+                        dni = query.value(0)
+                        alta = query.value(3)
+                        apellidos = query.value(1)
+                        nombre = query.value(2)
+                        pago = query.value(4)
+                        direccion=query.value(5)
+                        provincia=query.value(6)
+                        genero=query.value(7)
+                var.ui.txtDNI.setText(dni)
+                var.ui.txtApel.setText(apellidos)
+                var.ui.txtNombre.setText(nombre)
+                var.ui.txtFecha.setText(alta)
+                var.ui.txtDir.setText(direccion)
 
 
-
-            if "Cargo cuenta" in row[4]: var.ui.PagoCuenta.setChecked(True)
-            if "Pago Efectivo" in row[4]: var.ui.PagoEfectivo.setChecked(True)
-            if "Pago Tarjeta" in row[4]: var.ui.PagoTarjeta.setChecked(True)
-            if "Pago por transferencia" in row[4]: var.ui.PagoTransfer.setChecked(True)
+                var.ui.cmbProv.setCurrentText(provincia)
+                if "Hombre" in genero: var.ui.rbtHom.setChecked(True)
+                if "Mujer" in genero: var.ui.rbtFem.setChecked(True)
+                if "Otro" in genero: var.ui.rbtOtro.setChecked(True)
+                if "Cargo cuenta" in pago: var.ui.PagoCuenta.setChecked(True)
+                if "Pago Efectivo" in pago: var.ui.PagoEfectivo.setChecked(True)
+                if "Pago Tarjeta" in pago: var.ui.PagoTarjeta.setChecked(True)
+                if "Pago por transferencia" in pago: var.ui.PagoTransfer.setChecked(True)
 
 
         except Exception as error: print("Error en modulo CargaCli")
