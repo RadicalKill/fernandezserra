@@ -48,6 +48,13 @@ class Main (QtWidgets.QMainWindow):
         var.ui.btnGuardaClie.clicked.connect(clients.Clientes.GuardaClie)
         var.ui.btnGuardaClie.clicked.connect(event.Eventos.ClearForm)
 
+
+        var.ui.btnModifCli.clicked.connect(clients.Clientes.modifCli)
+        var.ui.btnModifCli.clicked.connect(event.Eventos.ClearForm)
+
+        var.ui.btnEliminarCli.clicked.connect(conexion.Conexion.DelCli)
+
+
         var.ui.btnLimpiar.clicked.connect(event.Eventos.ClearForm)
         '''
         Barra de menu
@@ -67,8 +74,8 @@ class Main (QtWidgets.QMainWindow):
         '''
         Eventos combobox
         '''
-        clients.Clientes.cargaProv(self)
-        var.ui.cmbProv.activated[str].connect(clients.Clientes.selProv)
+
+        var.ui.cmbProv.activated[str].connect(conexion.Conexion.CargaMun)
         '''
         Eventos QTableWidget
         '''
@@ -80,6 +87,7 @@ class Main (QtWidgets.QMainWindow):
         '''
         conexion.Conexion.db_connect(var.filedb)
         conexion.Conexion.cargarTablaCli(self)
+        conexion.Conexion.CargaProv(self)
 
 if __name__ =="__main__":
     app=QtWidgets.QApplication([])

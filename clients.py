@@ -56,35 +56,21 @@ class Clientes():
 
 
 
-    def cargaProv(self):
+    def cargaProv(prov):
         try:
             var.ui.cmbProv.clear()
-            prov=[" ","A Coruña","Lugo","Ourense","Pontevedra","Vigo"]
+
             for i in prov:
                 var.ui.cmbProv.addItem(i)
 
         except Exception as error: print("Error en modulo cargaProv")
 
-    def selProv(prov):
-        try:
-            clients.Clientes.cargaMun(prov)
-        except Exception as error: print("Error en modulo selProv")
-
-    def cargaMun(prov):
+    def cargaMun(mun):
         try:
             var.ui.cmbMun.clear()
-            if prov == "Vigo":
-                mun=[" ","Vigo","Redondela","Ponteareas","Cangas"]
-            if prov == "A Coruña":
-                mun=[" ","A Coruña","Ferrol","Betanzos","Santiago"]
-            if prov == "Pontevedra":
-                mun=[" ","Pontevedra","Moaña","Lalín","A Cañiza"]
-            if prov == "Ourense":
-                mun=[" ","Ourense","O Barco","Monforte","Verin"]
-            if prov== "Lugo":
-                mun=[" ","Lugo","Sarria","Villalba","Ribadeo"]
             for i in mun:
                 var.ui.cmbMun.addItem(i)
+
         except Exception as error: print("Error en modulo cargaMun")
 
 
@@ -119,11 +105,6 @@ class Clientes():
             if control == 1:
                 #Preparamos el registro
                 newcli=[var.ui.txtDNI.text(),var.ui.txtFecha.text(),var.ui.txtApel.text(),var.ui.txtNombre.text(),var.ui.txtDir.text()] #Para la base de datos
-                tabcli=[] #Para tableview
-                client= [var.ui.txtDNI,var.ui.txtApel,var.ui.txtNombre,var.ui.txtFecha]
-                for i in client:
-                    tabcli.append(i.text())
-
                 newcli.append(var.ui.cmbProv.currentText())
                 newcli.append(var.ui.cmbMun.currentText())
                 if var.ui.rbtHom.isChecked():
@@ -143,18 +124,12 @@ class Clientes():
                     pagos.append("Pago por transferencia")
 
                 pagos=set(pagos)
-                tabcli.append("; ".join(pagos))
+
                 newcli.append("; ".join(pagos))
 
-                #Cargamos en la tabla
-                row=0
-                column=0
-                var.ui.tabClientes.insertRow(row)
-                for campo in tabcli:
-                    cell = QtWidgets.QTableWidgetItem(str(campo))
-                    var.ui.tabClientes.setItem(row,column,cell)
-                    column +=1
+
                 conexion.Conexion.altaCli(newcli)
+                conexion.Conexion.cargarTablaCli(self)
             else:
                 msg=QtWidgets.QMessageBox()
                 msg.setWindowTitle("ERROR")
@@ -208,3 +183,49 @@ class Clientes():
 
 
         except Exception as error: print("Error en modulo CargaCli")
+
+    def modifCli(self):
+
+        try:
+            Clientes.validarDNI()
+            if control == 1:
+                # Preparamos el registro
+                newcli = [var.ui.txtDNI.text(), var.ui.txtFecha.text(), var.ui.txtApel.text(),
+                          var.ui.txtNombre.text(), var.ui.txtDir.text()]  # Para la base de datos
+                tabcli = []  # Para tableview
+                client = [var.ui.txtDNI, var.ui.txtApel, var.ui.txtNombre, var.ui.txtFecha]
+                for i in client:
+                    tabcli.append(i.text())
+
+                newcli.append(var.ui.cmbProv.currentText())
+                newcli.append(var.ui.cmbMun.currentText())
+                if var.ui.rbtHom.isChecked():
+                    newcli.append('Hombre')
+                elif var.ui.rbtFem.isChecked():
+                    newcli.append('Mujer')
+                elif var.ui.rbtOtro.isChecked():
+                    newcli.append('Otro')
+                pagos = []
+                if var.ui.PagoCuenta.isChecked():
+                    pagos.append("Cargo cuenta")
+                if var.ui.PagoEfectivo.isChecked():
+                    pagos.append("Pago Efectivo")
+                if var.ui.PagoTarjeta.isChecked():
+                    pagos.append("Pago Tarjeta")
+                if var.ui.PagoTransfer.isChecked():
+                    pagos.append("Pago por transferencia")
+
+                pagos = set(pagos)
+                tabcli.append("; ".join(pagos))
+                newcli.append("; ".join(pagos))
+
+                conexion.Conexion.modCli(newcli)
+                conexion.Conexion.cargarTablaCli(self)
+            else:
+                msg = QtWidgets.QMessageBox()
+                msg.setWindowTitle("ERROR")
+                msg.setIcon(QtWidgets.QMessageBox.Warning)
+                msg.setText("DNI INCORRECTO")
+                msg.exec()
+
+        except Exception as error: print("Error en modulo modifCli")

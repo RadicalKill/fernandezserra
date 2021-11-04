@@ -1,5 +1,7 @@
 from PyQt5 import QtSql,QtWidgets
 
+import clients
+import conexion
 import event
 import var
 
@@ -67,7 +69,7 @@ class Conexion():
 
             index=0
             query=QtSql.QSqlQuery()
-            query.prepare('SELECT dni,apellidos,nombre,alta,pago FROM CLIENTES')
+            query.prepare('SELECT dni,apellidos,nombre,alta,pago FROM CLIENTES ORDER BY apellidos')
             if query.exec_():
                 while query.next():
                     dni=query.value(0)
@@ -91,3 +93,153 @@ class Conexion():
                 msgBox.exec()
         except Exception as error:
             print("Problemas en cargarTablaCli", error)
+
+
+    def modCli(newclie):
+        try:
+
+
+            query = QtSql.QSqlQuery()
+            query.prepare('UPDATE clientes SET alta=:alta,apellidos=:apellidos,nombre=:nombre,direccion=:direccion,provincia=:provincia,genero=:genero,pago=:pago WHERE dni=:dni')
+            query.bindValue(':dni', str(newclie[0]))
+            query.bindValue(':alta', str(newclie[1]))
+            query.bindValue(':apellidos', str(newclie[2]))
+            query.bindValue(':nombre', str(newclie[3]))
+            query.bindValue(':direccion', str(newclie[4]))
+            query.bindValue(':provincia', str(newclie[5]))
+            query.bindValue(':municipio', str(newclie[6]))
+            query.bindValue(':genero', str(newclie[7]))
+            query.bindValue(':pago', str(newclie[8]))
+            if query.exec_():
+                print('Modificación correcta')
+                msgBox = QtWidgets.QMessageBox()
+                msgBox.setWindowTitle("Modificación")
+                msgBox.setIcon((QtWidgets.QMessageBox.Warning))
+                msgBox.setText("El cliente ha sido modificado en la BD")
+                msgBox.exec()
+            else:
+                print('Error:', query.lastError().text())
+                msgBox = QtWidgets.QMessageBox()
+                msgBox.setWindowTitle("Aviso")
+                msgBox.setIcon((QtWidgets.QMessageBox.Warning))
+                msgBox.setText("El cliente no ha sido modificado en la BD")
+                msgBox.exec()
+        except Exception as error:
+            print('Problemas modificar cliente',error)
+            msgBox = QtWidgets.QMessageBox()
+            msgBox.setWindowTitle("Aviso")
+            msgBox.setIcon((QtWidgets.QMessageBox.Warning))
+            msgBox.setText("Error al modificar cliente  en la BD")
+            msgBox.exec()
+
+
+    def DelCli(self):
+        try:
+            dni=var.ui.txtDNI.text()
+            query = QtSql.QSqlQuery()
+            query.prepare(
+                'DELETE FROM clientes  WHERE dni=:dni')
+            query.bindValue(':dni', dni)
+
+            if query.exec_():
+                print('Eliminación correcta')
+                msgBox = QtWidgets.QMessageBox()
+                msgBox.setWindowTitle("Eliminación")
+                msgBox.setIcon((QtWidgets.QMessageBox.Warning))
+                msgBox.setText("El cliente ha sido eliminado de la BD")
+                msgBox.exec()
+                conexion.Conexion.cargarTablaCli(self)
+            else:
+                print('Error:', query.lastError().text())
+                msgBox = QtWidgets.QMessageBox()
+                msgBox.setWindowTitle("Aviso")
+                msgBox.setIcon((QtWidgets.QMessageBox.Warning))
+                msgBox.setText("El cliente no ha sido eliminado de la BD")
+                msgBox.exec()
+
+        except Exception as error:
+            print('Problemas eliminar cliente', error)
+            msgBox = QtWidgets.QMessageBox()
+            msgBox.setWindowTitle("Aviso")
+            msgBox.setIcon((QtWidgets.QMessageBox.Warning))
+            msgBox.setText("Error al eliminar cliente  en la BD")
+            msgBox.exec()
+
+    def CargaProv(self):
+        try:
+            prov=[""]
+            ids=[]
+            query = QtSql.QSqlQuery()
+            query.prepare('SELECT id,provincia FROM provincias')
+            if query.exec_():
+                while query.next():
+                    id=query.value(0)
+                    ids.append(id)
+                    provin=query.value(1)
+                    prov.append(provin)
+                clients.Clientes.cargaProv(prov)
+            else:
+                print('Error:', query.lastError().text())
+                msgBox = QtWidgets.QMessageBox()
+                msgBox.setWindowTitle("Aviso")
+                msgBox.setIcon((QtWidgets.QMessageBox.Warning))
+                msgBox.setText("El cliente no ha sido cargado")
+                msgBox.exec()
+
+        except Exception as error:
+            print('Problemas cargar provincias', error)
+            msgBox = QtWidgets.QMessageBox()
+            msgBox.setWindowTitle("Aviso")
+            msgBox.setIcon((QtWidgets.QMessageBox.Warning))
+            msgBox.setText("Error al cargar provincias de la BD")
+            msgBox.exec()
+
+
+
+
+    def CargaMun(prov):
+
+        try:
+
+            query = QtSql.QSqlQuery()
+            query.prepare(
+                'SELECT id FROM provincias WHERE provincia=:pro')
+            query.bindValue(':pro',prov)
+
+            if query.exec_():
+                while query.next():
+                    idp=query.value(0)
+
+
+            else:
+                print('Error:', query.lastError().text())
+                msgBox = QtWidgets.QMessageBox()
+                msgBox.setWindowTitle("Aviso")
+                msgBox.setIcon((QtWidgets.QMessageBox.Warning))
+                msgBox.setText("La provincia no ha sido cargada")
+                msgBox.exec()
+            mun=[""]
+
+            query = QtSql.QSqlQuery()
+            query.prepare('SELECT id,municipio FROM municipios WHERE provincia_id=:idp')
+            query.bindValue(':idp',idp)
+            if query.exec_():
+                while query.next():
+                    munic=query.value(1)
+                    mun.append(munic)
+                clients.Clientes.cargaMun(mun)
+            else:
+                print('Error:', query.lastError().text())
+                msgBox = QtWidgets.QMessageBox()
+                msgBox.setWindowTitle("Aviso")
+                msgBox.setIcon((QtWidgets.QMessageBox.Warning))
+                msgBox.setText("El cliente no ha sido cargado")
+                msgBox.exec()
+
+        except Exception as error:
+            print('Problemas cargar provincias', error)
+            msgBox = QtWidgets.QMessageBox()
+            msgBox.setWindowTitle("Aviso")
+            msgBox.setIcon((QtWidgets.QMessageBox.Warning))
+            msgBox.setText("Error al cargar provincias de la BD")
+            msgBox.exec()

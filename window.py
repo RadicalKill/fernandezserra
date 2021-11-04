@@ -60,6 +60,7 @@ class Ui_MainWindow(object):
         self.line.setObjectName("line")
         self.tabClientes = QtWidgets.QTableWidget(self.centralwidget)
         self.tabClientes.setGeometry(QtCore.QRect(10, 470, 951, 271))
+        self.tabClientes.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOn)
         self.tabClientes.setAlternatingRowColors(True)
         self.tabClientes.setObjectName("tabClientes")
         self.tabClientes.setColumnCount(5)
