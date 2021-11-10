@@ -31,6 +31,14 @@ class Eventos():
             print("Error al cambiar el tamaño de las columnas", error)
 
 
+    def Abrir(self):
+        try:
+            var.dlgabrir.show()
+        except Exception as error:
+            print("Error al abrir cuadro dialogo", error)
+
+
+
     def ClearForm(self):
         try:
             cajas=[var.ui.txtApel,var.ui.txtNombre,var.ui.txtDir,var.ui.txtDNI,var.ui.txtFecha]

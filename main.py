@@ -2,12 +2,23 @@
 
 # Press Shift+F10 to execute it or replace it with your code.
 # Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+from time import strftime, gmtime
+
 import clients
 from window import *
 from windowaviso import *
 from windowcal import *
 from datetime import *
-import sys,var,event,conexion
+import sys,var,event,conexion,locale
+locale.setlocale(locale.LC_ALL,'es-ES')
+
+
+class FileDialogAbrir(QtWidgets.QFileDialog):
+    def __init__(self):
+        super(FileDialogAbrir,self).__init__()
+
+
+
 
 
 
@@ -57,9 +68,10 @@ class Main (QtWidgets.QMainWindow):
 
         var.ui.btnLimpiar.clicked.connect(event.Eventos.ClearForm)
         '''
-        Barra de menu
+        Barra de menús y herramientas
         '''
         var.ui.actionSalir.triggered.connect(event.Eventos.Salir)
+        var.ui.actionAbrir.triggered.connect(event.Eventos.Abrir)
 
         '''
         comprobar el dni
@@ -76,6 +88,14 @@ class Main (QtWidgets.QMainWindow):
         '''
 
         var.ui.cmbProv.activated[str].connect(conexion.Conexion.CargaMun)
+        '''
+        
+        
+        
+        '''
+        var.ui.statusbar.addPermanentWidget(var.ui.lblStat,1)
+        fecha=date.today().strftime("%A %d de %B de %Y")
+        var.ui.lblStat.setText(fecha.capitalize())
         '''
         Eventos QTableWidget
         '''
@@ -98,5 +118,6 @@ if __name__ =="__main__":
     window.move(x,y)
     var.dlgaviso=DialogAviso()
     var.dlgcalendar=DialogCalendar()
+    var.dlgabrir=FileDialogAbrir()
     window.show()
     sys.exit(app.exec())

@@ -33,6 +33,7 @@ class Clientes():
                     var.ui.ValidarDNI.setStyleSheet("QLabel{color:red;}")
                     var.ui.ValidarDNI.setText("La erraste pendejo")
                     var.ui.txtDNI.setStyleSheet("background-color: rgb(255, 155, 90);")
+
             else:
 
                 var.ui.ValidarDNI.setStyleSheet("QLabel{color:red;}")
