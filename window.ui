@@ -811,9 +811,10 @@ color: rgb(85, 170, 255);</string>
     <bool>false</bool>
    </attribute>
    <addaction name="actionactbarAbrir"/>
-   <addaction name="actionactbarSalir"/>
+   <addaction name="actionactbarimprimir"/>
    <addaction name="actionactbarcrearbackup"/>
    <addaction name="actionactbarrestaurarbackup"/>
+   <addaction name="actionactbarSalir"/>
   </widget>
   <action name="actionGuadar">
    <property name="text">
@@ -895,6 +896,15 @@ color: rgb(85, 170, 255);</string>
    </property>
    <property name="text">
     <string>actbarrestaurarbackup</string>
+   </property>
+  </action>
+  <action name="actionactbarimprimir">
+   <property name="icon">
+    <iconset>
+     <normaloff>img/814618.png</normaloff>img/814618.png</iconset>
+   </property>
+   <property name="text">
+    <string>actbarimprimir</string>
    </property>
   </action>
  </widget>

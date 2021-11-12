@@ -107,6 +107,7 @@ class Main (QtWidgets.QMainWindow):
         var.ui.actionactbarAbrir.triggered.connect(event.Eventos.Abrir)
         var.ui.actionactbarcrearbackup.triggered.connect(event.Eventos.crearBackup)
         var.ui.actionactbarrestaurarbackup.triggered.connect(event.Eventos.RestaurarDB)
+        var.ui.actionactbarimprimir.triggered.connect(event.Eventos.Imprimir)
         '''
         Eventos QTableWidget
         '''

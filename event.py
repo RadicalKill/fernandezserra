@@ -3,6 +3,8 @@ import pathlib
 import shutil
 import zipfile
 
+from PyQt5 import QtPrintSupport
+
 import conexion
 from window import *
 import sys,var
@@ -115,3 +117,12 @@ class Eventos():
                 msgBox.setText("BD restaurada con éxito")
                 msgBox.exec()
         except Exception as error: print("Error al restaurar BD",error)
+
+
+    def Imprimir(self):
+        try:
+            printDialog=QtPrintSupport.QPrintDialog()
+            if printDialog.exec():
+                printDialog.show()
+
+        except Exception as error: print("Error al imprimir",error)
