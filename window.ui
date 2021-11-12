@@ -779,12 +779,41 @@ color: rgb(85, 170, 255);</string>
     <addaction name="separator"/>
     <addaction name="actionSalir"/>
    </widget>
+   <widget class="QMenu" name="menuHerramientas">
+    <property name="title">
+     <string>Herramientas</string>
+    </property>
+    <addaction name="actionCrearBackup"/>
+    <addaction name="actionRestaurarBD"/>
+   </widget>
    <addaction name="menuArchivo"/>
+   <addaction name="menuHerramientas"/>
   </widget>
   <widget class="QStatusBar" name="statusbar">
    <property name="styleSheet">
     <string notr="true"/>
    </property>
+  </widget>
+  <widget class="QToolBar" name="toolBar">
+   <property name="windowTitle">
+    <string>toolBar</string>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>32</width>
+     <height>32</height>
+    </size>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="actionactbarAbrir"/>
+   <addaction name="actionactbarSalir"/>
+   <addaction name="actionactbarcrearbackup"/>
+   <addaction name="actionactbarrestaurarbackup"/>
   </widget>
   <action name="actionGuadar">
    <property name="text">
@@ -812,6 +841,60 @@ color: rgb(85, 170, 255);</string>
   <action name="actionAbrir">
    <property name="text">
     <string>Abrir</string>
+   </property>
+  </action>
+  <action name="actionCrearBackup">
+   <property name="text">
+    <string>CrearBackup</string>
+   </property>
+  </action>
+  <action name="actionRestaurarBD">
+   <property name="text">
+    <string>RestaurarBD</string>
+   </property>
+  </action>
+  <action name="actionactbarSalir">
+   <property name="icon">
+    <iconset>
+     <normaloff>img/320140.png</normaloff>
+     <normalon>../../Documents/descarga.png</normalon>img/320140.png</iconset>
+   </property>
+   <property name="text">
+    <string>actbarSalir</string>
+   </property>
+   <property name="shortcut">
+    <string>Alt+J</string>
+   </property>
+  </action>
+  <action name="actionactbarAbrir">
+   <property name="icon">
+    <iconset>
+     <normaloff>img/Open-icon.png</normaloff>
+     <normalon>../../Documents/Open-icon.png</normalon>img/Open-icon.png</iconset>
+   </property>
+   <property name="text">
+    <string>actbarAbrir</string>
+   </property>
+   <property name="shortcut">
+    <string>Alt+A</string>
+   </property>
+  </action>
+  <action name="actionactbarcrearbackup">
+   <property name="icon">
+    <iconset>
+     <normaloff>img/306.png</normaloff>img/306.png</iconset>
+   </property>
+   <property name="text">
+    <string>actbarcrearbackup</string>
+   </property>
+  </action>
+  <action name="actionactbarrestaurarbackup">
+   <property name="icon">
+    <iconset>
+     <normaloff>img/kisspng-computer-icons-backup-and-restore-clip-art-databas-5bfae21471f515.0483477915431685324668.png</normaloff>img/kisspng-computer-icons-backup-and-restore-clip-art-databas-5bfae21471f515.0483477915431685324668.png</iconset>
+   </property>
+   <property name="text">
+    <string>actbarrestaurarbackup</string>
    </property>
   </action>
  </widget>

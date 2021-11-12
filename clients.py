@@ -155,7 +155,7 @@ class Clientes():
                 row=[dato.text() for dato in fila]
                 dni1=row[0]
                 query = QtSql.QSqlQuery()
-                query.prepare('SELECT dni,apellidos,nombre,alta,pago,direccion,provincia,genero FROM CLIENTES WHERE dni="'+dni1+'"')
+                query.prepare('SELECT dni,apellidos,nombre,alta,pagos,direccion,provincia, municipio,sexo FROM CLIENTES WHERE dni="'+dni1+'"')
                 if query.exec_():
                     while query.next():
                         dni = query.value(0)
@@ -165,7 +165,8 @@ class Clientes():
                         pago = query.value(4)
                         direccion=query.value(5)
                         provincia=query.value(6)
-                        genero=query.value(7)
+                        municipio=query.value(7)
+                        genero=query.value(8)
                 var.ui.txtDNI.setText(dni)
                 var.ui.txtApel.setText(apellidos)
                 var.ui.txtNombre.setText(nombre)
@@ -174,6 +175,7 @@ class Clientes():
 
 
                 var.ui.cmbProv.setCurrentText(provincia)
+                var.ui.cmbMun.setCurrentText(municipio)
                 if "Hombre" in genero: var.ui.rbtHom.setChecked(True)
                 if "Mujer" in genero: var.ui.rbtFem.setChecked(True)
                 if "Otro" in genero: var.ui.rbtOtro.setChecked(True)

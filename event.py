@@ -1,7 +1,14 @@
+import os.path
+import pathlib
+import shutil
+import zipfile
 
-
+import conexion
 from window import *
 import sys,var
+from datetime import date, datetime
+from zipfile import ZipFile
+
 
 class Eventos():
     def Salir(self):
@@ -38,6 +45,27 @@ class Eventos():
             print("Error al abrir cuadro dialogo", error)
 
 
+    def crearBackup(self):
+        try:
+            fecha= datetime.today().strftime("%Y.%m.%d.%H.%M.%S")
+            var.copia= (str(fecha) + "_backup.zip")
+            option= QtWidgets.QFileDialog.Options()
+            directorio,filename= var.dlgabrir.getSaveFileName(None,"Guardar copia",var.copia,".zip",options=option)
+            if var.dlgabrir.Accepted and filename != "":
+                fichzip=zipfile.ZipFile(var.copia,"w")
+                fichzip.write(var.filedb,os.path.basename(var.filedb),zipfile.ZIP_DEFLATED)
+                fichzip.close()
+
+                shutil.move(str(var.copia),str(directorio))
+                msgBox = QtWidgets.QMessageBox()
+                msgBox.setWindowTitle("Aviso")
+                msgBox.setIcon((QtWidgets.QMessageBox.Warning))
+                msgBox.setText("Backup creado con éxito")
+                msgBox.exec()
+        except Exception as error:
+            print("Error al crear backup", error)
+
+
 
     def ClearForm(self):
         try:
@@ -68,3 +96,22 @@ class Eventos():
 
         except Exception as error:
             print("Error al salir",error)
+
+    def RestaurarDB(self):
+        try:
+            a=""
+            option = QtWidgets.QFileDialog.Options()
+            arch=var.dlgabrir.getOpenFileName(None,"Abrir copia",a,"Zip Files (*.zip), *.zip",options=option)
+            if var.dlgabrir.Accepted and arch != "":
+                ruta_descompresion = pathlib.Path(__file__).parent.absolute()
+                with ZipFile(arch[0], 'r') as zipObj:
+                    path= zipObj.extract("bbdd.db",ruta_descompresion)
+
+                conexion.Conexion.db_connect(path)
+                conexion.Conexion.cargarTablaCli(self)
+                msgBox = QtWidgets.QMessageBox()
+                msgBox.setWindowTitle("Aviso")
+                msgBox.setIcon((QtWidgets.QMessageBox.Warning))
+                msgBox.setText("BD restaurada con éxito")
+                msgBox.exec()
+        except Exception as error: print("Error al restaurar BD",error)

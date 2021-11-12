@@ -31,7 +31,7 @@ class Conexion():
             print(newclie)
             query = QtSql.QSqlQuery()
             query.prepare('insert into clientes (dni, alta, apellidos, nombre, direccion,'
-                          ' provincia, municipio, genero, pago )VALUES (:dni, :alta, :apellidos, '
+                          ' provincia, municipio, sexo, pagos )VALUES (:dni, :alta, :apellidos, '
                           ':nombre, :direccion, :provincia, :municipio, :genero, :pago)')
             query.bindValue(':dni', str(newclie[0]))
             query.bindValue(':alta', str(newclie[1]))
@@ -69,13 +69,13 @@ class Conexion():
 
             index=0
             query=QtSql.QSqlQuery()
-            query.prepare('SELECT dni,apellidos,nombre,alta,pago FROM CLIENTES ORDER BY apellidos')
+            query.prepare('SELECT dni,alta,apellidos,nombre,pagos FROM CLIENTES ORDER BY apellidos')
             if query.exec_():
                 while query.next():
                     dni=query.value(0)
-                    alta=query.value(3)
-                    apellidos=query.value(1)
-                    nombre=query.value(2)
+                    alta=query.value(1)
+                    apellidos=query.value(2)
+                    nombre=query.value(3)
                     pago=query.value(4)
                     var.ui.tabClientes.setRowCount(index+1)
                     var.ui.tabClientes.setItem(index,0,QtWidgets.QTableWidgetItem(dni))
@@ -100,7 +100,7 @@ class Conexion():
 
 
             query = QtSql.QSqlQuery()
-            query.prepare('UPDATE clientes SET alta=:alta,apellidos=:apellidos,nombre=:nombre,direccion=:direccion,provincia=:provincia,genero=:genero,pago=:pago WHERE dni=:dni')
+            query.prepare('UPDATE clientes SET alta=:alta,apellidos=:apellidos,nombre=:nombre,direccion=:direccion,provincia=:provincia,sexo=:genero,pagos=:pago WHERE dni=:dni')
             query.bindValue(':dni', str(newclie[0]))
             query.bindValue(':alta', str(newclie[1]))
             query.bindValue(':apellidos', str(newclie[2]))

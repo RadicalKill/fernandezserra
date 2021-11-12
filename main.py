@@ -72,6 +72,8 @@ class Main (QtWidgets.QMainWindow):
         '''
         var.ui.actionSalir.triggered.connect(event.Eventos.Salir)
         var.ui.actionAbrir.triggered.connect(event.Eventos.Abrir)
+        var.ui.actionCrearBackup.triggered.connect(event.Eventos.crearBackup)
+        var.ui.actionRestaurarBD.triggered.connect(event.Eventos.RestaurarDB)
 
         '''
         comprobar el dni
@@ -90,12 +92,21 @@ class Main (QtWidgets.QMainWindow):
         var.ui.cmbProv.activated[str].connect(conexion.Conexion.CargaMun)
         '''
         
-        
+        Barra de estado
         
         '''
         var.ui.statusbar.addPermanentWidget(var.ui.lblStat,1)
         fecha=date.today().strftime("%A %d de %B de %Y")
         var.ui.lblStat.setText(fecha.capitalize())
+
+
+        '''
+        Eventos barra herramientas
+        '''
+        var.ui.actionactbarSalir.triggered.connect(event.Eventos.Salir)
+        var.ui.actionactbarAbrir.triggered.connect(event.Eventos.Abrir)
+        var.ui.actionactbarcrearbackup.triggered.connect(event.Eventos.crearBackup)
+        var.ui.actionactbarrestaurarbackup.triggered.connect(event.Eventos.RestaurarDB)
         '''
         Eventos QTableWidget
         '''
