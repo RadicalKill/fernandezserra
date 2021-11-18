@@ -4,6 +4,7 @@ import clients
 import conexion
 import event
 import var
+import pandas as pd
 
 class Conexion():
     def db_connect(filedb):
@@ -64,7 +65,7 @@ class Conexion():
             msgBox.setText("Error al guardar cliente  en la BD")
             msgBox.exec()
 
-    def cargarTablaCli(self):
+    def cargarTablaCli():
         try:
 
             index=0
@@ -117,6 +118,8 @@ class Conexion():
                 msgBox.setIcon((QtWidgets.QMessageBox.Warning))
                 msgBox.setText("El cliente ha sido modificado en la BD")
                 msgBox.exec()
+
+
             else:
                 print('Error:', query.lastError().text())
                 msgBox = QtWidgets.QMessageBox()
@@ -124,6 +127,7 @@ class Conexion():
                 msgBox.setIcon((QtWidgets.QMessageBox.Warning))
                 msgBox.setText("El cliente no ha sido modificado en la BD")
                 msgBox.exec()
+
         except Exception as error:
             print('Problemas modificar cliente',error)
             msgBox = QtWidgets.QMessageBox()
@@ -148,7 +152,7 @@ class Conexion():
                 msgBox.setIcon((QtWidgets.QMessageBox.Warning))
                 msgBox.setText("El cliente ha sido eliminado de la BD")
                 msgBox.exec()
-                conexion.Conexion.cargarTablaCli(self)
+                conexion.Conexion.cargarTablaCli()
             else:
                 print('Error:', query.lastError().text())
                 msgBox = QtWidgets.QMessageBox()
@@ -242,4 +246,138 @@ class Conexion():
             msgBox.setWindowTitle("Aviso")
             msgBox.setIcon((QtWidgets.QMessageBox.Warning))
             msgBox.setText("Error al cargar provincias de la BD")
+            msgBox.exec()
+
+    def comprobarCliente(dni):
+        try:
+
+            contador="0"
+            query = QtSql.QSqlQuery()
+            query.prepare(
+                'SELECT * FROM clientes WHERE dni=:dni')
+            query.bindValue(':dni', dni)
+            if query.exec_():
+                while query.next():
+                    contador = query.value(0)
+            else: contador="0"
+            return contador
+
+
+        except Exception as error:
+            print('Problemas al buscar en la bd', error)
+            msgBox = QtWidgets.QMessageBox()
+            msgBox.setWindowTitle("Aviso")
+            msgBox.setIcon((QtWidgets.QMessageBox.Warning))
+            msgBox.setText("Error al cargar provincias de la BD")
+            msgBox.exec()
+
+    def altaCliXL(newclie):
+        try:
+
+
+            query = QtSql.QSqlQuery()
+            query.prepare('insert into clientes (dni, alta, apellidos, nombre, direccion,'
+                          ' provincia, municipio, sexo, pagos )VALUES (:dni, :alta, :apellidos, '
+                          ':nombre, :direccion, :provincia, :municipio, :genero, :pago)')
+            query.bindValue(':dni', str(newclie[0]))
+            query.bindValue(':alta', str(newclie[1]))
+            query.bindValue(':apellidos', str(newclie[2]))
+            query.bindValue(':nombre', str(newclie[3]))
+            query.bindValue(':direccion', str(newclie[4]))
+            query.bindValue(':provincia', str(newclie[5]))
+            query.bindValue(':municipio', str(newclie[6]))
+            query.bindValue(':genero', str(newclie[7]))
+            query.bindValue(':pago', str(newclie[8]))
+
+            if query.exec_():
+                Conexion.cargarTablaCli()
+            else:
+                print('Error:', query.lastError().text())
+                msgBox = QtWidgets.QMessageBox()
+                msgBox.setWindowTitle("Aviso")
+                msgBox.setIcon((QtWidgets.QMessageBox.Warning))
+                msgBox.setText("El cliente no ha sido guardado en la BD")
+                msgBox.exec()
+
+
+        except Exception as error:
+            print('Problemas alta cliente',error)
+            msgBox = QtWidgets.QMessageBox()
+            msgBox.setWindowTitle("Aviso")
+            msgBox.setIcon((QtWidgets.QMessageBox.Warning))
+            msgBox.setText("Error al guardar cliente  en la BD")
+            msgBox.exec()
+
+    def modCliXL(newclie):
+        try:
+
+
+            query = QtSql.QSqlQuery()
+            query.prepare('UPDATE clientes SET alta=:alta,apellidos=:apellidos,nombre=:nombre,direccion=:direccion,provincia=:provincia,sexo=:genero,pagos=:pago WHERE dni=:dni')
+
+            query.bindValue(':dni', str(newclie[0]))
+            query.bindValue(':alta', str(newclie[1]))
+            query.bindValue(':apellidos', str(newclie[2]))
+            query.bindValue(':nombre', str(newclie[3]))
+            query.bindValue(':direccion', str(newclie[4]))
+            query.bindValue(':provincia', str(newclie[5]))
+            query.bindValue(':municipio', str(newclie[6]))
+            query.bindValue(':genero', str(newclie[7]))
+            query.bindValue(':pago', str(newclie[8]))
+            if query.exec_():
+                Conexion.cargarTablaCli()
+
+
+            else:
+                print('Error:', query.lastError().text())
+                msgBox = QtWidgets.QMessageBox()
+                msgBox.setWindowTitle("Aviso")
+                msgBox.setIcon((QtWidgets.QMessageBox.Warning))
+                msgBox.setText("El cliente no ha sido modificado en la BD")
+                msgBox.exec()
+        except Exception as error:
+            print('Problemas modificar cliente',error)
+            msgBox = QtWidgets.QMessageBox()
+            msgBox.setWindowTitle("Aviso")
+            msgBox.setIcon((QtWidgets.QMessageBox.Warning))
+            msgBox.setText("Error al modificar cliente  en la BD")
+            msgBox.exec()
+
+    def exportBD(self):
+        try:
+            list = []
+            adiciones=[]
+            query = QtSql.QSqlQuery()
+            query.prepare('SELECT * FROM clientes')
+
+            if query.exec_():
+                while query.next():
+                    dni=query.value(0)
+                    alta=query.value(1)
+                    apellidos=query.value(2)
+                    nombre=query.value(3)
+                    direccion=query.value(4)
+                    provincia=query.value(5)
+                    municipio=query.value(6)
+                    sexo=query.value(7)
+                    pago=query.value(8)
+                    list=[dni,alta,apellidos,nombre,direccion,provincia,municipio,sexo,pago]
+                    adiciones.append(list)
+                event.Eventos.Exportacion(adiciones)
+            else:
+                print('Error:', query.lastError().text())
+                msgBox = QtWidgets.QMessageBox()
+                msgBox.setWindowTitle("Aviso")
+                msgBox.setIcon((QtWidgets.QMessageBox.Warning))
+                msgBox.setText("La BD no ha sido exportada")
+                msgBox.exec()
+
+
+
+        except Exception as error:
+            print('Problemas exportar BD',error)
+            msgBox = QtWidgets.QMessageBox()
+            msgBox.setWindowTitle("Aviso")
+            msgBox.setIcon((QtWidgets.QMessageBox.Warning))
+            msgBox.setText("Error al exportar la BD")
             msgBox.exec()

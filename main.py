@@ -74,6 +74,9 @@ class Main (QtWidgets.QMainWindow):
         var.ui.actionAbrir.triggered.connect(event.Eventos.Abrir)
         var.ui.actionCrearBackup.triggered.connect(event.Eventos.crearBackup)
         var.ui.actionRestaurarBD.triggered.connect(event.Eventos.RestaurarDB)
+        var.ui.actionImprimir.triggered.connect(event.Eventos.Imprimir)
+        var.ui.actionImportar_Datos.triggered.connect(event.Eventos.ImportarExcel)
+        var.ui.actionExportar_Datos.triggered.connect(conexion.Conexion.exportBD)
 
         '''
         comprobar el dni
@@ -118,7 +121,7 @@ class Main (QtWidgets.QMainWindow):
         Base de datos
         '''
         conexion.Conexion.db_connect(var.filedb)
-        conexion.Conexion.cargarTablaCli(self)
+        conexion.Conexion.cargarTablaCli()
         conexion.Conexion.CargaProv(self)
 
 if __name__ =="__main__":
@@ -131,5 +134,6 @@ if __name__ =="__main__":
     var.dlgaviso=DialogAviso()
     var.dlgcalendar=DialogCalendar()
     var.dlgabrir=FileDialogAbrir()
+
     window.show()
     sys.exit(app.exec())

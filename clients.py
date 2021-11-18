@@ -15,14 +15,14 @@ class Clientes():
             dni= var.ui.txtDNI.text()
             tabla="TRWAGMYFPDXBNJZSQVHLCKE" #Letra DNI
             dig_ext= "XYZ"  #DIGITO EXTRANJEROS
-            reemp_dig_ext= {"X":0,"Y":1,"Z":2}
+            reemp_dig_ext= {"X":"0","Y":"1","Z":"2"}
             numeros= "1234567890"
             dni= dni.upper()
             if len(dni)==9:
                 dig_control= dni[8]
                 dni=dni[:8]
                 if dni[0] in dig_ext:
-                    dni= dni.replace(dni[0],reemp_dig_ext(dni[0]))
+                    dni= dni.replace(dni[0],reemp_dig_ext[dni[0]])
                 if len(dni) == len([n for n in dni if n in numeros]) and tabla[int(dni)%23] == dig_control:
                     control=1
                     var.ui.ValidarDNI.setStyleSheet ("QLabel{color:green;}")
@@ -41,7 +41,7 @@ class Clientes():
                 var.ui.txtDNI.setStyleSheet("background-color: rgb(255, 155, 90);")
 
 
-        except Exception as error: print("Error en modulo validarDNI")
+        except Exception as error: print("Error en modulo validarDNI", error)
 
     def selGen(self):
         try:
@@ -223,7 +223,7 @@ class Clientes():
                 newcli.append("; ".join(pagos))
 
                 conexion.Conexion.modCli(newcli)
-                conexion.Conexion.cargarTablaCli(self)
+                conexion.Conexion.cargarTablaCli()
             else:
                 msg = QtWidgets.QMessageBox()
                 msg.setWindowTitle("ERROR")
