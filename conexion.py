@@ -32,8 +32,8 @@ class Conexion():
             print(newclie)
             query = QtSql.QSqlQuery()
             query.prepare('insert into clientes (dni, alta, apellidos, nombre, direccion,'
-                          ' provincia, municipio, sexo, pagos )VALUES (:dni, :alta, :apellidos, '
-                          ':nombre, :direccion, :provincia, :municipio, :genero, :pago)')
+                          ' provincia, municipio, sexo, pagos,envio )VALUES (:dni, :alta, :apellidos, '
+                          ':nombre, :direccion, :provincia, :municipio, :genero, :pago,:envio)')
             query.bindValue(':dni', str(newclie[0]))
             query.bindValue(':alta', str(newclie[1]))
             query.bindValue(':apellidos', str(newclie[2]))
@@ -43,6 +43,7 @@ class Conexion():
             query.bindValue(':municipio', str(newclie[6]))
             query.bindValue(':genero', str(newclie[7]))
             query.bindValue(':pago', str(newclie[8]))
+            query.bindValue(':envio', str(newclie[9]))
             if query.exec_():
                 print('Inserción correcta')
                 msgBox = QtWidgets.QMessageBox()
@@ -101,7 +102,7 @@ class Conexion():
 
 
             query = QtSql.QSqlQuery()
-            query.prepare('UPDATE clientes SET alta=:alta,apellidos=:apellidos,nombre=:nombre,direccion=:direccion,provincia=:provincia,sexo=:genero,pagos=:pago WHERE dni=:dni')
+            query.prepare('UPDATE clientes SET alta=:alta,apellidos=:apellidos,nombre=:nombre,direccion=:direccion,provincia=:provincia,sexo=:genero,pagos=:pago,envio=:envio WHERE dni=:dni')
             query.bindValue(':dni', str(newclie[0]))
             query.bindValue(':alta', str(newclie[1]))
             query.bindValue(':apellidos', str(newclie[2]))
@@ -111,6 +112,7 @@ class Conexion():
             query.bindValue(':municipio', str(newclie[6]))
             query.bindValue(':genero', str(newclie[7]))
             query.bindValue(':pago', str(newclie[8]))
+            query.bindValue(':envio', str(newclie[9]))
             if query.exec_():
                 print('Modificación correcta')
                 msgBox = QtWidgets.QMessageBox()
@@ -277,8 +279,8 @@ class Conexion():
 
             query = QtSql.QSqlQuery()
             query.prepare('insert into clientes (dni, alta, apellidos, nombre, direccion,'
-                          ' provincia, municipio, sexo, pagos )VALUES (:dni, :alta, :apellidos, '
-                          ':nombre, :direccion, :provincia, :municipio, :genero, :pago)')
+                          ' provincia, municipio, sexo, pagos,envio )VALUES (:dni, :alta, :apellidos, '
+                          ':nombre, :direccion, :provincia, :municipio, :genero, :pago,:envio)')
             query.bindValue(':dni', str(newclie[0]))
             query.bindValue(':alta', str(newclie[1]))
             query.bindValue(':apellidos', str(newclie[2]))
@@ -288,6 +290,7 @@ class Conexion():
             query.bindValue(':municipio', str(newclie[6]))
             query.bindValue(':genero', str(newclie[7]))
             query.bindValue(':pago', str(newclie[8]))
+            query.bindValue(':envio', str(newclie[9]))
 
             if query.exec_():
                 Conexion.cargarTablaCli()
@@ -313,7 +316,7 @@ class Conexion():
 
 
             query = QtSql.QSqlQuery()
-            query.prepare('UPDATE clientes SET alta=:alta,apellidos=:apellidos,nombre=:nombre,direccion=:direccion,provincia=:provincia,sexo=:genero,pagos=:pago WHERE dni=:dni')
+            query.prepare('UPDATE clientes SET alta=:alta,apellidos=:apellidos,nombre=:nombre,direccion=:direccion,provincia=:provincia,sexo=:genero,pagos=:pago,envio=:envio WHERE dni=:dni')
 
             query.bindValue(':dni', str(newclie[0]))
             query.bindValue(':alta', str(newclie[1]))
@@ -324,6 +327,7 @@ class Conexion():
             query.bindValue(':municipio', str(newclie[6]))
             query.bindValue(':genero', str(newclie[7]))
             query.bindValue(':pago', str(newclie[8]))
+            query.bindValue(':envio',str(newclie[9]))
             if query.exec_():
                 Conexion.cargarTablaCli()
 
@@ -361,7 +365,8 @@ class Conexion():
                     municipio=query.value(6)
                     sexo=query.value(7)
                     pago=query.value(8)
-                    list=[dni,alta,apellidos,nombre,direccion,provincia,municipio,sexo,pago]
+                    envio=query.value(9)
+                    list=[dni,alta,apellidos,nombre,direccion,provincia,municipio,sexo,pago,envio]
                     adiciones.append(list)
                 event.Eventos.Exportacion(adiciones)
             else:

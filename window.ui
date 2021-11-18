@@ -730,6 +730,61 @@ color: rgb(85, 170, 255);</string>
         </item>
        </layout>
       </widget>
+      <widget class="QWidget" name="">
+       <property name="geometry">
+        <rect>
+         <x>530</x>
+         <y>210</y>
+         <width>401</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <layout class="QHBoxLayout" name="horizontalLayout_8">
+        <item>
+         <widget class="QLabel" name="lbl_fenvio">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Formas de envío</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QSpinBox" name="spinEnvio">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="maximum">
+           <number>3</number>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="lblenvio">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+            <horstretch>100</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">
+color: rgb(85, 170, 255);</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
      </widget>
     </widget>
     <widget class="QWidget" name="tab_2">
@@ -886,7 +941,7 @@ color: rgb(85, 170, 255);</string>
   <action name="actionactbarcrearbackup">
    <property name="icon">
     <iconset>
-     <normaloff>img/306.png</normaloff>img/306.png</iconset>
+     <normaloff>img/crearBackup.png</normaloff>img/crearBackup.png</iconset>
    </property>
    <property name="text">
     <string>actbarcrearbackup</string>
@@ -895,7 +950,7 @@ color: rgb(85, 170, 255);</string>
   <action name="actionactbarrestaurarbackup">
    <property name="icon">
     <iconset>
-     <normaloff>img/kisspng-computer-icons-backup-and-restore-clip-art-databas-5bfae21471f515.0483477915431685324668.png</normaloff>img/kisspng-computer-icons-backup-and-restore-clip-art-databas-5bfae21471f515.0483477915431685324668.png</iconset>
+     <normaloff>img/restaurarDB.png</normaloff>img/restaurarDB.png</iconset>
    </property>
    <property name="text">
     <string>actbarrestaurarbackup</string>
@@ -929,11 +984,11 @@ color: rgb(85, 170, 255);</string>
  <resources/>
  <connections/>
  <buttongroups>
+  <buttongroup name="rbtGroupGen"/>
   <buttongroup name="rbtGroupPago">
    <property name="exclusive">
     <bool>false</bool>
    </property>
   </buttongroup>
-  <buttongroup name="rbtGroupGen"/>
  </buttongroups>
 </ui>

@@ -124,6 +124,11 @@ class Main (QtWidgets.QMainWindow):
         conexion.Conexion.cargarTablaCli()
         conexion.Conexion.CargaProv(self)
 
+        '''
+        Eventos spin
+        '''
+        var.ui.spinEnvio.valueChanged.connect(event.Eventos.ControlEnvio)
+
 if __name__ =="__main__":
     app=QtWidgets.QApplication([])
     window=Main()

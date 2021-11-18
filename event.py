@@ -91,7 +91,7 @@ class Eventos():
             var.ui.PagoTarjeta.setChecked(False)
             var.ui.PagoTransfer.setChecked(False)
 
-
+            var.ui.spinEnvio.setValue(0)
             var.ui.cmbProv.setCurrentIndex(0)
             var.ui.cmbMun.setCurrentIndex(0)
             var.ui.ValidarDNI.setText("")
@@ -162,7 +162,8 @@ class Eventos():
                             municipio = excel.cell_value(n, 6)
                             sexo = excel.cell_value(n, 7)
                             pagos = excel.cell_value(n, 8)
-                            newcli=[dni,alta, apellidos,nome,direccion,provincia,municipio,sexo,pagos]
+                            envio=excel.cell_value(n,9)
+                            newcli=[dni,alta, apellidos,nome,direccion,provincia,municipio,sexo,pagos,envio]
                             contador=conexion.Conexion.comprobarCliente(dni)
                             if (dni!=""):
                                 if contador=="0": conexion.Conexion.altaCliXL(newcli)
@@ -175,7 +176,7 @@ class Eventos():
         try:
             df = pd.DataFrame(adiciones,
                               columns=['DNI', 'Alta', 'Apellidos', 'Nombre', 'Direccion', 'Provincia', 'Municipio',
-                                       'Sexo', 'Pago'])
+                                       'Sexo', 'Pago','Envio'])
 
             fecha= datetime.today().strftime("%Y_%m_%d_%H_%M_%S")
             var.copia= (str(fecha)+".csv")
@@ -190,6 +191,21 @@ class Eventos():
                 msgBox.setIcon((QtWidgets.QMessageBox.Warning))
                 msgBox.setText("BD exportada con éxito")
                 msgBox.exec()
+        except Exception as error:
+            print("Error al exportar", error)
+
+
+    def ControlEnvio(self):
+        try:
+            envio = var.ui.spinEnvio.value()
+            if (envio == 0):
+                var.ui.lblenvio.setText("Envio 0")
+            if (envio == 1):
+                var.ui.lblenvio.setText("Envio 1")
+            if (envio == 2):
+                var.ui.lblenvio.setText("Envio 2")
+            if (envio == 3):
+                var.ui.lblenvio.setText("Envio 3")
         except Exception as error:
             print("Error al exportar", error)
 

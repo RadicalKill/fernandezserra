@@ -108,6 +108,7 @@ class Clientes():
                 newcli=[var.ui.txtDNI.text(),var.ui.txtFecha.text(),var.ui.txtApel.text(),var.ui.txtNombre.text(),var.ui.txtDir.text()] #Para la base de datos
                 newcli.append(var.ui.cmbProv.currentText())
                 newcli.append(var.ui.cmbMun.currentText())
+
                 if var.ui.rbtHom.isChecked():
                     newcli.append('Hombre')
                 elif var.ui.rbtFem.isChecked():
@@ -127,10 +128,10 @@ class Clientes():
                 pagos=set(pagos)
 
                 newcli.append("; ".join(pagos))
-
+                newcli.append(var.ui.spinEnvio.value())
 
                 conexion.Conexion.altaCli(newcli)
-                conexion.Conexion.cargarTablaCli(self)
+                conexion.Conexion.cargarTablaCli()
             else:
                 msg=QtWidgets.QMessageBox()
                 msg.setWindowTitle("ERROR")
@@ -155,7 +156,7 @@ class Clientes():
                 row=[dato.text() for dato in fila]
                 dni1=row[0]
                 query = QtSql.QSqlQuery()
-                query.prepare('SELECT dni,apellidos,nombre,alta,pagos,direccion,provincia, municipio,sexo FROM CLIENTES WHERE dni="'+dni1+'"')
+                query.prepare('SELECT dni,apellidos,nombre,alta,pagos,direccion,provincia, municipio,sexo, envio FROM CLIENTES WHERE dni="'+dni1+'"')
                 if query.exec_():
                     while query.next():
                         dni = query.value(0)
@@ -167,11 +168,14 @@ class Clientes():
                         provincia=query.value(6)
                         municipio=query.value(7)
                         genero=query.value(8)
+                        envio=query.value(9)
                 var.ui.txtDNI.setText(dni)
                 var.ui.txtApel.setText(apellidos)
                 var.ui.txtNombre.setText(nombre)
                 var.ui.txtFecha.setText(alta)
                 var.ui.txtDir.setText(direccion)
+                if(envio==0 or envio==1 or envio==2 or envio==3):
+                    var.ui.spinEnvio.setValue(envio)
 
 
                 var.ui.cmbProv.setCurrentText(provincia)
@@ -185,7 +189,7 @@ class Clientes():
                 if "Pago por transferencia" in pago: var.ui.PagoTransfer.setChecked(True)
 
 
-        except Exception as error: print("Error en modulo CargaCli")
+        except Exception as error: print("Error en modulo CargaCli",error)
 
     def modifCli(self):
 
@@ -221,6 +225,8 @@ class Clientes():
                 pagos = set(pagos)
                 tabcli.append("; ".join(pagos))
                 newcli.append("; ".join(pagos))
+
+                newcli.append(var.ui.spinEnvio.value())
 
                 conexion.Conexion.modCli(newcli)
                 conexion.Conexion.cargarTablaCli()
