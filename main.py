@@ -76,7 +76,7 @@ class Main (QtWidgets.QMainWindow):
         var.ui.actionRestaurarBD.triggered.connect(event.Eventos.RestaurarDB)
         var.ui.actionImprimir.triggered.connect(event.Eventos.Imprimir)
         var.ui.actionImportar_Datos.triggered.connect(event.Eventos.ImportarExcel)
-        var.ui.actionExportar_Datos.triggered.connect(conexion.Conexion.exportBD)
+        var.ui.actionExportar_Datos.triggered.connect(event.Eventos.ExportarDatos)
 
         '''
         comprobar el dni

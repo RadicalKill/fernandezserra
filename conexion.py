@@ -1,3 +1,6 @@
+from datetime import datetime
+
+import xlwt as xlwt
 from PyQt5 import QtSql,QtWidgets
 
 import clients
@@ -346,7 +349,7 @@ class Conexion():
             msgBox.setIcon((QtWidgets.QMessageBox.Warning))
             msgBox.setText("Error al modificar cliente  en la BD")
             msgBox.exec()
-
+    # Conexion para exportar con la libreria pandas
     def exportBD(self):
         try:
             list = []
@@ -386,3 +389,39 @@ class Conexion():
             msgBox.setIcon((QtWidgets.QMessageBox.Warning))
             msgBox.setText("Error al exportar la BD")
             msgBox.exec()
+    # Conexion para exportar con la libreria xlwt
+    def exportExcel(self):
+        try:
+            fecha = datetime.today()
+            fecha = fecha.strftime('%Y.%m.%d.%H.%M.%S')
+            var.copia = (str(fecha) + '_dataExport.xls')
+            option = QtWidgets.QFileDialog.Options()
+            directorio, filename = var.dlgabrir.getSaveFileName(None, 'Exportar datos', var.copia, '.xls',
+                                                                options=option)
+            wb = xlwt.Workbook()
+            # add_sheet is used to create sheet.
+            sheet1 = wb.add_sheet('Hoja 1')
+
+            # Cabeceras
+            sheet1.write(0, 0, 'DNI')
+            sheet1.write(0, 1, 'APELIDOS')
+            sheet1.write(0, 2, 'NOME')
+            sheet1.write(0, 3, 'DIRECCION')
+            sheet1.write(0, 4, 'PROVINCIA')
+            sheet1.write(0, 5, 'SEXO')
+            f = 1
+            query = QtSql.QSqlQuery()
+            query.prepare('SELECT *  FROM clientes')
+            if query.exec_():
+                while query.next():
+                    sheet1.write(f, 0, query.value(0))
+                    sheet1.write(f, 1, query.value(2))
+                    sheet1.write(f, 2, query.value(3))
+                    sheet1.write(f, 3, query.value(4))
+                    sheet1.write(f, 4, query.value(5))
+                    sheet1.write(f, 5, query.value(7))
+                    f+=1
+            wb.save(directorio)
+
+        except Exception as error:
+            print('Error en conexion para exportar excel ',error)

@@ -171,7 +171,7 @@ class Eventos():
 
 
         except Exception as error: print("Error al importar",error)
-
+    # Metodo para exportar con pandas(pd)
     def Exportacion(adiciones):
         try:
             df = pd.DataFrame(adiciones,
@@ -193,6 +193,22 @@ class Eventos():
                 msgBox.exec()
         except Exception as error:
             print("Error al exportar", error)
+
+    # Metodo para exportar con la librería xlwt
+    def ExportarDatos(self):
+        try:
+            conexion.Conexion.exportExcel(self)
+            try:
+                msgBox = QMessageBox()
+                msgBox.setIcon(QtWidgets.QMessageBox.Information)
+                msgBox.setText("Datos exportados con éxito.")
+                msgBox.setWindowTitle("Operación completada")
+                msgBox.setStandardButtons(QMessageBox.Ok)
+                msgBox.exec()
+            except Exception as error:
+                print('Error en mensaje generado exportar datos ', error)
+        except Exception as error:
+            print('Error en evento exportar datos ',error)
 
 
     def ControlEnvio(self):
