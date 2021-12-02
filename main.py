@@ -51,19 +51,30 @@ class Main (QtWidgets.QMainWindow):
         '''
         Eventos de botón
         '''
-        var.ui.btnSalir.clicked.connect(event.Eventos.Salir)
+
+        var.ui.btnSalirProd.clicked.connect(event.Eventos.Salir)
 
         var.ui.rbtGroupGen.buttonClicked.connect(clients.Clientes.selGen)
         var.ui.btFecha.clicked.connect(event.Eventos.abrirCal)
-
         var.ui.btnGuardaClie.clicked.connect(clients.Clientes.GuardaClie)
         var.ui.btnGuardaClie.clicked.connect(event.Eventos.ClearForm)
+
+        var.ui.btnGuardaArt.clicked.connect(clients.Clientes.GuardaProd)
+        var.ui.btnGuardaArt.clicked.connect(event.Eventos.ClearFormProd)
+
 
 
         var.ui.btnModifCli.clicked.connect(clients.Clientes.modifCli)
         var.ui.btnModifCli.clicked.connect(event.Eventos.ClearForm)
 
         var.ui.btnEliminarCli.clicked.connect(conexion.Conexion.DelCli)
+
+
+        var.ui.btnModifArt.clicked.connect(clients.Clientes.modifProd)
+        var.ui.btnModifArt.clicked.connect(event.Eventos.ClearFormProd)
+
+        var.ui.btnEliminarArt.clicked.connect(conexion.Conexion.DelProd)
+        var.ui.btnEliminarArt.clicked.connect(event.Eventos.ClearFormProd)
 
 
         var.ui.btnLimpiar.clicked.connect(event.Eventos.ClearForm)
@@ -115,8 +126,10 @@ class Main (QtWidgets.QMainWindow):
         Eventos QTableWidget
         '''
         event.Eventos.resizeTablaCli(self)
-        var.ui.tabClientes.clicked.connect(clients.Clientes.CargaCli)
+        var.ui.tabClientes.clicked.connect(clients.Clientes.Cargar)
         var.ui.tabClientes.setSelectionBehavior(QtWidgets.QTableWidget.SelectRows)
+        var.ui.tabPrograma.currentChanged.connect(event.Eventos.Tab)
+
         '''
         Base de datos
         '''
@@ -128,6 +141,8 @@ class Main (QtWidgets.QMainWindow):
         Eventos spin
         '''
         var.ui.spinEnvio.valueChanged.connect(event.Eventos.ControlEnvio)
+
+
 
 if __name__ =="__main__":
     app=QtWidgets.QApplication([])

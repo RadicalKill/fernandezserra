@@ -404,24 +404,161 @@ class Conexion():
 
             # Cabeceras
             sheet1.write(0, 0, 'DNI')
-            sheet1.write(0, 1, 'APELIDOS')
-            sheet1.write(0, 2, 'NOME')
-            sheet1.write(0, 3, 'DIRECCION')
-            sheet1.write(0, 4, 'PROVINCIA')
-            sheet1.write(0, 5, 'SEXO')
+            sheet1.write(0, 1, 'ALTA')
+            sheet1.write(0, 2, 'APELIDOS')
+            sheet1.write(0, 3, 'NOME')
+            sheet1.write(0, 4, 'DIRECCION')
+            sheet1.write(0, 5, 'PROVINCIA')
+            sheet1.write(0, 6, 'MUNICIPIO')
+            sheet1.write(0, 7, 'SEXO')
+            sheet1.write(0, 8, 'PAGOS')
+            sheet1.write(0, 9, 'ENVIO')
             f = 1
             query = QtSql.QSqlQuery()
             query.prepare('SELECT *  FROM clientes')
             if query.exec_():
                 while query.next():
                     sheet1.write(f, 0, query.value(0))
-                    sheet1.write(f, 1, query.value(2))
-                    sheet1.write(f, 2, query.value(3))
-                    sheet1.write(f, 3, query.value(4))
-                    sheet1.write(f, 4, query.value(5))
-                    sheet1.write(f, 5, query.value(7))
+                    sheet1.write(f, 1, query.value(1))
+                    sheet1.write(f, 2, query.value(2))
+                    sheet1.write(f, 3, query.value(3))
+                    sheet1.write(f, 4, query.value(4))
+                    sheet1.write(f, 5, query.value(5))
+                    sheet1.write(f, 6, query.value(6))
+                    sheet1.write(f, 7, query.value(7))
+                    sheet1.write(f, 8, query.value(8))
+                    sheet1.write(f, 9, query.value(9))
                     f+=1
             wb.save(directorio)
 
         except Exception as error:
             print('Error en conexion para exportar excel ',error)
+            
+            
+            
+    def altaProd(newProd):
+        try:
+
+
+            query = QtSql.QSqlQuery()
+            query.prepare('insert into articulos (nombre, precio) VALUES (:nombre, :precio)')
+            query.bindValue(':nombre', str(newProd[0]))
+            query.bindValue(':precio', str(newProd[1]))
+
+            if query.exec_():
+                print('Inserción correcta')
+                msgBox = QtWidgets.QMessageBox()
+                msgBox.setWindowTitle("Insercion")
+                msgBox.setIcon((QtWidgets.QMessageBox.Warning))
+                msgBox.setText("El articulo ha sido guardado en la BD")
+                msgBox.exec()
+            else:
+                print('Error:', query.lastError().text())
+                msgBox = QtWidgets.QMessageBox()
+                msgBox.setWindowTitle("Aviso")
+                msgBox.setIcon((QtWidgets.QMessageBox.Warning))
+                msgBox.setText("El articulo no ha sido guardado en la BD")
+                msgBox.exec()
+        except Exception as error:
+            print('Problemas alta articulo',error)
+            msgBox = QtWidgets.QMessageBox()
+            msgBox.setWindowTitle("Aviso")
+            msgBox.setIcon((QtWidgets.QMessageBox.Warning))
+            msgBox.setText("Error al guardar articulo  en la BD")
+            msgBox.exec()
+
+    def cargarTablaProd():
+        try:
+
+            index=0
+            query=QtSql.QSqlQuery()
+            query.prepare('SELECT codigo, nombre,precio FROM articulos ORDER BY codigo')
+            if query.exec_():
+                while query.next():
+                    codigo=str(query.value(0))
+                    nombre=query.value(1)
+                    precio=query.value(2)
+
+                    var.ui.tabClientes.setRowCount(index+1)
+                    var.ui.tabClientes.setItem(index,0 ,QtWidgets.QTableWidgetItem(codigo))
+                    var.ui.tabClientes.setItem(index, 1, QtWidgets.QTableWidgetItem(nombre))
+                    var.ui.tabClientes.setItem(index, 2, QtWidgets.QTableWidgetItem(precio))
+
+                    index+=1
+            else:
+                print('Error:', query.lastError().text())
+                msgBox = QtWidgets.QMessageBox()
+                msgBox.setWindowTitle("Aviso")
+                msgBox.setIcon((QtWidgets.QMessageBox.Warning))
+                msgBox.setText("El producto no ha sido cargado")
+                msgBox.exec()
+        except Exception as error:
+            print("Problemas en cargarTablaProd", error)
+
+    def modProd(newProd):
+        try:
+
+            query = QtSql.QSqlQuery()
+            query.prepare(
+                'UPDATE articulos SET nombre=:nombre,precio=:precio WHERE codigo=:codigo')
+            query.bindValue(':codigo', str(newProd[0]))
+            query.bindValue(':nombre', str(newProd[1]))
+            query.bindValue(':precio', str(newProd[2]))
+
+            if query.exec_():
+                print('Modificación correcta')
+                msgBox = QtWidgets.QMessageBox()
+                msgBox.setWindowTitle("Modificación")
+                msgBox.setIcon((QtWidgets.QMessageBox.Warning))
+                msgBox.setText("El articulo ha sido modificado en la BD")
+                msgBox.exec()
+
+
+            else:
+                print('Error:', query.lastError().text())
+                msgBox = QtWidgets.QMessageBox()
+                msgBox.setWindowTitle("Aviso")
+                msgBox.setIcon((QtWidgets.QMessageBox.Warning))
+                msgBox.setText("El articulo no ha sido modificado en la BD")
+                msgBox.exec()
+
+        except Exception as error:
+            print('Problemas modificar articulo', error)
+            msgBox = QtWidgets.QMessageBox()
+            msgBox.setWindowTitle("Aviso")
+            msgBox.setIcon((QtWidgets.QMessageBox.Warning))
+            msgBox.setText("Error al modificar articulo  en la BD")
+            msgBox.exec()
+
+    def DelProd(self):
+        try:
+            cod=var.ui.lblCod2.text()
+            query = QtSql.QSqlQuery()
+            query.prepare(
+                'DELETE FROM articulos  WHERE codigo=:codigo')
+            query.bindValue(':codigo', cod)
+
+            if query.exec_():
+                print('Eliminación correcta')
+                msgBox = QtWidgets.QMessageBox()
+                msgBox.setWindowTitle("Eliminación")
+                msgBox.setIcon((QtWidgets.QMessageBox.Warning))
+                msgBox.setText("El articulo ha sido eliminado de la BD")
+                msgBox.exec()
+                conexion.Conexion.cargarTablaProd()
+
+            else:
+                print('Error:', query.lastError().text())
+                msgBox = QtWidgets.QMessageBox()
+                msgBox.setWindowTitle("Aviso")
+                msgBox.setIcon((QtWidgets.QMessageBox.Warning))
+                msgBox.setText("El articulo no ha sido eliminado de la BD")
+                msgBox.exec()
+
+        except Exception as error:
+            print('Problemas eliminar articulo', error)
+            msgBox = QtWidgets.QMessageBox()
+            msgBox.setWindowTitle("Aviso")
+            msgBox.setIcon((QtWidgets.QMessageBox.Warning))
+            msgBox.setText("Error al eliminar articulo  en la BD")
+            msgBox.exec()
