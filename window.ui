@@ -52,7 +52,7 @@ color: rgb(85, 170, 255);
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>450</y>
+      <y>430</y>
       <width>941</width>
       <height>20</height>
      </rect>
@@ -61,71 +61,20 @@ color: rgb(85, 170, 255);
      <enum>Qt::Horizontal</enum>
     </property>
    </widget>
-   <widget class="QTableWidget" name="tabClientes">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>470</y>
-      <width>951</width>
-      <height>261</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true"/>
-    </property>
-    <property name="verticalScrollBarPolicy">
-     <enum>Qt::ScrollBarAlwaysOn</enum>
-    </property>
-    <property name="alternatingRowColors">
-     <bool>true</bool>
-    </property>
-    <column>
-     <property name="text">
-      <string>DNI</string>
-     </property>
-    </column>
-    <column>
-     <property name="text">
-      <string>Apellidos</string>
-     </property>
-     <property name="background">
-      <color alpha="0">
-       <red>0</red>
-       <green>0</green>
-       <blue>0</blue>
-      </color>
-     </property>
-    </column>
-    <column>
-     <property name="text">
-      <string>Nombre</string>
-     </property>
-    </column>
-    <column>
-     <property name="text">
-      <string>Fecha Alta</string>
-     </property>
-    </column>
-    <column>
-     <property name="text">
-      <string>Forma de pago</string>
-     </property>
-    </column>
-   </widget>
    <widget class="QTabWidget" name="tabPrograma">
     <property name="geometry">
      <rect>
       <x>10</x>
       <y>20</y>
       <width>951</width>
-      <height>391</height>
+      <height>401</height>
      </rect>
     </property>
     <property name="styleSheet">
      <string notr="true"/>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="tab">
      <attribute name="title">
@@ -137,7 +86,7 @@ color: rgb(85, 170, 255);
         <x>0</x>
         <y>10</y>
         <width>951</width>
-        <height>351</height>
+        <height>371</height>
        </rect>
       </property>
       <property name="font">
@@ -641,7 +590,7 @@ color: rgb(85, 170, 255);</string>
          <x>20</x>
          <y>250</y>
          <width>901</width>
-         <height>19</height>
+         <height>73</height>
         </rect>
        </property>
        <layout class="QHBoxLayout" name="horizontalLayout_6">
@@ -757,7 +706,7 @@ color: rgb(85, 170, 255);</string>
        <property name="geometry">
         <rect>
          <x>270</x>
-         <y>320</y>
+         <y>330</y>
          <width>351</width>
          <height>31</height>
         </rect>
@@ -792,6 +741,159 @@ color: rgb(85, 170, 255);</string>
      <attribute name="title">
       <string>Facturación</string>
      </attribute>
+     <widget class="QPushButton" name="btnFact">
+      <property name="geometry">
+       <rect>
+        <x>440</x>
+        <y>100</y>
+        <width>75</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>Facturar</string>
+      </property>
+     </widget>
+     <widget class="QWidget" name="">
+      <property name="geometry">
+       <rect>
+        <x>46</x>
+        <y>50</y>
+        <width>241</width>
+        <height>30</height>
+       </rect>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout_13">
+       <item>
+        <widget class="QLabel" name="label">
+         <property name="font">
+          <font>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>DNI:</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="txtDNIFact"/>
+       </item>
+       <item>
+        <spacer name="horizontalSpacer_13">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QPushButton" name="btnBuscaClifac">
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset>
+           <normaloff>img/lupa.png</normaloff>img/lupa.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>20</width>
+           <height>20</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="">
+      <property name="geometry">
+       <rect>
+        <x>50</x>
+        <y>100</y>
+        <width>241</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout_14">
+       <item>
+        <widget class="QLabel" name="label_2">
+         <property name="font">
+          <font>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>CLIENTE:</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="txtCliFac"/>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="">
+      <property name="geometry">
+       <rect>
+        <x>440</x>
+        <y>50</y>
+        <width>351</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout_15">
+       <item>
+        <widget class="QLabel" name="label_3">
+         <property name="font">
+          <font>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>FECHA FACTURA:</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="txtFechaFac"/>
+       </item>
+       <item>
+        <widget class="QPushButton" name="btnFechaFac">
+         <property name="autoFillBackground">
+          <bool>false</bool>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset>
+           <normaloff>img/calend.png</normaloff>img/calend.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>20</width>
+           <height>20</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
     </widget>
     <widget class="QWidget" name="tab_3">
      <attribute name="title">
@@ -993,18 +1095,6 @@ color: rgb(85, 170, 255);</string>
           </property>
          </widget>
         </item>
-        <item>
-         <widget class="QPushButton" name="btnSalirProd">
-          <property name="font">
-           <font>
-            <pointsize>8</pointsize>
-           </font>
-          </property>
-          <property name="text">
-           <string>Salir</string>
-          </property>
-         </widget>
-        </item>
        </layout>
       </widget>
       <widget class="QWidget" name="layoutWidget">
@@ -1083,6 +1173,60 @@ color: rgb(85, 170, 255);</string>
     <property name="alignment">
      <set>Qt::AlignCenter</set>
     </property>
+   </widget>
+   <widget class="QTableWidget" name="tabClientes">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>450</y>
+      <width>941</width>
+      <height>271</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"/>
+    </property>
+    <property name="verticalScrollBarPolicy">
+     <enum>Qt::ScrollBarAlwaysOn</enum>
+    </property>
+    <property name="alternatingRowColors">
+     <bool>true</bool>
+    </property>
+    <property name="showGrid">
+     <bool>true</bool>
+    </property>
+    <column>
+     <property name="text">
+      <string>DNI</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Apellidos</string>
+     </property>
+     <property name="background">
+      <color alpha="0">
+       <red>0</red>
+       <green>0</green>
+       <blue>0</blue>
+      </color>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Nombre</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Fecha Alta</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Forma de pago</string>
+     </property>
+    </column>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -1254,11 +1398,11 @@ color: rgb(85, 170, 255);</string>
  <resources/>
  <connections/>
  <buttongroups>
-  <buttongroup name="rbtGroupGen"/>
   <buttongroup name="rbtGroupPago">
    <property name="exclusive">
     <bool>false</bool>
    </property>
   </buttongroup>
+  <buttongroup name="rbtGroupGen"/>
  </buttongroups>
 </ui>

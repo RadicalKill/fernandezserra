@@ -9,7 +9,7 @@ from window import *
 from windowaviso import *
 from windowcal import *
 from datetime import *
-import sys,var,event,conexion,locale
+import sys,var,event,conexion,locale,invoice
 locale.setlocale(locale.LC_ALL,'es-ES')
 
 
@@ -52,7 +52,7 @@ class Main (QtWidgets.QMainWindow):
         Eventos de botón
         '''
 
-        var.ui.btnSalirProd.clicked.connect(event.Eventos.Salir)
+
 
         var.ui.rbtGroupGen.buttonClicked.connect(clients.Clientes.selGen)
         var.ui.btFecha.clicked.connect(event.Eventos.abrirCal)
@@ -78,6 +78,10 @@ class Main (QtWidgets.QMainWindow):
 
 
         var.ui.btnLimpiar.clicked.connect(event.Eventos.ClearForm)
+
+        var.ui.btnBuscaClifac.clicked.connect(invoice.Facturas.buscaCli)
+        var.ui.btnFechaFac.clicked.connect(event.Eventos.abrirCal)
+        var.ui.btnFact.clicked.connect(invoice.Facturas.Facturar)
         '''
         Barra de menús y herramientas
         '''

@@ -562,3 +562,57 @@ class Conexion():
             msgBox.setIcon((QtWidgets.QMessageBox.Warning))
             msgBox.setText("Error al eliminar articulo  en la BD")
             msgBox.exec()
+
+    '''
+    Gestion facturas
+    '''
+    def buscaCliFac(dni):
+        try:
+            registro=[]
+
+            query = QtSql.QSqlQuery()
+            query.prepare(
+                'SELECT dni,apellidos, nombre from clientes where dni=:dni')
+            query.bindValue(':dni', dni)
+            if query.exec_():
+                while query.next():
+                    registro.append(query.value(1))
+                    registro.append(query.value(2))
+
+            return registro
+        except Exception as error:
+            print('Problemas buscar cliente factura', error)
+            msgBox = QtWidgets.QMessageBox()
+            msgBox.setWindowTitle("Aviso")
+            msgBox.setIcon((QtWidgets.QMessageBox.Warning))
+            msgBox.setText("Error al buscar cliente en factura")
+            msgBox.exec()
+
+    def altaFact(registro):
+        try:
+            query = QtSql.QSqlQuery()
+            query.prepare('insert into facturas(dni,fechafac)values(:dni,:fecha)')
+            query.bindValue(':dni', registro[0])
+
+            query.bindValue(':fecha', registro[1])
+            if query.exec_():
+                print('Inserción correcta')
+                msgBox = QtWidgets.QMessageBox()
+                msgBox.setWindowTitle("Insercion")
+                msgBox.setIcon((QtWidgets.QMessageBox.Warning))
+                msgBox.setText("La factura ha sido guardada en la BD")
+                msgBox.exec()
+            else:
+                print('Error:', query.lastError().text())
+                msgBox = QtWidgets.QMessageBox()
+                msgBox.setWindowTitle("Aviso")
+                msgBox.setIcon((QtWidgets.QMessageBox.Warning))
+                msgBox.setText("La factura no ha sido guardada en la BD")
+                msgBox.exec()
+        except Exception as error:
+            print('Problemas alta factura', error)
+            msgBox = QtWidgets.QMessageBox()
+            msgBox.setWindowTitle("Aviso")
+            msgBox.setIcon((QtWidgets.QMessageBox.Warning))
+            msgBox.setText("Error al facturar")
+            msgBox.exec()

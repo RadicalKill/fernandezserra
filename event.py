@@ -248,6 +248,7 @@ class Eventos():
             _translate = QtCore.QCoreApplication.translate
 
             if (var.ui.tabPrograma.currentIndex() == 2):
+                var.ui.tabClientes.setGeometry(QtCore.QRect(20, 450, 941, 271))
                 item = QtWidgets.QTableWidgetItem()
                 var.ui.tabClientes.setHorizontalHeaderItem(0, item)
                 item = QtWidgets.QTableWidgetItem()
@@ -294,6 +295,8 @@ class Eventos():
                 Eventos.resizeTablaCli(self)
                 conexion.Conexion.cargarTablaCli()
                 Eventos.ClearForm(self)
+            if (var.ui.tabPrograma.currentIndex() == 1):
+                var.ui.tabClientes.hide()
         except Exception as error:
             print("Error al tabular", error)
 
