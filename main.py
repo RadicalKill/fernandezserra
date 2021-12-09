@@ -51,7 +51,8 @@ class Main (QtWidgets.QMainWindow):
         '''
         Eventos de botón
         '''
-
+        var.ui.btnBuscar.clicked.connect(conexion.Conexion.buscaCliente)
+        var.ui.btnBuscar_Art.clicked.connect(conexion.Conexion.buscaArt)
 
 
         var.ui.rbtGroupGen.buttonClicked.connect(clients.Clientes.selGen)
@@ -96,12 +97,12 @@ class Main (QtWidgets.QMainWindow):
         '''
         comprobar el dni
         '''
-
+        var.ui.txtNomArt.editingFinished.connect(clients.Clientes.capitalizar)
         var.ui.txtDNI.editingFinished.connect(clients.Clientes.validarDNI)
         var.ui.txtNombre.editingFinished.connect(clients.Clientes.capitalizar)
         var.ui.txtApel.editingFinished.connect(clients.Clientes.capitalizar)
         var.ui.txtDir.editingFinished.connect(clients.Clientes.capitalizar)
-
+        var.ui.txtDNIFact.editingFinished.connect(clients.Clientes.validarDNIFac)
 
         '''
         Eventos combobox
@@ -132,6 +133,8 @@ class Main (QtWidgets.QMainWindow):
         event.Eventos.resizeTablaCli(self)
         var.ui.tabClientes.clicked.connect(clients.Clientes.Cargar)
         var.ui.tabClientes.setSelectionBehavior(QtWidgets.QTableWidget.SelectRows)
+        var.ui.tabFact.clicked.connect(clients.Clientes.Cargar)
+        var.ui.tabFact.setSelectionBehavior(QtWidgets.QTableWidget.SelectRows)
         var.ui.tabPrograma.currentChanged.connect(event.Eventos.Tab)
 
         '''

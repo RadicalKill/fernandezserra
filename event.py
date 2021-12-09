@@ -248,7 +248,10 @@ class Eventos():
             _translate = QtCore.QCoreApplication.translate
 
             if (var.ui.tabPrograma.currentIndex() == 2):
-                var.ui.tabClientes.setGeometry(QtCore.QRect(20, 450, 941, 271))
+                var.ui.tabPrograma.setGeometry(QtCore.QRect(10, 20, 951, 401))
+                var.ui.tabClientes.setGeometry(QtCore.QRect(10, 450, 951, 271))
+                var.ui.tabFact.setGeometry(QtCore.QRect(10, 450, 256, 271))
+                var.ui.line.setGeometry(QtCore.QRect(10, 430, 941, 20))
                 item = QtWidgets.QTableWidgetItem()
                 var.ui.tabClientes.setHorizontalHeaderItem(0, item)
                 item = QtWidgets.QTableWidgetItem()
@@ -269,6 +272,10 @@ class Eventos():
 
                 var.ui.tabClientes.setColumnCount(3)
             if (var.ui.tabPrograma.currentIndex() == 0):
+                var.ui.line.setGeometry(QtCore.QRect(10, 430, 941, 20))
+                var.ui.tabPrograma.setGeometry(QtCore.QRect(10, 20, 951, 401))
+                var.ui.tabClientes.setGeometry(QtCore.QRect(10, 450, 951, 271))
+                var.ui.tabFact.setGeometry(QtCore.QRect(10, 450, 256, 271))
                 var.ui.tabClientes.setColumnCount(5)
                 var.ui.tabClientes.setRowCount(0)
                 item = QtWidgets.QTableWidgetItem()
@@ -296,7 +303,12 @@ class Eventos():
                 conexion.Conexion.cargarTablaCli()
                 Eventos.ClearForm(self)
             if (var.ui.tabPrograma.currentIndex() == 1):
-                var.ui.tabClientes.hide()
+                var.ui.line.setGeometry(QtCore.QRect(10, 190, 941, 20))
+                var.ui.tabClientes.setGeometry(QtCore.QRect(270, 210, 691, 521))
+                var.ui.tabPrograma.setGeometry(QtCore.QRect(10, 20, 951, 171))
+                var.ui.tabFact.setGeometry(QtCore.QRect(10, 210, 256, 521))
+                Eventos.resizeTablaFac(self)
+                conexion.Conexion.cargarTablaFac()
         except Exception as error:
             print("Error al tabular", error)
 
@@ -307,5 +319,13 @@ class Eventos():
                 header.setSectionResizeMode(i, QtWidgets.QHeaderView.Stretch)
                 if i == 0:
                     header.setSectionResizeMode(i, QtWidgets.QHeaderView.ResizeToContents)
+        except Exception as error:
+            print("Error al cambiar el tamaño de las columnas", error)
+
+    def resizeTablaFac(self):
+        try:
+            header= var.ui.tabFact.horizontalHeader()
+            for i in range(2):
+                header.setSectionResizeMode(i, QtWidgets.QHeaderView.Stretch)
         except Exception as error:
             print("Error al cambiar el tamaño de las columnas", error)

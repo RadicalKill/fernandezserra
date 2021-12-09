@@ -562,6 +562,79 @@ class Conexion():
             msgBox.setIcon((QtWidgets.QMessageBox.Warning))
             msgBox.setText("Error al eliminar articulo  en la BD")
             msgBox.exec()
+    def buscaCliente(self):
+        try:
+
+            dni=var.ui.txtDNI.text().upper()
+            query = QtSql.QSqlQuery()
+            index=0
+            query.prepare('SELECT dni,alta,apellidos,nombre,pagos FROM CLIENTES WHERE dni=:dni ORDER BY apellidos')
+            query.bindValue(':dni', str(dni))
+            if query.exec_():
+
+                while query.next():
+                    dni=query.value(0)
+                    alta=query.value(1)
+                    apellidos=query.value(2)
+                    nombre=query.value(3)
+                    pago=query.value(4)
+                    var.ui.tabClientes.setRowCount(index+1)
+                    var.ui.tabClientes.setItem(index,0,QtWidgets.QTableWidgetItem(dni))
+                    var.ui.tabClientes.setItem(index, 1, QtWidgets.QTableWidgetItem(apellidos))
+                    var.ui.tabClientes.setItem(index, 2, QtWidgets.QTableWidgetItem(nombre))
+                    var.ui.tabClientes.setItem(index, 3, QtWidgets.QTableWidgetItem(alta))
+                    var.ui.tabClientes.setItem(index, 4, QtWidgets.QTableWidgetItem(pago))
+                    index+=1
+            else:
+                print('Error:', query.lastError().text())
+                msgBox = QtWidgets.QMessageBox()
+                msgBox.setWindowTitle("Aviso")
+                msgBox.setIcon((QtWidgets.QMessageBox.Warning))
+                msgBox.setText("El cliente no ha sido encontrado en la BD")
+                msgBox.exec()
+        except Exception as error:
+            print('Problemas buscar cliente ', error)
+            msgBox = QtWidgets.QMessageBox()
+            msgBox.setWindowTitle("Aviso")
+            msgBox.setIcon((QtWidgets.QMessageBox.Warning))
+            msgBox.setText("Error al buscar cliente")
+            msgBox.exec()
+    def buscaArt(self):
+        try:
+
+            nomart=var.ui.txtNomArt.text().title()
+            query = QtSql.QSqlQuery()
+            print(nomart)
+            index=0
+            query.prepare('SELECT codigo,nombre,precio FROM articulos WHERE nombre=:nombre ORDER BY codigo')
+            query.bindValue(':nombre', str(nomart))
+            if query.exec_():
+
+                while query.next():
+                    codigo=query.value(0)
+                    nombre=query.value(1)
+                    precio=query.value(2)
+
+                    var.ui.tabClientes.setRowCount(index+1)
+                    var.ui.tabClientes.setItem(index,0,QtWidgets.QTableWidgetItem(codigo))
+                    var.ui.tabClientes.setItem(index, 1, QtWidgets.QTableWidgetItem(nombre))
+                    var.ui.tabClientes.setItem(index, 2, QtWidgets.QTableWidgetItem(precio))
+
+                    index+=1
+            else:
+                print('Error:', query.lastError().text())
+                msgBox = QtWidgets.QMessageBox()
+                msgBox.setWindowTitle("Aviso")
+                msgBox.setIcon((QtWidgets.QMessageBox.Warning))
+                msgBox.setText("El articulo no ha sido encontrado en la BD")
+                msgBox.exec()
+        except Exception as error:
+            print('Problemas buscar articulo ', error)
+            msgBox = QtWidgets.QMessageBox()
+            msgBox.setWindowTitle("Aviso")
+            msgBox.setIcon((QtWidgets.QMessageBox.Warning))
+            msgBox.setText("Error al buscar articulo")
+            msgBox.exec()
 
     '''
     Gestion facturas
@@ -602,6 +675,7 @@ class Conexion():
                 msgBox.setIcon((QtWidgets.QMessageBox.Warning))
                 msgBox.setText("La factura ha sido guardada en la BD")
                 msgBox.exec()
+                conexion.Conexion.cargarTablaFac()
             else:
                 print('Error:', query.lastError().text())
                 msgBox = QtWidgets.QMessageBox()
@@ -616,3 +690,29 @@ class Conexion():
             msgBox.setIcon((QtWidgets.QMessageBox.Warning))
             msgBox.setText("Error al facturar")
             msgBox.exec()
+
+    def cargarTablaFac():
+        try:
+
+            index = 0
+            query = QtSql.QSqlQuery()
+            query.prepare('SELECT codfac,fechafac FROM facturas ORDER BY codfac')
+            if query.exec_():
+                while query.next():
+                    codigo = str(query.value(0))
+                    fecha = query.value(1)
+
+                    var.ui.tabFact.setRowCount(index + 1)
+                    var.ui.tabFact.setItem(index, 0, QtWidgets.QTableWidgetItem(codigo))
+                    var.ui.tabFact.setItem(index, 1, QtWidgets.QTableWidgetItem(fecha))
+
+                    index += 1
+            else:
+                print('Error:', query.lastError().text())
+                msgBox = QtWidgets.QMessageBox()
+                msgBox.setWindowTitle("Aviso")
+                msgBox.setIcon((QtWidgets.QMessageBox.Warning))
+                msgBox.setText("La factura no ha sido cargada")
+                msgBox.exec()
+        except Exception as error:
+            print("Problemas en cargarTablaFac", error)
