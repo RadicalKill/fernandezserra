@@ -4,7 +4,10 @@
 # Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
 from time import strftime, gmtime
 
+import canvas
+
 import clients
+import informes
 from window import *
 from windowaviso import *
 from windowcal import *
@@ -83,6 +86,7 @@ class Main (QtWidgets.QMainWindow):
         var.ui.btnBuscaClifac.clicked.connect(invoice.Facturas.buscaCli)
         var.ui.btnFechaFac.clicked.connect(event.Eventos.abrirCal)
         var.ui.btnFact.clicked.connect(invoice.Facturas.Facturar)
+        var.ui.btnPDFCli.clicked.connect(informes.Informes.listadoClientes)
         '''
         Barra de menús y herramientas
         '''

@@ -696,7 +696,7 @@ class Conexion():
 
             index = 0
             query = QtSql.QSqlQuery()
-            query.prepare('SELECT codfac,fechafac FROM facturas ORDER BY codfac')
+            query.prepare('SELECT codfac,fechafac FROM facturas order by substr(fechafac,7)||substr(fechafac,4,2)||substr(fechafac,1,2) desc')
             if query.exec_():
                 while query.next():
                     codigo = str(query.value(0))
