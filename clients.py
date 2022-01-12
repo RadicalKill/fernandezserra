@@ -348,7 +348,7 @@ class Clientes():
             if (var.ui.tabPrograma.currentIndex() == 2):
                 clients.Clientes.CargaProd(self)
             if(var.ui.tabPrograma.currentIndex()==1):
-                print("Hola")
+                clients.Clientes.CargaFact(self)
         except Exception as error:
             print("Error en modulo Cargar", error)
 
@@ -374,3 +374,39 @@ class Clientes():
 
         except Exception as error:
             print("Error en modulo modifProd", error)
+
+#             Cargar datos factura
+    def CargaFact(self):
+
+        try:
+            fila = var.ui.tabFact.selectedItems()
+
+            if fila:
+                row = [dato.text() for dato in fila]
+                num1 = row[0]
+                query = QtSql.QSqlQuery()
+                query.prepare(
+                    'SELECT dni,fechafac,codfac FROM facturas WHERE codfac=' + num1)
+                if query.exec_():
+                    while query.next():
+                        dni = query.value(0)
+                        fecha = query.value(1)
+                        cod= query.value(2)
+                var.ui.txtDNIFact.setText(dni)
+                var.ui.txtFechaFac.setText(fecha)
+                var.ui.lblnumfac.setText(str(cod))
+                var.ui.lblnumfac.setAlignment(QtCore.Qt.AlignCenter)
+                query = QtSql.QSqlQuery()
+                query.prepare(
+                    'SELECT apellidos,nombre FROM clientes WHERE dni="' + dni+'"')
+                if query.exec_():
+                    while query.next():
+                        apel = query.value(0)
+                        nom= query.value(1)
+                cliente=apel+', '+nom
+                var.ui.lblCliFac.setText(cliente)
+
+
+
+        except Exception as error:
+            print("Error en modulo CargaFact", error)

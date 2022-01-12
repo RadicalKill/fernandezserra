@@ -325,7 +325,10 @@ class Eventos():
     def resizeTablaFac(self):
         try:
             header= var.ui.tabFact.horizontalHeader()
-            for i in range(2):
+            for i in range(3):
                 header.setSectionResizeMode(i, QtWidgets.QHeaderView.Stretch)
+                if i == 2:
+                    header.setSectionResizeMode(i, QtWidgets.QHeaderView.ResizeToContents)
+
         except Exception as error:
             print("Error al cambiar el tamaño de las columnas", error)

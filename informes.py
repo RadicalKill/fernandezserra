@@ -7,7 +7,7 @@ class Informes():
 
     def cabecera_(self):
         try:
-            logo = "img/calend.png"
+            logo = ".\\img\cal  <z<qq<end.png"
             var.cv.line(40, 800, 500, 800)
             var.cv.line(40, 700, 500, 700)
             var.cv.setFont('Helvetica-Bold', 14)
@@ -70,6 +70,60 @@ class Informes():
                         Informes.pie(textoTitulo)
                         var.cv.line(40, 685, 530, 685)
                         items = ["DNI", "Nombre", "Formas de pago"]
+                        var.cv.setFont('Helvetica-Bold', size=9)
+                        var.cv.drawString(70, 675, items[0])
+                        var.cv.drawString(220, 675, items[1])
+                        var.cv.drawString(330, 675, items[2])
+                        var.cv.line(40, 670, 530, 670)
+                        x=50
+                        y=655
+            Informes.pie(textoTitulo)
+            var.cv.save()
+            rootPath = '.\\informes'
+            cont = 0
+            for file in os.listdir(rootPath):
+                if file.endswith('.pdf'):
+                    os.startfile('%s/%s' % (rootPath, file))
+                cont += 1
+
+
+        except Exception as error:
+            print('Error en informes', error)
+    def listadoProductos(self):
+        try:
+            var.cv = canvas.Canvas('informes/listadoProductos.pdf')
+            Informes.cabecera_(self)
+            var.cv.setFont('Helvetica-Bold', size=9)
+            var.cv.setTitle('Listado Productos')
+            var.cv.setAuthor('Departamento de administración')
+            textoTitulo= 'Listado Productos'
+            var.cv.drawString(255,690,textoTitulo)
+            var.cv.line(40,685,530,685)
+            items=["Codigo", "Nombre", "Precio/Unidad"]
+            var.cv.drawString(70,675,items[0])
+            var.cv.drawString(220,675,items[1])
+            var.cv.drawString(420,675,items[2])
+            var.cv.line(40,670,530,670)
+            query = QtSql.QSqlQuery()
+            query.prepare("select codigo, nombre, precio from articulos order by codigo")
+
+            if query.exec_():
+                x=80
+                y=655
+                while query.next():
+                    if y>=80:
+                        var.cv.setFont("Helvetica", size=8)
+                        var.cv.drawString(x,y,str(query.value(0)))
+                        var.cv.drawString(x+140,y,str(query.value(1)))
+                        var.cv.drawString(x+360,y,str(query.value(2)))
+                        y=y-20
+                    else:
+                        var.cv.drawString(460,30,"Página siguiente....")
+                        var.cv.showPage()
+                        Informes.cabecera_(self)
+                        Informes.pie(textoTitulo)
+                        var.cv.line(40, 685, 530, 685)
+                        items = ["Codigo", "Nombre", "Precio/Unidad"]
                         var.cv.setFont('Helvetica-Bold', size=9)
                         var.cv.drawString(70, 675, items[0])
                         var.cv.drawString(220, 675, items[1])

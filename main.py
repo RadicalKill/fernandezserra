@@ -87,6 +87,7 @@ class Main (QtWidgets.QMainWindow):
         var.ui.btnFechaFac.clicked.connect(event.Eventos.abrirCal)
         var.ui.btnFact.clicked.connect(invoice.Facturas.Facturar)
         var.ui.btnPDFCli.clicked.connect(informes.Informes.listadoClientes)
+        var.ui.btnPDFProd.clicked.connect(informes.Informes.listadoProductos)
         '''
         Barra de menús y herramientas
         '''
