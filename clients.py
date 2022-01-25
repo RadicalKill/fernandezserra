@@ -380,7 +380,7 @@ class Clientes():
 
         try:
             fila = var.ui.tabFact.selectedItems()
-
+            index=0
             if fila:
                 row = [dato.text() for dato in fila]
                 num1 = row[0]
@@ -405,6 +405,28 @@ class Clientes():
                         nom= query.value(1)
                 cliente=apel+', '+nom
                 var.ui.lblCliFac.setText(cliente)
+                query2 = QtSql.QSqlQuery()
+                query2.prepare(
+                    'SELECT codprof,precio,cantidad FROM ventas WHERE codfacf=:codfacf')
+                query.bindValue(':nombre', cod)
+
+                if query2.exec_():
+                    while query2.next():
+                        codprod = query.value(0)
+                        precio= query.value(1)
+                        cantidad= query.value(2)
+                        var.ui.tabClientes.setRowCount(index + 1)
+                        var.ui.tabClientes.setItem(index, 0, QtWidgets.QTableWidgetItem(codprod))
+                        var.ui.tabClientes.setItem(index, 2, QtWidgets.QTableWidgetItem(precio))
+                        var.ui.tabClientes.setItem(index, 3, QtWidgets.QTableWidgetItem(cantidad))
+                else:
+                    print('Error:', query2.lastError().text())
+                    msgBox = QtWidgets.QMessageBox()
+                    msgBox.setWindowTitle("Aviso")
+                    msgBox.setIcon((QtWidgets.QMessageBox.Warning))
+                    msgBox.setText("El producto no ha sido cargado")
+                    msgBox.exec()
+
 
 
 

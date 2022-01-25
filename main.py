@@ -166,6 +166,7 @@ if __name__ =="__main__":
     var.dlgaviso=DialogAviso()
     var.dlgcalendar=DialogCalendar()
     var.dlgabrir=FileDialogAbrir()
+    print(float(2.3))
 
     window.show()
     sys.exit(app.exec())

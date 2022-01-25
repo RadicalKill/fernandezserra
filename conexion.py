@@ -755,3 +755,106 @@ class Conexion():
 
         except Exception as error:
           print('Error en dar baja factura', error)
+
+    def cargarCmbproducto():
+        try:
+            var.cmbProducto.clear()
+            var.cmbProducto.addItem('') # la primera linea en blanco
+            query2 = QtSql.QSqlQuery()
+            query2.prepare('select  nombre from articulos')
+            print(query2.exec_())
+
+            if query2.exec_():
+                while query2.next():
+                    print(query2.value(0))
+                    var.cmbProducto.addItem(str(query2.value(0)))
+            else:
+                print('Error:', query2.lastError().text())
+                msgBox = QtWidgets.QMessageBox()
+                msgBox.setWindowTitle("Aviso")
+                msgBox.setIcon((QtWidgets.QMessageBox.Warning))
+                msgBox.setText("La factura no ha sido cargada")
+                msgBox.exec()
+
+
+        except Exception as error:
+            print('Error cargar combox de productos', error)
+
+    def obtenerCodPrecio(articulo):
+        try:
+            dato = []
+            query = QtSql.QSqlQuery()
+            query.prepare('select precio,codigo from articulos where nombre =:nombre ')
+            print(articulo)
+            query.bindValue(':nombre', str(articulo))
+            if query.exec_():
+                while query.next():
+                    dato.append(query.value(0))
+                    print("precio",str(query.value(0)))
+                    dato.append(str(query.value(1)))
+            else:
+                print('Error:', query.lastError().text())
+                msgBox = QtWidgets.QMessageBox()
+                msgBox.setWindowTitle("Aviso")
+                msgBox.setIcon((QtWidgets.QMessageBox.Warning))
+                msgBox.setText("La factura no ha sido cargada")
+                msgBox.exec()
+
+            return  dato
+
+        except Exception as error:
+            print('Error cargar codigo precio en conexion', error)
+
+    def cargarVenta(venta):
+        try:
+            query = QtSql.QSqlQuery()
+            query.prepare('insert into ventas (codfacf, codprof, precio, cantidad) values (:codfac, :codpro, :precio, :cantidad)')
+            query.bindValue(':codfac', int(venta[0]))
+            query.bindValue(':codpro', int(venta[1]))
+            query.bindValue(':precio', int(venta[2]))
+            query.bindValue(':cantidad', int(venta[3]))
+            if query.exec_():
+                print("gurdada venta")
+                var.ui.lbl_venta.setText("Venta realizada")
+                var.ui.lbl_venta.setStyleSheet("background-color:rgb(82, 190, 128);")
+
+
+            else:
+                var.ui.lbl_venta.setText("Error en venta")
+                var.ui.lbl_venta.setStyleSheet("background-color:rgb(240, 128, 128);")
+
+        except Exception as error:
+            print('Error cargar venta en conexion', error)
+
+    def buscaCodFac(self):
+        try:
+            query = QtSql.QSqlQuery()
+            query.prepare('select codfac from facturas order by codfac desc  limit 1')
+            if query.exec_():
+                while query.next():
+                     dato = query.value(0)
+                     return  dato
+
+        except Exception as error:
+            print('Error obtener código factura', error)
+
+    def cargarLiasVentas(codfac):
+        try:
+
+            var.ui.tabVentas.clearContents()
+            index = 0
+            query = QtSql.QSqlQuery()
+            query.prepare('select codven,precio,cantidad from ventas where codfac = :codfac')
+            query.bindValue(':codfac', int(codfac))
+            print("cargar lineas ventas")
+            if query.exec_():
+                while query.next():
+                    codventa = query.value(0)
+                    print(codventa)
+                    var.ui.tabClientes.setRowCount(index + 1)
+                    var.ui.tabClientes.setItem(index, 0, QtWidgets.QTableWidgetItem(str(codventa)))
+                    var.ui.tabClientes.item(index, 0).setTextAlignment(QtCore.Qt.AlignCenter)
+                    index = index + 1
+
+        except Exception as error:
+            print('Error cargar lineas ventas en conexion', error)

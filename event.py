@@ -10,6 +10,7 @@ from PyQt5 import QtPrintSupport
 from PyQt5.QtWidgets import QMessageBox
 
 import conexion
+import invoice
 from window import *
 import sys, var
 from datetime import date, datetime
@@ -304,11 +305,42 @@ class Eventos():
                 Eventos.ClearForm(self)
             if (var.ui.tabPrograma.currentIndex() == 1):
                 var.ui.line.setGeometry(QtCore.QRect(10, 190, 941, 20))
-                var.ui.tabClientes.setGeometry(QtCore.QRect(270, 210, 691, 521))
+                var.ui.tabClientes.setGeometry(QtCore.QRect(270, 230, 691, 401))
                 var.ui.tabPrograma.setGeometry(QtCore.QRect(10, 20, 951, 171))
-                var.ui.tabFact.setGeometry(QtCore.QRect(10, 210, 256, 521))
+                var.ui.tabFact.setGeometry(QtCore.QRect(10, 230, 256, 521))
+                var.ui.labelnumtab.setGeometry(QtCore.QRect(35, 210, 80, 15))
+                var.ui.labelfechatab.setGeometry(QtCore.QRect(130, 210, 90, 15))
+                var.ui.labelventatab.setGeometry(QtCore.QRect(450, 210, 300, 15))
+                var.ui.lbl_venta.setGeometry(QtCore.QRect(450,650,300,15))
+                var.ui.tabClientes.setColumnCount(5)
+                var.ui.tabClientes.setRowCount(0)
+                item = QtWidgets.QTableWidgetItem()
+                var.ui.tabClientes.setHorizontalHeaderItem(0, item)
+                item = QtWidgets.QTableWidgetItem()
+                item.setBackground(QtGui.QColor(0, 0, 0, 0))
+                var.ui.tabClientes.setHorizontalHeaderItem(1, item)
+                item = QtWidgets.QTableWidgetItem()
+                var.ui.tabClientes.setHorizontalHeaderItem(2, item)
+                item = QtWidgets.QTableWidgetItem()
+                var.ui.tabClientes.setHorizontalHeaderItem(3, item)
+                item = QtWidgets.QTableWidgetItem()
+                var.ui.tabClientes.setHorizontalHeaderItem(4, item)
+                item = var.ui.tabClientes.horizontalHeaderItem(0)
+                item.setText(_translate("MainWindow", "Codigo"))
+                item = var.ui.tabClientes.horizontalHeaderItem(1)
+                item.setText(_translate("MainWindow", "Producto"))
+                item = var.ui.tabClientes.horizontalHeaderItem(2)
+                item.setText(_translate("MainWindow", "Precio"))
+                item = var.ui.tabClientes.horizontalHeaderItem(3)
+                item.setText(_translate("MainWindow", "Cantidad"))
+                item = var.ui.tabClientes.horizontalHeaderItem(4)
+                item.setText(_translate("MainWindow", "Total"))
+
                 Eventos.resizeTablaFac(self)
+                Eventos.resizeTablaVent(self)
                 conexion.Conexion.cargarTablaFac()
+                invoice.Facturas.cargaLineaVenta(self)
+                var.cmbProducto.currentIndexChanged.connect(invoice.Facturas.procesoVenta)
         except Exception as error:
             print("Error al tabular", error)
 
@@ -330,5 +362,16 @@ class Eventos():
                 if i == 2:
                     header.setSectionResizeMode(i, QtWidgets.QHeaderView.ResizeToContents)
 
+        except Exception as error:
+            print("Error al cambiar el tamaño de las columnas", error)
+
+
+    def resizeTablaVent(self):
+        try:
+            header = var.ui.tabClientes.horizontalHeader()
+            for i in range(5):
+                header.setSectionResizeMode(i, QtWidgets.QHeaderView.Stretch)
+                if i == 1 or i == 3:
+                    header.setSectionResizeMode(i, QtWidgets.QHeaderView.ResizeToContents)
         except Exception as error:
             print("Error al cambiar el tamaño de las columnas", error)
