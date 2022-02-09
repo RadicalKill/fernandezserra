@@ -381,9 +381,14 @@ class Clientes():
         try:
             fila = var.ui.tabFact.selectedItems()
             index=0
+            var.ui.tabClientes.clearContents()
+            event.Eventos.resizeTablaFac(self)
+            event.Eventos.resizeTablaVent(self)
             if fila:
                 row = [dato.text() for dato in fila]
                 num1 = row[0]
+
+
                 query = QtSql.QSqlQuery()
                 query.prepare(
                     'SELECT dni,fechafac,codfac FROM facturas WHERE codfac=' + num1)
@@ -392,33 +397,51 @@ class Clientes():
                         dni = query.value(0)
                         fecha = query.value(1)
                         cod= query.value(2)
-                var.ui.txtDNIFact.setText(dni)
-                var.ui.txtFechaFac.setText(fecha)
-                var.ui.lblnumfac.setText(str(cod))
-                var.ui.lblnumfac.setAlignment(QtCore.Qt.AlignCenter)
-                query = QtSql.QSqlQuery()
-                query.prepare(
+                    var.ui.txtDNIFact.setText(dni)
+                    var.ui.txtFechaFac.setText(fecha)
+                    var.ui.lblnumfac.setText(str(cod))
+                    var.ui.lblnumfac.setAlignment(QtCore.Qt.AlignCenter)
+                else:
+                    print('Error:', query.lastError().text())
+                    msgBox = QtWidgets.QMessageBox()
+                    msgBox.setWindowTitle("Aviso")
+                    msgBox.setIcon((QtWidgets.QMessageBox.Warning))
+                    msgBox.setText("El producto no ha sido cargado")
+                    msgBox.exec()
+                query3 = QtSql.QSqlQuery()
+                query3.prepare(
                     'SELECT apellidos,nombre FROM clientes WHERE dni="' + dni+'"')
-                if query.exec_():
-                    while query.next():
-                        apel = query.value(0)
-                        nom= query.value(1)
-                cliente=apel+', '+nom
-                var.ui.lblCliFac.setText(cliente)
+                if query3.exec_():
+                    while query3.next():
+                        apel = query3.value(0)
+                        nom= query3.value(1)
+                    cliente=apel+', '+nom
+                    var.ui.lblCliFac.setText(cliente)
+
+                else:
+                    print('Error:', query3.lastError().text())
+                    msgBox = QtWidgets.QMessageBox()
+                    msgBox.setWindowTitle("Aviso")
+                    msgBox.setIcon((QtWidgets.QMessageBox.Warning))
+                    msgBox.setText("El producto no ha sido cargado")
+                    msgBox.exec()
+
                 query2 = QtSql.QSqlQuery()
                 query2.prepare(
                     'SELECT codprof,precio,cantidad FROM ventas WHERE codfacf=:codfacf')
-                query.bindValue(':nombre', cod)
+                query2.bindValue(':codfacf', cod)
 
                 if query2.exec_():
                     while query2.next():
-                        codprod = query.value(0)
-                        precio= query.value(1)
-                        cantidad= query.value(2)
+                        codprod = query2.value(0)
+                        print(codprod)
+                        precio= query2.value(1)
+                        cantidad= query2.value(2)
                         var.ui.tabClientes.setRowCount(index + 1)
                         var.ui.tabClientes.setItem(index, 0, QtWidgets.QTableWidgetItem(codprod))
                         var.ui.tabClientes.setItem(index, 2, QtWidgets.QTableWidgetItem(precio))
                         var.ui.tabClientes.setItem(index, 3, QtWidgets.QTableWidgetItem(cantidad))
+                        index = index+1
                 else:
                     print('Error:', query2.lastError().text())
                     msgBox = QtWidgets.QMessageBox()

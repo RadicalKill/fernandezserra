@@ -58,7 +58,6 @@ class Facturas():
             index = 0
             var.cmbProducto = QtWidgets.QComboBox()
             var.cmbProducto.setFixedSize(180,25)
-            print("cargar linea de venta")
             conexion.Conexion.cargarCmbproducto()
             var.txtCantidad = QtWidgets.QLineEdit()
             var.txtCantidad.returnPressed.connect(Facturas.totalLineaVenta)
@@ -75,7 +74,6 @@ class Facturas():
     def procesoVenta():
         try:
             row = var.ui.tabClientes.currentRow()
-            print("Precio")
             articulo = var.cmbProducto.currentText()
             dato = conexion.Conexion.obtenerCodPrecio(articulo)
             var.ui.tabClientes.setItem(row,2, QtWidgets.QTableWidgetItem(str(dato[0])+ " €"))
@@ -110,7 +108,6 @@ class Facturas():
             venta.append(int(var.codpro))
             venta.append(cantidad)
             venta.append(float(var.precio))
-            print(venta)
             conexion.Conexion.cargarVenta(venta)
             var.txtCantidad.clearFocus()
 

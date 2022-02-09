@@ -33,7 +33,6 @@ class Conexion():
     def altaCli(newclie):
         try:
 
-            print(newclie)
             query = QtSql.QSqlQuery()
             query.prepare('insert into clientes (dni, alta, apellidos, nombre, direccion,'
                           ' provincia, municipio, sexo, pagos,envio )VALUES (:dni, :alta, :apellidos, '
@@ -605,7 +604,6 @@ class Conexion():
 
             nomart=var.ui.txtNomArt.text().title()
             query = QtSql.QSqlQuery()
-            print(nomart)
             index=0
             query.prepare('SELECT codigo,nombre,precio FROM articulos WHERE nombre=:nombre ORDER BY codigo')
             query.bindValue(':nombre', str(nomart))
@@ -762,11 +760,10 @@ class Conexion():
             var.cmbProducto.addItem('') # la primera linea en blanco
             query2 = QtSql.QSqlQuery()
             query2.prepare('select  nombre from articulos')
-            print(query2.exec_())
+
 
             if query2.exec_():
                 while query2.next():
-                    print(query2.value(0))
                     var.cmbProducto.addItem(str(query2.value(0)))
             else:
                 print('Error:', query2.lastError().text())
@@ -785,12 +782,10 @@ class Conexion():
             dato = []
             query = QtSql.QSqlQuery()
             query.prepare('select precio,codigo from articulos where nombre =:nombre ')
-            print(articulo)
             query.bindValue(':nombre', str(articulo))
             if query.exec_():
                 while query.next():
                     dato.append(query.value(0))
-                    print("precio",str(query.value(0)))
                     dato.append(str(query.value(1)))
             else:
                 print('Error:', query.lastError().text())
@@ -814,7 +809,6 @@ class Conexion():
             query.bindValue(':precio', int(venta[2]))
             query.bindValue(':cantidad', int(venta[3]))
             if query.exec_():
-                print("gurdada venta")
                 var.ui.lbl_venta.setText("Venta realizada")
                 var.ui.lbl_venta.setStyleSheet("background-color:rgb(82, 190, 128);")
 
@@ -824,7 +818,7 @@ class Conexion():
                 var.ui.lbl_venta.setStyleSheet("background-color:rgb(240, 128, 128);")
 
         except Exception as error:
-            print('Error cargar venta en conexion', error)
+            pass
 
     def buscaCodFac(self):
         try:
@@ -846,11 +840,9 @@ class Conexion():
             query = QtSql.QSqlQuery()
             query.prepare('select codven,precio,cantidad from ventas where codfac = :codfac')
             query.bindValue(':codfac', int(codfac))
-            print("cargar lineas ventas")
             if query.exec_():
                 while query.next():
                     codventa = query.value(0)
-                    print(codventa)
                     var.ui.tabClientes.setRowCount(index + 1)
                     var.ui.tabClientes.setItem(index, 0, QtWidgets.QTableWidgetItem(str(codventa)))
                     var.ui.tabClientes.item(index, 0).setTextAlignment(QtCore.Qt.AlignCenter)
