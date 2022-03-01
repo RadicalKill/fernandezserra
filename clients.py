@@ -348,7 +348,7 @@ class Clientes():
             if (var.ui.tabPrograma.currentIndex() == 2):
                 clients.Clientes.CargaProd(self)
             if(var.ui.tabPrograma.currentIndex()==1):
-                clients.Clientes.CargaFact(self)
+                clients.Clientes.cargaFac(self)
         except Exception as error:
             print("Error en modulo Cargar", error)
 
@@ -376,82 +376,30 @@ class Clientes():
             print("Error en modulo modifProd", error)
 
 #             Cargar datos factura
-    def CargaFact(self):
 
+
+    def cargaFac(self):
+        """
+
+        Método que consulta los datos de una factura seleccionada en tabla con Conexion.buscaDatosFac
+        y rellena sus respectivos campos en la interfaz.
+        Tambien carga sus lineas de venta con Conexion.cargarLineasVenta.
+
+        """
         try:
+
             fila = var.ui.tabFact.selectedItems()
-            index=0
-            var.ui.tabClientes.clearContents()
-            event.Eventos.resizeTablaFac(self)
-            event.Eventos.resizeTablaVent(self)
+            datos = [var.ui.lblnumfac, var.ui.txtFechaFac]
             if fila:
                 row = [dato.text() for dato in fila]
-                num1 = row[0]
-
-
-                query = QtSql.QSqlQuery()
-                query.prepare(
-                    'SELECT dni,fechafac,codfac FROM facturas WHERE codfac=' + num1)
-                if query.exec_():
-                    while query.next():
-                        dni = query.value(0)
-                        fecha = query.value(1)
-                        cod= query.value(2)
-                    var.ui.txtDNIFact.setText(dni)
-                    var.ui.txtFechaFac.setText(fecha)
-                    var.ui.lblnumfac.setText(str(cod))
-                    var.ui.lblnumfac.setAlignment(QtCore.Qt.AlignCenter)
-                else:
-                    print('Error:', query.lastError().text())
-                    msgBox = QtWidgets.QMessageBox()
-                    msgBox.setWindowTitle("Aviso")
-                    msgBox.setIcon((QtWidgets.QMessageBox.Warning))
-                    msgBox.setText("El producto no ha sido cargado")
-                    msgBox.exec()
-                query3 = QtSql.QSqlQuery()
-                query3.prepare(
-                    'SELECT apellidos,nombre FROM clientes WHERE dni="' + dni+'"')
-                if query3.exec_():
-                    while query3.next():
-                        apel = query3.value(0)
-                        nom= query3.value(1)
-                    cliente=apel+', '+nom
-                    var.ui.lblCliFac.setText(cliente)
-
-                else:
-                    print('Error:', query3.lastError().text())
-                    msgBox = QtWidgets.QMessageBox()
-                    msgBox.setWindowTitle("Aviso")
-                    msgBox.setIcon((QtWidgets.QMessageBox.Warning))
-                    msgBox.setText("El producto no ha sido cargado")
-                    msgBox.exec()
-
-                query2 = QtSql.QSqlQuery()
-                query2.prepare(
-                    'SELECT codprof,precio,cantidad FROM ventas WHERE codfacf=:codfacf')
-                query2.bindValue(':codfacf', cod)
-
-                if query2.exec_():
-                    while query2.next():
-                        codprod = query2.value(0)
-                        print(codprod)
-                        precio= query2.value(1)
-                        cantidad= query2.value(2)
-                        var.ui.tabClientes.setRowCount(index + 1)
-                        var.ui.tabClientes.setItem(index, 0, QtWidgets.QTableWidgetItem(codprod))
-                        var.ui.tabClientes.setItem(index, 2, QtWidgets.QTableWidgetItem(precio))
-                        var.ui.tabClientes.setItem(index, 3, QtWidgets.QTableWidgetItem(cantidad))
-                        index = index+1
-                else:
-                    print('Error:', query2.lastError().text())
-                    msgBox = QtWidgets.QMessageBox()
-                    msgBox.setWindowTitle("Aviso")
-                    msgBox.setIcon((QtWidgets.QMessageBox.Warning))
-                    msgBox.setText("El producto no ha sido cargado")
-                    msgBox.exec()
-
-
-
-
+            for i, dato in enumerate(datos):
+                dato.setText(row[i])
+            # Ahora los datos desde la base de datos (de momento solo dni):
+            datos=conexion.Conexion.buscaDatosFac(var.ui.lblnumfac.text())
+            var.ui.txtDNIFact.setText(datos[0])
+            invoice.Facturas.buscaCli(self)
+            invoice.Facturas.cargaLineaVenta(self)
+            conexion.Conexion.cargarLineasVenta(str(var.ui.lblnumfac.text()))
         except Exception as error:
-            print("Error en modulo CargaFact", error)
+            print('Error en módulo cargar factura (invoice) ',error)
+

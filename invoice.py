@@ -55,12 +55,11 @@ class Facturas():
 
     def cargaLineaVenta(self):
         try:
+
             index = 0
-            var.cmbProducto = QtWidgets.QComboBox()
+
             var.cmbProducto.setFixedSize(180,25)
             conexion.Conexion.cargarCmbproducto()
-            var.txtCantidad = QtWidgets.QLineEdit()
-            var.txtCantidad.returnPressed.connect(Facturas.totalLineaVenta)
             var.txtCantidad.setFixedSize(70,25)
             var.txtCantidad.setAlignment(QtCore.Qt.AlignCenter)
             var.ui.tabClientes.setRowCount(index+1)
@@ -71,18 +70,22 @@ class Facturas():
         except Exception as error:
             print("Error en cargar linea venta",error)
 
-    def procesoVenta():
+    def procesoVenta(self):
         try:
             row = var.ui.tabClientes.currentRow()
             articulo = var.cmbProducto.currentText()
-            dato = conexion.Conexion.obtenerCodPrecio(articulo)
-            var.ui.tabClientes.setItem(row,2, QtWidgets.QTableWidgetItem(str(dato[0])+ " €"))
-            var.ui.tabClientes.item(row, 2).setTextAlignment(QtCore.Qt.AlignCenter)
-            var.ui.tabClientes.setItem(row, 0, QtWidgets.QTableWidgetItem(str(dato[1])))
-            var.ui.tabClientes.item(row, 0).setTextAlignment(QtCore.Qt.AlignCenter)
-            var.precio = dato[0].replace('€', '')
-            var.precio = dato[0].replace(',', '.')
-            var.codpro = dato[1]
+            if (articulo != ''):
+                dato = conexion.Conexion.obtenerCodPrecio(articulo)
+                var.ui.tabClientes.setItem(row,2, QtWidgets.QTableWidgetItem(str(dato[0])+ " €"))
+                var.ui.tabClientes.item(row, 2).setTextAlignment(QtCore.Qt.AlignCenter)
+                var.ui.tabClientes.setItem(row, 0, QtWidgets.QTableWidgetItem(str(dato[1])))
+                var.ui.tabClientes.item(row, 0).setTextAlignment(QtCore.Qt.AlignCenter)
+                var.precio = dato[0].replace('€', '')
+                var.precio = dato[0].replace(',', '.')
+                var.codpro = dato[1]
+            else:
+                var.ui.tabClientes.setItem(row, 2, QtWidgets.QTableWidgetItem(''))
+
 
 
 
@@ -93,27 +96,44 @@ class Facturas():
 
     def totalLineaVenta(self = None):
         try:
-
-            venta=[]
-            var.precio=float(var.precio)
             row = var.ui.tabClientes.currentRow()
-            cantidad1=var.txtCantidad.text()
-            cantidad = round(float(cantidad1), 2)
-            total_linea =round(var.precio*cantidad, 2)
-            total_linea = str(total_linea)+ " €"
-            var.ui.tabClientes.setItem(row, 4, QtWidgets.QTableWidgetItem(str(total_linea)))
+            cantidad=round(float(var.txtCantidad.text().replace(',', '.')), 2)
+            total_linea = round(float(var.precio)*float(cantidad),2)
+            var.ui.tabClientes.setItem(row, 4, QtWidgets.QTableWidgetItem(str('{:.2f}'.format(total_linea))+'€'))
             var.ui.tabClientes.item(row, 4).setTextAlignment(QtCore.Qt.AlignRight)
-            codfac= var.ui.lblnumfac.text()
-            venta.append(codfac)
+            venta=[]
+            codfac=var.ui.lblnumfac.text()
+            venta.append(int(codfac))
             venta.append(int(var.codpro))
-            venta.append(cantidad)
             venta.append(float(var.precio))
+            venta.append(float(cantidad))
             conexion.Conexion.cargarVenta(venta)
-            var.txtCantidad.clearFocus()
 
+            if var.ui.lbl_venta.text() != '':
+                print("2")
+                Facturas.vaciarTabVentas()
+                conexion.Conexion.cargarLineasVenta(str(var.ui.lblnumfac.text()))
 
 
             # currency para convertir a moneda
 
         except Exception as error:
             print('Error en producto linea venta', error)
+
+    def vaciarTabVentas(self=None):
+        """
+
+        Método que vacía la tabla y los campos referentes a las lineas de venta en la interfaz para futuras operaciones.
+
+        """
+        try:
+
+            var.ui.tabClientes.clearContents()
+            var.cmbProducto = QtWidgets.QComboBox()
+            var.txtCantidad = QtWidgets.QLineEdit()
+            var.txtCantidad.editingFinished.connect(Facturas.totalLineaVenta)
+            var.cmbProducto.currentIndexChanged.connect(Facturas.procesoVenta)
+            Facturas.cargaLineaVenta(self)
+
+        except Exception as error:
+            print('Error en vaciarTabVentas: ',error)

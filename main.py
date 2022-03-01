@@ -4,7 +4,7 @@
 # Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
 from time import strftime, gmtime
 
-import canvas
+
 
 import clients
 import informes
@@ -108,12 +108,18 @@ class Main (QtWidgets.QMainWindow):
         var.ui.txtApel.editingFinished.connect(clients.Clientes.capitalizar)
         var.ui.txtDir.editingFinished.connect(clients.Clientes.capitalizar)
         var.ui.txtDNIFact.editingFinished.connect(clients.Clientes.validarDNIFac)
+        var.txtCantidad = QtWidgets.QLineEdit()
+        var.txtCantidad.editingFinished.connect(invoice.Facturas.totalLineaVenta)
+
 
         '''
         Eventos combobox
         '''
 
         var.ui.cmbProv.activated[str].connect(conexion.Conexion.CargaMun)
+        var.cmbProducto = QtWidgets.QComboBox()
+        var.cmbProducto.currentIndexChanged.connect(invoice.Facturas.procesoVenta)
+
         '''
         
         Barra de estado
@@ -138,9 +144,10 @@ class Main (QtWidgets.QMainWindow):
         event.Eventos.resizeTablaCli(self)
         var.ui.tabClientes.clicked.connect(clients.Clientes.Cargar)
         var.ui.tabClientes.setSelectionBehavior(QtWidgets.QTableWidget.SelectRows)
+        var.ui.tabPrograma.currentChanged.connect(event.Eventos.Tab)
         var.ui.tabFact.clicked.connect(clients.Clientes.Cargar)
         var.ui.tabFact.setSelectionBehavior(QtWidgets.QTableWidget.SelectRows)
-        var.ui.tabPrograma.currentChanged.connect(event.Eventos.Tab)
+
 
         '''
         Base de datos
@@ -148,6 +155,7 @@ class Main (QtWidgets.QMainWindow):
         conexion.Conexion.db_connect(var.filedb)
         conexion.Conexion.cargarTablaCli()
         conexion.Conexion.CargaProv(self)
+
 
         '''
         Eventos spin

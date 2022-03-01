@@ -7,6 +7,7 @@ from PyQt5.QtWidgets import QMessageBox
 import clients
 import conexion
 import event
+import invoice
 import var
 import pandas as pd
 
@@ -743,6 +744,8 @@ class Conexion():
                 msgBox.setWindowTitle("Aviso")
                 msgBox.setStandardButtons(QMessageBox.Ok)
                 msgBox.exec()
+                invoice.Facturas.vaciarTabVentas()
+
             else:
                 print('Error:', query.lastError().text())
                 msgBox = QtWidgets.QMessageBox()
@@ -832,21 +835,76 @@ class Conexion():
         except Exception as error:
             print('Error obtener código factura', error)
 
-    def cargarLiasVentas(codfac):
+    def cargarLineasVenta(codfac):
         try:
-
-            var.ui.tabVentas.clearContents()
-            index = 0
+            suma=0
+            index = 1
             query = QtSql.QSqlQuery()
-            query.prepare('select codven,precio,cantidad from ventas where codfac = :codfac')
+            query.prepare('select codven,codprof,precio,cantidad from ventas where codfacf = :codfac')
             query.bindValue(':codfac', int(codfac))
+
             if query.exec_():
                 while query.next():
                     codventa = query.value(0)
+                    producto = conexion.Conexion.nombreDeArticulo(query.value(1))
+                    cantidad=query.value(2)
+                    precio=query.value(3)
+                    total_linea = round(float(precio) * float(cantidad), 2)
+                    suma=suma+total_linea
                     var.ui.tabClientes.setRowCount(index + 1)
                     var.ui.tabClientes.setItem(index, 0, QtWidgets.QTableWidgetItem(str(codventa)))
+                    var.ui.tabClientes.setItem(index, 1, QtWidgets.QTableWidgetItem(str(producto)))
+                    var.ui.tabClientes.setItem(index, 2, QtWidgets.QTableWidgetItem(str('{:.2f}'.format(precio))))
+                    var.ui.tabClientes.setItem(index, 3, QtWidgets.QTableWidgetItem(str(cantidad)))
+                    var.ui.tabClientes.setItem(index, 4, QtWidgets.QTableWidgetItem(str('{:.2f}'.format(total_linea))+'€'))
                     var.ui.tabClientes.item(index, 0).setTextAlignment(QtCore.Qt.AlignCenter)
+                    var.ui.tabClientes.item(index, 2).setTextAlignment(QtCore.Qt.AlignRight)
+                    var.ui.tabClientes.item(index, 3).setTextAlignment(QtCore.Qt.AlignRight)
+                    var.ui.tabClientes.item(index, 4).setTextAlignment(QtCore.Qt.AlignRight)
                     index = index + 1
 
         except Exception as error:
             print('Error cargar lineas ventas en conexion', error)
+
+    def nombreDeArticulo(codpro):
+
+        """
+        Método que devuelve el nombre del artículo al que corresponde el código que recibe.
+        :return: Nombre del artículo
+        :rtype: String
+
+        """
+        try:
+            nombre=''
+            query = QtSql.QSqlQuery()
+            query.prepare('select nombre from articulos where codigo = :codpro')
+            query.bindValue(':codpro', int(codpro))
+            if query.exec_():
+                while query.next():
+                    nombre=query.value(0)
+            return nombre
+        except Exception as error:
+            print('Error al obtener nombre de articulo en conexión: ',error)
+
+    def buscaDatosFac(codigo):
+        """
+
+        Recibe el código de una factura y devuelve el dni del cliente asociado a ella.
+        :return: Dni del cliente
+        :rtype: String
+
+        """
+        datosFac = []
+        try:
+            query = QtSql.QSqlQuery()
+            query.prepare(
+                'SELECT dni FROM facturas WHERE codfac =:codigo')
+            query.bindValue(':codigo', str(codigo))
+            if query.exec_():
+                while query.next():
+                    datosFac.append(query.value(0))
+
+
+        except Exception as error:
+            print('Error en buscar datos factura (conexión) ', error)
+        return datosFac

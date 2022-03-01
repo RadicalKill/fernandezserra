@@ -1,4 +1,3 @@
-import canvas as canvas
 from PyQt5 import QtWidgets
 global ui
 global dlgaviso
@@ -7,10 +6,9 @@ global dlgabrir
 global copia
 global cv
 global cmbProducto
-
+global txtCantidad
 global precio
 global codpro
-cmbProducto: QtWidgets.QComboBox
 '''
 Otras variables
 '''

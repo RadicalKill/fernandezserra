@@ -249,6 +249,7 @@ class Eventos():
             _translate = QtCore.QCoreApplication.translate
 
             if (var.ui.tabPrograma.currentIndex() == 2):
+
                 var.ui.tabPrograma.setGeometry(QtCore.QRect(10, 20, 951, 401))
                 var.ui.tabClientes.setGeometry(QtCore.QRect(10, 450, 951, 271))
                 var.ui.tabFact.setGeometry(QtCore.QRect(10, 450, 256, 271))
@@ -272,6 +273,7 @@ class Eventos():
                 Eventos.ClearFormProd(self)
 
                 var.ui.tabClientes.setColumnCount(3)
+
             if (var.ui.tabPrograma.currentIndex() == 0):
                 var.ui.line.setGeometry(QtCore.QRect(10, 430, 941, 20))
                 var.ui.tabPrograma.setGeometry(QtCore.QRect(10, 20, 951, 401))
@@ -307,7 +309,7 @@ class Eventos():
                 var.ui.line.setGeometry(QtCore.QRect(10, 190, 941, 20))
                 var.ui.tabClientes.setGeometry(QtCore.QRect(270, 230, 691, 401))
                 var.ui.tabPrograma.setGeometry(QtCore.QRect(10, 20, 951, 171))
-                var.ui.tabFact.setGeometry(QtCore.QRect(10, 230, 256, 521))
+                var.ui.tabFact.setGeometry(QtCore.QRect(10, 230, 256, 501))
                 var.ui.labelnumtab.setGeometry(QtCore.QRect(35, 210, 80, 15))
                 var.ui.labelfechatab.setGeometry(QtCore.QRect(130, 210, 90, 15))
                 var.ui.labelventatab.setGeometry(QtCore.QRect(450, 210, 300, 15))
@@ -338,9 +340,14 @@ class Eventos():
 
                 Eventos.resizeTablaFac(self)
                 Eventos.resizeTablaVent(self)
-                conexion.Conexion.cargarTablaFac()
-                invoice.Facturas.cargaLineaVenta(self)
+                var.cmbProducto = QtWidgets.QComboBox()
                 var.cmbProducto.currentIndexChanged.connect(invoice.Facturas.procesoVenta)
+                var.txtCantidad = QtWidgets.QLineEdit()
+                var.txtCantidad.editingFinished.connect(invoice.Facturas.totalLineaVenta)
+                conexion.Conexion.cargarTablaFac()
+
+
+                invoice.Facturas.cargaLineaVenta(self)
         except Exception as error:
             print("Error al tabular", error)
 
@@ -375,3 +382,5 @@ class Eventos():
                     header.setSectionResizeMode(i, QtWidgets.QHeaderView.ResizeToContents)
         except Exception as error:
             print("Error al cambiar el tamaño de las columnas", error)
+
+
