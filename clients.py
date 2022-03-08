@@ -348,9 +348,11 @@ class Clientes():
             if (var.ui.tabPrograma.currentIndex() == 2):
                 clients.Clientes.CargaProd(self)
             if(var.ui.tabPrograma.currentIndex()==1):
-                clients.Clientes.cargaFac(self)
+                pass
         except Exception as error:
             print("Error en modulo Cargar", error)
+
+
 
     def modifProd(self):
 

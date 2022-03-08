@@ -307,13 +307,13 @@ class Eventos():
                 Eventos.ClearForm(self)
             if (var.ui.tabPrograma.currentIndex() == 1):
                 var.ui.line.setGeometry(QtCore.QRect(10, 190, 941, 20))
-                var.ui.tabClientes.setGeometry(QtCore.QRect(270, 230, 691, 401))
+                var.ui.tabClientes.setGeometry(QtCore.QRect(270, 230, 691, 371))
                 var.ui.tabPrograma.setGeometry(QtCore.QRect(10, 20, 951, 171))
                 var.ui.tabFact.setGeometry(QtCore.QRect(10, 230, 256, 501))
                 var.ui.labelnumtab.setGeometry(QtCore.QRect(35, 210, 80, 15))
                 var.ui.labelfechatab.setGeometry(QtCore.QRect(130, 210, 90, 15))
                 var.ui.labelventatab.setGeometry(QtCore.QRect(450, 210, 300, 15))
-                var.ui.lbl_venta.setGeometry(QtCore.QRect(450,650,300,15))
+                var.ui.lbl_venta.setGeometry(QtCore.QRect(450,620,300,15))
                 var.ui.tabClientes.setColumnCount(5)
                 var.ui.tabClientes.setRowCount(0)
                 item = QtWidgets.QTableWidgetItem()
@@ -337,6 +337,7 @@ class Eventos():
                 item.setText(_translate("MainWindow", "Cantidad"))
                 item = var.ui.tabClientes.horizontalHeaderItem(4)
                 item.setText(_translate("MainWindow", "Total"))
+                var.ui.tabClientes.setSelectionBehavior(QtWidgets.QTableWidget.SelectRows)
 
                 Eventos.resizeTablaFac(self)
                 Eventos.resizeTablaVent(self)
@@ -383,4 +384,19 @@ class Eventos():
         except Exception as error:
             print("Error al cambiar el tamaño de las columnas", error)
 
+    def acercaDe(self):
+        """
 
+        Método que muestra un cartel de información sobre el proyecto al pulsar Acerca de.
+
+        """
+        try:
+            msgBox = QMessageBox()
+            msgBox.setIcon(QtWidgets.QMessageBox.Information)
+            msgBox.setText("Este es un proyecto de Diseño de Interfaces y "
+                           "ha sido realizado por Sergio Fernández.")
+            msgBox.setWindowTitle("Aviso")
+            msgBox.setStandardButtons(QMessageBox.Ok)
+            msgBox.exec()
+        except Exception as error:
+            print('Error al mostrar acerca de ',error)

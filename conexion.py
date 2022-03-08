@@ -1,3 +1,7 @@
+import csv
+import os
+import sqlite3
+import sys
 from datetime import datetime
 
 import xlwt as xlwt
@@ -12,6 +16,48 @@ import var
 import pandas as pd
 
 class Conexion():
+    def create_db(fileName):
+        """
+               Recibe el nombre de la base de datos
+               Módulo que se ejecuta al princio del programa crea las tablas, carga los municipios y provincias y crea los directorios necesarios
+               :rtype: object
+
+               """
+        try:
+            con = sqlite3.connect(database=fileName)
+            cur = con.cursor()
+
+            if not os.path.exists('.\\img'):
+                os.mkdir('.\\img')
+
+            if not os.path.exists('.\\Informes'):
+                fd = conexion.Conexion.resource_path("tablas.sql")
+                sql_file = open(fd, encoding="utf8")
+                sql_as_string = sql_file.read()
+                cur.executescript(sql_as_string)
+
+            con.commit()
+            con.close()
+
+            '''creacion de directorios'''
+            if not os.path.exists('.\\Informes'):
+                os.mkdir('.\\Informes')
+
+
+
+
+        except Exception as error:
+            msgBox = QtWidgets.QMessageBox()
+            msgBox.setWindowTitle("Aviso")
+            msgBox.setIcon((QtWidgets.QMessageBox.Warning))
+            msgBox.setText("Error" + str(error))
+            msgBox.exec()
+
+    def resource_path(relative_path):
+        """ Get absolute path to resource, works for dev and for PyInstaller """
+        base_path = getattr(sys, '_MEIPASS2', os.path.dirname(os.path.abspath(__file__)))
+        return os.path.join(base_path, relative_path)
+
     def db_connect(filedb):
         try:
             db=QtSql.QSqlDatabase.addDatabase('QSQLITE')
@@ -809,7 +855,7 @@ class Conexion():
             query.prepare('insert into ventas (codfacf, codprof, precio, cantidad) values (:codfac, :codpro, :precio, :cantidad)')
             query.bindValue(':codfac', int(venta[0]))
             query.bindValue(':codpro', int(venta[1]))
-            query.bindValue(':precio', int(venta[2]))
+            query.bindValue(':precio', float(venta[2]))
             query.bindValue(':cantidad', int(venta[3]))
             if query.exec_():
                 var.ui.lbl_venta.setText("Venta realizada")
@@ -847,8 +893,8 @@ class Conexion():
                 while query.next():
                     codventa = query.value(0)
                     producto = conexion.Conexion.nombreDeArticulo(query.value(1))
-                    cantidad=query.value(2)
-                    precio=query.value(3)
+                    cantidad=query.value(3)
+                    precio=query.value(2)
                     total_linea = round(float(precio) * float(cantidad), 2)
                     suma=suma+total_linea
                     var.ui.tabClientes.setRowCount(index + 1)
@@ -862,6 +908,14 @@ class Conexion():
                     var.ui.tabClientes.item(index, 3).setTextAlignment(QtCore.Qt.AlignRight)
                     var.ui.tabClientes.item(index, 4).setTextAlignment(QtCore.Qt.AlignRight)
                     index = index + 1
+                iva = suma * 0.21
+                total = suma + iva
+                # Para el test:
+                # return total
+                # Damos formato a los totales
+                var.ui.txtSubtotal.setText(str('{:.2f}'.format(round(suma, 2))) + '€')
+                var.ui.txtIva.setText(str('{:.2f}'.format(round(iva, 2))) + '€')
+                var.ui.txtTotal.setText(str('{:.2f}'.format(round(total, 2))) + '€')
 
         except Exception as error:
             print('Error cargar lineas ventas en conexion', error)
@@ -908,3 +962,26 @@ class Conexion():
         except Exception as error:
             print('Error en buscar datos factura (conexión) ', error)
         return datosFac
+    def eliminarLineaVenta(codigo):
+        """
+
+        Método que elimina una linea de venta en concreto de la bbdd.
+        También muestra el mensaje correspondiente.
+
+        """
+        try:
+            numfac = var.ui.lblnumfac.text()
+            query = QtSql.QSqlQuery()
+            query.prepare('delete from ventas where codven = :codigo')
+            query.bindValue(':codigo', int(codigo))
+            if query.exec_():
+                Conexion.cargarLineasVenta(numfac)
+                var.ui.lbl_venta.setText('Venta Eliminada')
+                var.ui.lbl_venta.setStyleSheet('QLabel{color:blue;}')
+            else:
+                var.ui.lbl_venta.setText('Error al eliminar venta')
+                var.ui.lbl_venta.setStyleSheet('QLabel{color:red;}')
+
+
+        except Exception as error:
+          print('Error en eliminar venta conexion', error)

@@ -1060,6 +1060,46 @@ color: rgb(85, 170, 255);</string>
        </item>
       </layout>
      </widget>
+     <widget class="QWidget" name="">
+      <property name="geometry">
+       <rect>
+        <x>870</x>
+        <y>100</y>
+        <width>64</width>
+        <height>26</height>
+       </rect>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout_22">
+       <item>
+        <widget class="QPushButton" name="btnLimpiarFact">
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset>
+           <normaloff>img/recargar.ico</normaloff>img/recargar.ico</iconset>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="btnImprimir2Fact">
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset>
+           <normaloff>img/814618.png</normaloff>img/814618.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>16</width>
+           <height>16</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
     </widget>
     <widget class="QWidget" name="tab_3">
      <attribute name="title">
@@ -1263,11 +1303,17 @@ color: rgb(85, 170, 255);</string>
       <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
-         <x>260</x>
-         <y>170</y>
+         <x>261</x>
+         <y>171</y>
          <width>421</width>
          <height>30</height>
         </rect>
+       </property>
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
        </property>
        <layout class="QHBoxLayout" name="horizontalLayout_16">
         <item>
@@ -1397,6 +1443,29 @@ color: rgb(85, 170, 255);</string>
         </item>
        </layout>
       </widget>
+      <widget class="QPushButton" name="btnLimpiarFactProd">
+       <property name="geometry">
+        <rect>
+         <x>702</x>
+         <y>174</y>
+         <width>28</width>
+         <height>24</height>
+        </rect>
+       </property>
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset>
+         <normaloff>img/recargar.ico</normaloff>img/recargar.ico</iconset>
+       </property>
+      </widget>
      </widget>
     </widget>
    </widget>
@@ -1433,6 +1502,9 @@ color: rgb(85, 170, 255);</string>
     </property>
     <property name="alternatingRowColors">
      <bool>true</bool>
+    </property>
+    <property name="selectionBehavior">
+     <enum>QAbstractItemView::SelectItems</enum>
     </property>
     <property name="showGrid">
      <bool>true</bool>
@@ -1570,38 +1642,170 @@ color: rgb(85, 170, 255);</string>
      <set>Qt::AlignCenter</set>
     </property>
    </widget>
-   <widget class="QLabel" name="lbl_venta">
+   <widget class="QWidget" name="layoutWidget_2">
     <property name="geometry">
      <rect>
-      <x>560</x>
-      <y>650</y>
-      <width>47</width>
-      <height>13</height>
+      <x>740</x>
+      <y>670</y>
+      <width>185</width>
+      <height>22</height>
      </rect>
     </property>
-    <property name="font">
-     <font>
-      <weight>75</weight>
-      <bold>true</bold>
-     </font>
+    <layout class="QHBoxLayout" name="horizontalLayout_24">
+     <item>
+      <widget class="QLabel" name="label_6">
+       <property name="text">
+        <string>IVA:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="txtIva">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="layoutWidget_5">
+    <property name="geometry">
+     <rect>
+      <x>740</x>
+      <y>700</y>
+      <width>185</width>
+      <height>22</height>
+     </rect>
     </property>
-    <property name="text">
-     <string/>
+    <layout class="QHBoxLayout" name="horizontalLayout_25">
+     <item>
+      <widget class="QLabel" name="label_7">
+       <property name="font">
+        <font>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>TOTAL:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="txtTotal">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="">
+    <property name="geometry">
+     <rect>
+      <x>740</x>
+      <y>640</y>
+      <width>185</width>
+      <height>22</height>
+     </rect>
     </property>
-    <property name="alignment">
-     <set>Qt::AlignCenter</set>
+    <layout class="QHBoxLayout" name="horizontalLayout_23">
+     <item>
+      <widget class="QLabel" name="label_5">
+       <property name="text">
+        <string>Subtotal:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="txtSubtotal"/>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="">
+    <property name="geometry">
+     <rect>
+      <x>300</x>
+      <y>610</y>
+      <width>621</width>
+      <height>25</height>
+     </rect>
     </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_26">
+     <item>
+      <widget class="QLabel" name="lbl_venta">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="font">
+        <font>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_16">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Fixed</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btnBorrarVenta">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="text">
+        <string>Borrar venta</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </widget>
    <zorder>lbl_venta</zorder>
    <zorder>labelventatab</zorder>
    <zorder>labelnumtab</zorder>
    <zorder>labelfechatab</zorder>
    <zorder>tabFact</zorder>
-   <zorder>tabClientes</zorder>
    <zorder>lblClientes</zorder>
    <zorder>tabPrograma</zorder>
    <zorder>lblStat</zorder>
    <zorder>line</zorder>
+   <zorder>btnBorrarVenta</zorder>
+   <zorder>label_5</zorder>
+   <zorder>txtSubtotal</zorder>
+   <zorder>layoutWidget_2</zorder>
+   <zorder>layoutWidget_5</zorder>
+   <zorder>tabClientes</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -1632,8 +1836,23 @@ color: rgb(85, 170, 255);</string>
     <addaction name="actionCrearBackup"/>
     <addaction name="actionRestaurarBD"/>
    </widget>
+   <widget class="QMenu" name="menuInformes">
+    <property name="title">
+     <string>Informes</string>
+    </property>
+    <addaction name="actionListadoClientes"/>
+    <addaction name="actionListadoProductos"/>
+   </widget>
+   <widget class="QMenu" name="menuA">
+    <property name="title">
+     <string>Acerca de</string>
+    </property>
+    <addaction name="actionInformation"/>
+   </widget>
    <addaction name="menuArchivo"/>
    <addaction name="menuHerramientas"/>
+   <addaction name="menuInformes"/>
+   <addaction name="menuA"/>
   </widget>
   <widget class="QStatusBar" name="statusbar">
    <property name="styleSheet">
@@ -1766,6 +1985,21 @@ color: rgb(85, 170, 255);</string>
   <action name="actionExportar_Datos">
    <property name="text">
     <string>Exportar Datos</string>
+   </property>
+  </action>
+  <action name="actionListadoClientes">
+   <property name="text">
+    <string>ListadoClientes</string>
+   </property>
+  </action>
+  <action name="actionListadoProductos">
+   <property name="text">
+    <string>ListadoProductos</string>
+   </property>
+  </action>
+  <action name="actionInformation">
+   <property name="text">
+    <string>Información del proyecto</string>
    </property>
   </action>
  </widget>

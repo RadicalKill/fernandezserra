@@ -72,6 +72,7 @@ class Facturas():
 
     def procesoVenta(self):
         try:
+
             row = var.ui.tabClientes.currentRow()
             articulo = var.cmbProducto.currentText()
             if (articulo != ''):
@@ -92,10 +93,11 @@ class Facturas():
 
 
         except Exception as error:
-            print("Error en proceso venta", error)
+            print("Error en proceso venta2", error)
 
     def totalLineaVenta(self = None):
         try:
+
             row = var.ui.tabClientes.currentRow()
             cantidad=round(float(var.txtCantidad.text().replace(',', '.')), 2)
             total_linea = round(float(var.precio)*float(cantidad),2)
@@ -107,10 +109,11 @@ class Facturas():
             venta.append(int(var.codpro))
             venta.append(float(var.precio))
             venta.append(float(cantidad))
+            print(venta)
             conexion.Conexion.cargarVenta(venta)
 
             if var.ui.lbl_venta.text() != '':
-                print("2")
+
                 Facturas.vaciarTabVentas()
                 conexion.Conexion.cargarLineasVenta(str(var.ui.lblnumfac.text()))
 
@@ -118,7 +121,7 @@ class Facturas():
             # currency para convertir a moneda
 
         except Exception as error:
-            print('Error en producto linea venta', error)
+            print('Error en producto linea venta2', error)
 
     def vaciarTabVentas(self=None):
         """
@@ -133,7 +136,40 @@ class Facturas():
             var.txtCantidad = QtWidgets.QLineEdit()
             var.txtCantidad.editingFinished.connect(Facturas.totalLineaVenta)
             var.cmbProducto.currentIndexChanged.connect(Facturas.procesoVenta)
+
+            var.ui.txtSubtotal.setText('')
+            var.ui.txtIva.setText('')
+            var.ui.txtTotal.setText('')
             Facturas.cargaLineaVenta(self)
 
         except Exception as error:
             print('Error en vaciarTabVentas: ',error)
+
+    def limpiaFormFac(self):
+        """
+
+        Método que vacía el formulario de la interfaz de facturación para poder realizar otros procesos.
+
+        """
+        try:
+            cajas = [var.ui.txtDNIFact, var.ui.lblCliFac, var.ui.lblnumfac, var.ui.txtFechaFac]
+            for i in cajas:
+                i.setText('')
+            Facturas.vaciarTabVentas()
+            var.ui.lbl_venta.setText('')
+            var.ui.lbl_venta.setStyleSheet('QLabel{color:black;}')
+        except Exception as error:
+            print('Error en módulo limpiar formulario ',error)
+
+    def eliminarVenta(self):
+        """
+
+        Método que elimina una linea de venta de la bbdd apoyándose en Conexion.eliminarLineaVenta.
+
+        """
+        try:
+            row = var.ui.tabClientes.selectedItems()
+            codVenta=row[0].text()
+            conexion.Conexion.eliminarLineaVenta(codVenta)
+        except Exception as error:
+            print('Error al eliminar venta: ',error)

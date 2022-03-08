@@ -82,6 +82,11 @@ class Main (QtWidgets.QMainWindow):
 
 
         var.ui.btnLimpiar.clicked.connect(event.Eventos.ClearForm)
+        var.ui.btnLimpiarFact.clicked.connect(invoice.Facturas.limpiaFormFac)
+        var.ui.btnLimpiarFactProd.clicked.connect(event.Eventos.ClearFormProd)
+
+        var.ui.btnBorrarVenta.clicked.connect(invoice.Facturas.eliminarVenta)
+
 
         var.ui.btnBuscaClifac.clicked.connect(invoice.Facturas.buscaCli)
         var.ui.btnFechaFac.clicked.connect(event.Eventos.abrirCal)
@@ -98,6 +103,9 @@ class Main (QtWidgets.QMainWindow):
         var.ui.actionImprimir.triggered.connect(event.Eventos.Imprimir)
         var.ui.actionImportar_Datos.triggered.connect(event.Eventos.ImportarExcel)
         var.ui.actionExportar_Datos.triggered.connect(event.Eventos.ExportarDatos)
+        var.ui.actionListadoClientes.triggered.connect(informes.Informes.listadoClientes)
+        var.ui.actionListadoProductos.triggered.connect(informes.Informes.listadoProductos)
+        var.ui.actionInformation.triggered.connect(event.Eventos.acercaDe)
 
         '''
         comprobar el dni
@@ -145,7 +153,7 @@ class Main (QtWidgets.QMainWindow):
         var.ui.tabClientes.clicked.connect(clients.Clientes.Cargar)
         var.ui.tabClientes.setSelectionBehavior(QtWidgets.QTableWidget.SelectRows)
         var.ui.tabPrograma.currentChanged.connect(event.Eventos.Tab)
-        var.ui.tabFact.clicked.connect(clients.Clientes.Cargar)
+        var.ui.tabFact.clicked.connect(clients.Clientes.cargaFac)
         var.ui.tabFact.setSelectionBehavior(QtWidgets.QTableWidget.SelectRows)
 
 

@@ -7,7 +7,7 @@ class Informes():
 
     def cabecera_(self):
         try:
-            logo = ".\\img\cal  <z<qq<end.png"
+            logo = ".\\img\logo.png"
             var.cv.line(40, 800, 500, 800)
             var.cv.line(40, 700, 500, 700)
             var.cv.setFont('Helvetica-Bold', 14)
@@ -17,7 +17,7 @@ class Informes():
             var.cv.drawString(50, 755, 'Direcion: A00000000F')
             var.cv.drawString(50, 740, 'Vigo: A00000000F')
             var.cv.drawString(50, 725, 'Correo: A00000000F')
-            var.cv.drawImage(logo,425,700)
+            var.cv.drawImage(logo,425,720)
 
 
 
@@ -82,7 +82,7 @@ class Informes():
             rootPath = '.\\informes'
             cont = 0
             for file in os.listdir(rootPath):
-                if file.endswith('.pdf'):
+                if file.endswith('listadoClientes.pdf'):
                     os.startfile('%s/%s' % (rootPath, file))
                 cont += 1
 
@@ -136,7 +136,7 @@ class Informes():
             rootPath = '.\\informes'
             cont = 0
             for file in os.listdir(rootPath):
-                if file.endswith('.pdf'):
+                if file.endswith('listadoProductos.pdf'):
                     os.startfile('%s/%s' % (rootPath, file))
                 cont += 1
 
