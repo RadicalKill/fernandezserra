@@ -109,7 +109,6 @@ class Facturas():
             venta.append(int(var.codpro))
             venta.append(float(var.precio))
             venta.append(float(cantidad))
-            print(venta)
             conexion.Conexion.cargarVenta(venta)
 
             if var.ui.lbl_venta.text() != '':

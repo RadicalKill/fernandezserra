@@ -30,11 +30,12 @@ class Conexion():
             if not os.path.exists('.\\img'):
                 os.mkdir('.\\img')
 
-            if not os.path.exists('.\\Informes'):
-                fd = conexion.Conexion.resource_path("tablas.sql")
-                sql_file = open(fd, encoding="utf8")
-                sql_as_string = sql_file.read()
-                cur.executescript(sql_as_string)
+            if not os.path.exists('.\\informes'):
+                os.mkdir('.\\informes')
+            fd = conexion.Conexion.resource_path("tablas.sql")
+            sql_file = open(fd, encoding="utf8")
+            sql_as_string = sql_file.read()
+            cur.executescript(sql_as_string)
 
             con.commit()
             con.close()
