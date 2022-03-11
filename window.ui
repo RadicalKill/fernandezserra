@@ -1060,7 +1060,7 @@ color: rgb(85, 170, 255);</string>
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="">
+     <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
         <x>870</x>
@@ -1099,6 +1099,29 @@ color: rgb(85, 170, 255);</string>
         </widget>
        </item>
       </layout>
+     </widget>
+     <widget class="QPushButton" name="btnPDFFact">
+      <property name="geometry">
+       <rect>
+        <x>530</x>
+        <y>100</y>
+        <width>28</width>
+        <height>24</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>img/ojo.png</normaloff>img/ojo.png</iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>16</width>
+        <height>16</height>
+       </size>
+      </property>
      </widget>
     </widget>
     <widget class="QWidget" name="tab_3">
@@ -1303,7 +1326,7 @@ color: rgb(85, 170, 255);</string>
       <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
-         <x>261</x>
+         <x>262</x>
          <y>171</y>
          <width>421</width>
          <height>30</height>
@@ -1446,10 +1469,10 @@ color: rgb(85, 170, 255);</string>
       <widget class="QPushButton" name="btnLimpiarFactProd">
        <property name="geometry">
         <rect>
-         <x>702</x>
-         <y>174</y>
-         <width>28</width>
-         <height>24</height>
+         <x>699</x>
+         <y>172</y>
+         <width>32</width>
+         <height>28</height>
         </rect>
        </property>
        <property name="sizePolicy">
@@ -1464,6 +1487,12 @@ color: rgb(85, 170, 255);</string>
        <property name="icon">
         <iconset>
          <normaloff>img/recargar.ico</normaloff>img/recargar.ico</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>20</width>
+         <height>20</height>
+        </size>
        </property>
       </widget>
      </widget>
@@ -1706,7 +1735,7 @@ color: rgb(85, 170, 255);</string>
      </item>
     </layout>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>740</x>
@@ -1728,7 +1757,7 @@ color: rgb(85, 170, 255);</string>
      </item>
     </layout>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>300</x>
@@ -1791,7 +1820,8 @@ color: rgb(85, 170, 255);</string>
      </item>
     </layout>
    </widget>
-   <zorder>lbl_venta</zorder>
+   <zorder>layoutWidget</zorder>
+   <zorder>layoutWidget</zorder>
    <zorder>labelventatab</zorder>
    <zorder>labelnumtab</zorder>
    <zorder>labelfechatab</zorder>
@@ -1800,9 +1830,6 @@ color: rgb(85, 170, 255);</string>
    <zorder>tabPrograma</zorder>
    <zorder>lblStat</zorder>
    <zorder>line</zorder>
-   <zorder>btnBorrarVenta</zorder>
-   <zorder>label_5</zorder>
-   <zorder>txtSubtotal</zorder>
    <zorder>layoutWidget_2</zorder>
    <zorder>layoutWidget_5</zorder>
    <zorder>tabClientes</zorder>
@@ -1877,8 +1904,10 @@ color: rgb(85, 170, 255);</string>
    </attribute>
    <addaction name="actionactbarAbrir"/>
    <addaction name="actionactbarimprimir"/>
+   <addaction name="separator"/>
    <addaction name="actionactbarcrearbackup"/>
    <addaction name="actionactbarrestaurarbackup"/>
+   <addaction name="separator"/>
    <addaction name="actionactbarSalir"/>
   </widget>
   <action name="actionGuadar">

@@ -692,12 +692,16 @@ class Conexion():
 
             query = QtSql.QSqlQuery()
             query.prepare(
-                'SELECT dni,apellidos, nombre from clientes where dni=:dni')
+                'SELECT dni,apellidos, nombre, direccion, municipio, provincia from clientes where dni=:dni')
             query.bindValue(':dni', dni)
             if query.exec_():
                 while query.next():
                     registro.append(query.value(1))
                     registro.append(query.value(2))
+                    registro.append(query.value(3))
+                    registro.append(query.value(4))
+                    registro.append(query.value(5))
+
 
             return registro
         except Exception as error:
